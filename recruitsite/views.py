@@ -41,6 +41,9 @@ def register(request):
 		form = UserCreationForm(request.POST)
 		if form.is_valid():
 			user = form.save()
+			perm = Permission.objects.get(codename='wait')
+			request.user.user_permissions.add(perm)
+			student.save()
 			return HttpResponseRedirect('/accounts/login/')
 	else:
 		form = UserCreationForm()
@@ -48,6 +51,9 @@ def register(request):
 
 def perror(request):
 	return render_to_response('permission_error.html', RequestContext(request, locals()))
+
+def wait(request):
+	return render_to_response('waiting.html', RequestContext(request, locals()))
 
 def use_session(request):
 	request.session['lucky_number'] = 8

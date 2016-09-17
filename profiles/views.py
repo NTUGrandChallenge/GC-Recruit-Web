@@ -40,6 +40,7 @@ def edit(request):
 	else:
 		return render_to_response('edit_profile.html', RequestContext(request, locals()))
 
+@permission_required('wait', login_url='/wait/')
 def student_create(request):
 	errors = []
 	# inter = Interest.objects.all()
@@ -63,6 +64,9 @@ def student_create(request):
 				talent = talent,
 				team = none_team
 			)
+			perm = Permission.objects.get(codename='wait')
+			request.user.user_permissions.remove(perm)
+			student.save()
 		return render_to_response('complete.html', RequestContext(request, locals()))
 	else:
 		return render_to_response('create_student.html', RequestContext(request, locals()))
