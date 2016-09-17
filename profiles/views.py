@@ -160,11 +160,13 @@ def create_team(request):
 		teamname = request.POST['teamname']
 		content = request.POST['content']
 		team_interest = request.POST['interest']
+		captain_name = student.nickname
 		if any(not request.POST[k] for k in request.POST):
 			errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
 			t = Team.objects.create(
 					name=teamname,
+					captain_name=captain_name,
 					interest = Interest.objects.get(name=team_interest),
 					content = content,
 				)

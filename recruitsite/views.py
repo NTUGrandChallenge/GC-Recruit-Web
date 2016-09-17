@@ -43,7 +43,6 @@ def register(request):
 			user = form.save()
 			perm = Permission.objects.get(codename='wait')
 			request.user.user_permissions.add(perm)
-			student.save()
 			return HttpResponseRedirect('/accounts/login/')
 	else:
 		form = UserCreationForm()

@@ -2,16 +2,18 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import staticfiles
 from django.conf.urls import include, url
 from django.contrib import admin
-from recruitsite.views import welcome, index, register, logout, perror, use_session, complete, wait, login#, logout
-#from django.contrib.auth.views import login#, logout
+from recruitsite.views import welcome, index, register, logout, perror, use_session, complete, wait#, login#, logout
+from django.contrib.auth.views import login#, logout
 from django.contrib.auth.decorators import login_required
 from profiles.views import list_student, profile, edit, student_create, other_profile, chatroom, upload, follow_complete, list_team, create_team, teamroom, team_profile, applied_list
 from django.views.static import serve
+import allauth
 
 admin.autodiscover()
 urlpatterns = [
     url(r'^$', index),
     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', login),
     url(r'^index/$', index),

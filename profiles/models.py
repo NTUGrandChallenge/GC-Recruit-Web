@@ -15,6 +15,7 @@ class Badge(models.Model):
 
 class Team(models.Model):
 	name = models.CharField(max_length=50, blank=True)
+	captain_name = models.CharField(max_length=50, blank=True)
 	interest = models.ForeignKey(Interest, null=True)
 	content = models.CharField(max_length=50, blank=True)
 	class Meta:
