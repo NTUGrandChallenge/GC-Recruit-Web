@@ -26,8 +26,17 @@
 								<td> {{student.interest.name}} </td>
 								<td> <a href="/team_profile/{{student.team.id}}/"> {{student.team}} </a></td>
 								<td> {{student.role}} </td>
-								<td> {{student.badge}} </td>
-								<td> {{student.follow}} </td>
+								<td> 
+ 								{%for badge in student.badge.all%}
+ 									{{badge.name}}
+     								<!-- <img src="{{ badge.image.url}}"> -->
+ 								{%endfor%}
+ 								</td>
+ 								<td> 
+ 								{%for follow in student.follow.all%}
+ 									{{follow}}
+ 								{%endfor%}
+ 								</td>
 								<td> {{student.talent}} </td>
 							</tr>
 						</table>

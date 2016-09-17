@@ -41,9 +41,9 @@ class Student(models.Model):
 	interest = models.ForeignKey(Interest, default=1)
 	talent = models.CharField(max_length=20, blank=True)
 	#talent = models.ManyToManyField(Talent, default=1 )#one student can have many badges, one badge can have many students
-	badge = models.ManyToManyField(Badge, default=1 )#one student can have many badges, one badge can have many students
-	role = models.ForeignKey(Role, default=1)
-	team = models.ForeignKey(Team, default=1 )
+	badge = models.ManyToManyField(Badge, default="none" )#one student can have many badges, one badge can have many students
+	role = models.ForeignKey(Role, default="none")
+	team = models.ForeignKey(Team, default="none")
 	follow = models.ManyToManyField('self', blank=True, symmetrical=False)
 	applied = models.ManyToManyField(Team, blank=True, related_name='applier')
 	class Meta:

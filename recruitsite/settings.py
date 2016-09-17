@@ -25,7 +25,7 @@ SECRET_KEY = DJANGO_SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -80,20 +80,20 @@ WSGI_APPLICATION = 'recruitsite.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'test1',
-    # }
     'default': {
-        "name": "dc67463fe7ce24dd8bf0d8c18222ce082",
-        "host": "198.11.228.48",
-        "hostname": "198.11.228.48",
-        "port": 5433,
-        "user": "u95502d799bde433fb4bc6ec347e15296",
-        "username": "u95502d799bde433fb4bc6ec347e15296",
-        "password": "pa0ef819988954f238eff6194cc23a75e",
-        "uri": "postgres://u95502d799bde433fb4bc6ec347e15296:pa0ef819988954f238eff6194cc23a75e@198.11.228.48:5433/dc67463fe7ce24dd8bf0d8c18222ce082",
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'test1',
     }
+    # 'default': {
+    #     "name": "dc67463fe7ce24dd8bf0d8c18222ce082",
+    #     "host": "198.11.228.48",
+    #     "hostname": "198.11.228.48",
+    #     "port": 5433,
+    #     "user": "u95502d799bde433fb4bc6ec347e15296",
+    #     "username": "u95502d799bde433fb4bc6ec347e15296",
+    #     "password": "pa0ef819988954f238eff6194cc23a75e",
+    #     "uri": "postgres://u95502d799bde433fb4bc6ec347e15296:pa0ef819988954f238eff6194cc23a75e@198.11.228.48:5433/dc67463fe7ce24dd8bf0d8c18222ce082",
+    # }
 }
 
 

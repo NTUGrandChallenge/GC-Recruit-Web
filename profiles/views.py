@@ -50,7 +50,7 @@ def student_create(request):
 		department = request.POST['department']
 		motto = request.POST['motto']
 		talent = request.POST['talent']
-		none_team = Team.objects.get(id=1)
+		none_team = Team.objects.get(name='none')
 		if any(not request.POST[k] for k in request.POST):
 			errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
