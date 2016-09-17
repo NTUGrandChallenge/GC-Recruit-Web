@@ -15,7 +15,7 @@ class Badge(models.Model):
 
 class Team(models.Model):
 	name = models.CharField(max_length=50, default='none')
-	interest = models.ForeignKey(Interest, default=1)
+	interest = models.ForeignKey(Interest, null=True)
 	content = models.CharField(max_length=50, blank=True)
 	class Meta:
 		permissions = (
@@ -26,24 +26,24 @@ class Team(models.Model):
 	def __str__(self):
 		return self.name
 class Role(models.Model):
-	name = models.CharField(max_length=50, default='none')
+	name = models.CharField(max_length=50, default="none")
 	def __str__(self):
 		return self.name
 
 
 class Student(models.Model):
 	#name = models.OneToOneField(User, on_delete=models.CASCADE)
-	name = models.ForeignKey(User, unique=True,)
-	realname = models.CharField(max_length=50, default='')
-	nickname = models.CharField(max_length=50)
-	department = models.CharField(max_length=50)
+	name = models.ForeignKey(User, unique=True)
+	realname = models.CharField(max_length=50,blank=True)
+	nickname = models.CharField(max_length=50,blank=True)
+	department = models.CharField(max_length=50,blank=True)
 	motto = models.CharField(max_length=20, blank=True)
-	interest = models.ForeignKey(Interest, default=1)
+	interest = models.ForeignKey(Interest, null=True)
 	talent = models.CharField(max_length=20, blank=True)
 	#talent = models.ManyToManyField(Talent, default=1 )#one student can have many badges, one badge can have many students
-	badge = models.ManyToManyField(Badge, default=1 )#one student can have many badges, one badge can have many students
-	role = models.ForeignKey(Role, default=1)
-	team = models.ForeignKey(Team, default=1 )
+	badge = models.ManyToManyField(Badge, null=True)#one student can have many badges, one badge can have many students
+	role = models.ForeignKey(Role, null=True)
+	team = models.ForeignKey(Team, null=True)
 	follow = models.ManyToManyField('self', blank=True, symmetrical=False)
 	applied = models.ManyToManyField(Team, blank=True, related_name='applier')
 	class Meta:
@@ -58,7 +58,7 @@ class Student(models.Model):
 class Chatroom(models.Model):
 	student1 = models.ForeignKey(Student, null=True, related_name='student1')
 	student2 = models.ForeignKey(Student, null=True, related_name='student2')
-	content = models.CharField(max_length=50)
+	content = models.CharField(max_length=50, blank=True)
 	date_time = models.DateTimeField()
 	def __str__(self):
 		return self.content
@@ -79,7 +79,7 @@ class file_info(models.Model):
 class Teamroom(models.Model):
 	team = models.ForeignKey(Team, null=True)
 	speaker = models.ForeignKey(Student, null=True)
-	content = models.CharField(max_length=50)
+	content = models.CharField(max_length=50,blank=True)
 	date_time = models.DateTimeField()
 	def __str__(self):
 		return self.content

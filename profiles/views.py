@@ -50,7 +50,7 @@ def student_create(request):
 		department = request.POST['department']
 		motto = request.POST['motto']
 		talent = request.POST['talent']
-		none_team = Team.objects.get(id=1)
+		none_team = Team.objects.get(name='none')
 		if any(not request.POST[k] for k in request.POST):
 			errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
@@ -112,7 +112,7 @@ def upload(request):
 		files = [f for key, f in request.FILES.items()] #抓取檔案(可能多個檔案)
 		if len(files) > 0:
 			try:
-				file_dir = os.path.join('/Users/handsome/Desktop/upload' , str(form.pk))
+				file_dir = os.path.join('/home/ubuntu/upload' , str(form.pk))
                 #如果路徑中的檔案夾不存在就建立一個新的
 				if not os.path.exists(file_dir):
 					os.makedirs(file_dir) 
