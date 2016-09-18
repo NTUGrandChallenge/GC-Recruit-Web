@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Student Profile {% endblock %}
+{% block h2 %} 台大創創挑戰賽 {% endblock %}
+
+{% block content %}
+	{% if request.user.is_authenticated %}          
+      	<h2>申請已經發送，請耐心等候！</h2>
+            <table align="center">
+              <tr>
+                <td></td>
+               </tr>
+            </table>
+      {%else%}
+        <p><div>您尚未登入喔~<a href="/accounts/login">登入</a></p></div>
+        <p>若您還沒有帳號,請<a href="/accounts/register/">註冊</a></p>
+      {%endif%}
+{% endblock %}
+{% block img %}
+	
+{% endblock %}
+

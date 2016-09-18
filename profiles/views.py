@@ -8,6 +8,9 @@ from django.utils import timezone
 import shutil, os
 from django.contrib.auth.models import Permission, User
 
+def search(request):
+	return render_to_response('search.html',local())
+
 # Create your views here.
 @permission_required('profiles.can_view_base_profile', login_url='/create_student/')
 def list_student(request):

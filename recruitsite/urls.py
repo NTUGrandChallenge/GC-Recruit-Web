@@ -5,7 +5,7 @@ from django.contrib import admin
 from recruitsite.views import welcome, index, register, logout, perror, use_session, complete, login#, logout
 #from django.contrib.auth.views import login#, logout
 from django.contrib.auth.decorators import login_required
-from profiles.views import list_student, profile, edit, student_create, other_profile, chatroom, upload, follow_complete, list_team, create_team, teamroom, team_profile, applied_list
+from profiles.views import list_student, profile, edit, student_create, other_profile, chatroom, upload, follow_complete, list_team, create_team, teamroom, team_profile, applied_list, search
 from django.views.static import serve
 
 admin.autodiscover()
@@ -36,6 +36,6 @@ urlpatterns = [
     url(r'^teamroom/(\d{1,5})/$', login_required(teamroom)),
     url(r'^team_profile/(\d{1,5})/$', login_required(team_profile)),
     url(r'^applied_list/(\d{1,5})/$', login_required(applied_list)),
-
+    url(r'^search/$', login_required(search)),
 
 ]
