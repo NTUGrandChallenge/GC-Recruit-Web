@@ -9,7 +9,17 @@ import shutil, os
 from django.contrib.auth.models import Permission, User
 
 def search(request):
-	return render_to_response('search.html',local())
+	if 'search' in request.GET:
+		keyword = request.GET['search']
+		if not keyword:
+			return render(request,'index.html')
+		else:
+			student_list = Student.objects.filter(talent__icontains = keyword)
+			if len(student_list) == 0 :
+				return render(request,'search.html', {'student_list' : student_list, 'error' : True, 'len' : 0, 'keyword' : keyword})
+			else :
+				return render(request,'search.html', {'student_list' : student_list, 'error' : False, 'len' : len(student_list), 'keyword' : keyword})
+	return render_to_response('search.html',locals())
 
 # Create your views here.
 @permission_required('profiles.can_view_base_profile', login_url='/create_student/')

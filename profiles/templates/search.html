@@ -4,17 +4,54 @@
 {% block h2 %} 台大創創挑戰賽 {% endblock %}
 
 {% block content %}
-	{% if request.user.is_authenticated %}          
-      	<h2>申請已經發送，請耐心等候！</h2>
-            <table align="center">
-              <tr>
-                <td></td>
-               </tr>
-            </table>
-      {%else%}
-        <p><div>您尚未登入喔~<a href="/accounts/login">登入</a></p></div>
-        <p>若您還沒有帳號,請<a href="/accounts/register/">註冊</a></p>
-      {%endif%}
+	    <p>請輸入關鍵字</p>
+      <nav class="nav">
+                
+                    <li>
+                    <form class="pure-form" action="/search/" method="get">
+                    <input class="pure-input-3-3" type="text" name="search" placeholder="search">
+                    <input type="submit" value="搜尋">
+                    </form>
+                    </li>
+                
+      </nav>
+
+    <div class="posts">
+    {% if error %}
+        <h2 class="post-title">沒有人有相關技能...</a></h2>
+    {% else %}
+        <h2 class="post-title">有 {{len}} 人有相關技能 '{{keyword}}'</a></h2>
+        <table class="table">
+        <tr>
+                <th>姓名</th>
+                <th>系級</th>
+                <th>座右銘</th>
+                <th>技能</th>
+                <th>詳細資料</th>
+                <th>收藏情況</th>
+        </tr>
+    {% for student in student_list %}
+        <tr>
+                <td> {{student.realname}} </td>
+                <td> {{student.department}} </td>
+                <td> {{student.motto}} </td>
+                <td> {{student.talent}} </td>
+                <td> <a href="/other_profile/?id={{ student.id }}">檢視</a> </td>
+                {%if student in me.follow.all%}
+                          <td>已收藏</td>
+                      {%else%}
+                          {%if student == me%}
+                          <td>是我自己</td>
+                        {%else%}
+                            <td>未收藏</td>
+ 
+                        {%endif%}
+                      {%endif%}
+              </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+</div>
 {% endblock %}
 {% block img %}
 	
