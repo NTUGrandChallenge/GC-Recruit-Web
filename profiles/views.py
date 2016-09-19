@@ -12,7 +12,7 @@ def search(request):
 	if 'search' in request.GET:
 		keyword = request.GET['search']
 		if not keyword:
-			return render(request,'index.html')
+			return render(request,'search.html')
 		else:
 			student_list = Student.objects.filter(talent__icontains = keyword)
 			if len(student_list) == 0 :
