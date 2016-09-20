@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.template import RequestContext
 from django.contrib.sessions.models import Session
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.models import Permission, User
 
 
 
@@ -42,7 +42,8 @@ def register(request):
 		if form.is_valid():
 			user = form.save()
 			perm = Permission.objects.get(codename='wait')
-			request.user.user_permissions.add(perm)
+			#request.user.user_permissions.add(perm)
+			user.user_permissions.add(perm)
 			return HttpResponseRedirect('/accounts/login/')
 	else:
 		form = UserCreationForm()
