@@ -1,0 +1,56 @@
+ {% extends 'base.html' %}
+ 
+ {% block title %} Student Profile {% endblock %}
+  {% block h2 %} 台大創創挑戰賽 {% endblock %}
+  
+  {% block content %}
+  <p>請輸入關鍵字</p>
+       <nav class="nav">
+                 
+                     <li>
+                     <form class="pure-form" action="/search/" method="get">
+                     <input class="pure-input-3-3" type="text" name="search" placeholder="search">
+                     <input type="submit" value="搜尋">
+                     </form>
+                     </li>
+                 
+       </nav>
+ 
+     <div class="posts">
+     {% if error %}
+         <h2 class="post-title">沒有人有相關技能...</a></h2>
+     {% else %}
+         <h2 class="post-title">有 {{len}} 人有相關技能 '{{keyword}}'</a></h2>
+         <table class="table">
+         <tr>
+                 <th>姓名</th>
+                 <th>系級</th>
+                 <th>座右銘</th>
+                 <th>技能</th>
+                 <th>詳細資料</th>
+                 <th>收藏情況</th>
+         </tr>
+     {% for student in student_list %}
+         <tr>
+                 <td> {{student.realname}} </td>
+                 <td> {{student.department}} </td>
+                 <td> {{student.motto}} </td>
+                 <td> {{student.talent}} </td>
+                 <td> <a href="/other_profile/?id={{ student.id }}">檢視</a> </td>
+                 {%if student in me.follow.all%}
+                           <td>已收藏</td>
+                       {%else%}
+                           {%if student == me%}
+                           <td>是我自己</td>
+                         {%else%}
+                             <td>未收藏</td>
+  
+                         {%endif%}
+                       {%endif%}
+               </tr>
+     {% endfor %}
+     </table>
+     {% endif %}
+ </div>
+  {% endblock %}
+  {% block img %}
