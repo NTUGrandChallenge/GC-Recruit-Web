@@ -8,27 +8,29 @@ from django.utils import timezone
 import shutil, os
 from django.contrib.auth.models import Permission, User
 
+
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def search(request):
 	if 'search' in request.GET:
- 		keyword = request.GET['search']
- 		if not keyword:
- 			return render(request,'index.html')
- 		else:
- 			student_list = Student.objects.filter(talent__icontains = keyword)
- 			if len(student_list) == 0 :
- 				return render(request,'search.html', {'student_list' : student_list, 'error' : True, 'len' : 0, 'keyword' : keyword})
- 			else :
- 				return render(request,'search.html', {'student_list' : student_list, 'error' : False, 'len' : len(student_list), 'keyword' : keyword})
- 	return render_to_response('search.html',locals())
+		keyword = request.GET['search']
+		if not keyword:
+			return render(request,'index.html')
+		else:
+			student_list = Student.objects.filter(talent__icontains = keyword)
+			if len(student_list) == 0 :
+				return render(request,'search.html', {'student_list' : student_list, 'error' : True, 'len' : 0, 'keyword' : keyword})
+			else :
+				return render(request,'search.html', {'student_list' : student_list, 'error' : False, 'len' : len(student_list), 'keyword' : keyword})
+	return render_to_response('search.html', RequestContext(request, locals()))
 # Create your views here.
-@permission_required('profiles.can_view_base_profile', login_url='/create_student/')
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def list_student(request):
 	students = Student.objects.all()
 	interests = Interest.objects.all()
 	me = Student.objects.get(name=request.user)
 	return render_to_response('student_list.html', locals())
 
-@permission_required('profiles.can_view_base_profile', login_url='/create_student/')
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def profile(request):
 	student = Student.objects.get(name=request.user)
 	#students = Student.objects.all()
@@ -52,8 +54,10 @@ def edit(request):
 	else:
 		return render_to_response('edit_profile.html', RequestContext(request, locals()))
 
-@permission_required('profiles.wait', login_url='/wait/')
+#@permission_required('profiles.wait', login_url='/wait/')
 def student_create(request):
+	if request.user.has_perm('profiles.wait'):
+		return HttpResponseRedirect('/wait/')
 	errors = []
 	# inter = Interest.objects.all()
 	if request.POST:
@@ -64,8 +68,8 @@ def student_create(request):
 		motto = request.POST['motto']
 		talent = request.POST['talent']
 		none_team = Team.objects.get(name='none')
-		if any(not request.POST[k] for k in request.POST):
-			errors.append('* 有空白欄位！請不要留空！')
+		# if any(not request.POST[k] for k in request.POST):
+		# 	errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
 			Student.objects.create(
 				name=name,
@@ -77,12 +81,12 @@ def student_create(request):
 				team = none_team
 			)
 			perm = Permission.objects.get(codename='wait')
-			request.user.user_permissions.remove(perm)
+			request.user.user_permissions.add(perm)
 		return render_to_response('complete.html', RequestContext(request, locals()))
 	else:
 		return render_to_response('create_student.html', RequestContext(request, locals()))
 
-@permission_required('profiles.can_view_base_profile', login_url='/create_student/')
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def chatroom(request, idfrom, idto):
 	s1=Student.objects.get(id=idfrom)
 	s2=Student.objects.get(id=idto)
@@ -100,7 +104,7 @@ def chatroom(request, idfrom, idto):
 		)
 	return render_to_response('chatroom.html', RequestContext(request, locals()))
 
-@permission_required('profiles.can_view_base_profile', login_url='/create_student/')
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def other_profile(request):
 	if request.GET.get('id'):
 		myid = request.user.student_set.first().id
@@ -116,7 +120,7 @@ def other_profile(request):
 	else:
 		return HttpResponseRedirect("/student_list/")
 
-@permission_required('profiles.can_view_base_profile', login_url='/create_student/')
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def upload(request):
 	s1=Student.objects.get(id=request.user.student_set.first().id)
 	if request.method == 'POST':# request.POST.get 如果沒有request到資料時會丟回None
@@ -157,6 +161,7 @@ def upload(request):
 def follow_complete(request):
 	return render_to_response('follow_complete.html', locals())
 
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def list_team(request):
 	students = Student.objects.all()
 	teams = Team.objects.all()
@@ -192,7 +197,7 @@ def create_team(request):
 def follow_complete(request):
  	return render_to_response('follow_complete.html', locals())
 
-@permission_required('profiles.can_view_base_profile', login_url='/create_student/')
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def teamroom(request,teamid):
 	me = Student.objects.get(name=request.user)
 	team = Team.objects.get(id=teamid)
@@ -212,7 +217,7 @@ def teamroom(request,teamid):
 		)
 	return render_to_response('teamroom.html', RequestContext(request, locals()))
 
-@permission_required('profiles.can_view_base_profile', login_url='/create_student/')
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def team_profile(request, teamid):
 	me = Student.objects.get(name=request.user)
 	team = Team.objects.get(id=teamid)

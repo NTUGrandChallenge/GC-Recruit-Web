@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.contrib.sessions.models import Session
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Permission, User
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 
@@ -41,10 +42,9 @@ def register(request):
 		form = UserCreationForm(request.POST)
 		if form.is_valid():
 			user = form.save()
-			perm = Permission.objects.get(codename='wait')
-			#request.user.user_permissions.add(perm)
-			user.user_permissions.add(perm)
-			return HttpResponseRedirect('/accounts/login/')
+			# perm = Permission.objects.get(codename='wait')
+			# user.user_permissions.add(perm)
+			return HttpResponseRedirect('/my_profile/')
 	else:
 		form = UserCreationForm()
 	return render_to_response('register.html', RequestContext(request, locals()))
@@ -52,6 +52,7 @@ def register(request):
 def perror(request):
 	return render_to_response('permission_error.html', RequestContext(request, locals()))
 
+@permission_required('profiles.wait', login_url='/create_student/')
 def wait(request):
 	return render_to_response('waiting.html', RequestContext(request, locals()))
 
