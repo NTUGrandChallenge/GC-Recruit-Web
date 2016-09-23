@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^teamroom/(\d{1,5})/$', login_required(teamroom)),
     url(r'^team_profile/(\d{1,5})/$', login_required(team_profile)),
     url(r'^applied_list/(\d{1,5})/$', login_required(applied_list)),
+    url(r'^search/$', login_required(search)),
 
 
 ]

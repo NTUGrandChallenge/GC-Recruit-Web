@@ -19,7 +19,7 @@ def search(request):
  				return render(request,'search.html', {'student_list' : student_list, 'error' : True, 'len' : 0, 'keyword' : keyword})
  			else :
  				return render(request,'search.html', {'student_list' : student_list, 'error' : False, 'len' : len(student_list), 'keyword' : keyword})
- 	return render_to_response('search.html',locals())
+	return render_to_response('search.html',locals())
 # Create your views here.
 @permission_required('profiles.can_view_base_profile', login_url='/create_student/')
 def list_student(request):
