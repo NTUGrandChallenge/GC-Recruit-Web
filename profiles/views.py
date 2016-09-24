@@ -10,6 +10,31 @@ from django.contrib.auth.models import Permission, User
 
 def search(request):
 	if 'search' in request.GET:
+		keywords = []
+		for each in request.GET:
+			if each != 'seach':
+				keywords.append(each)
+		total_student_list = []
+		for each in keywords:
+			if each == 'search':
+				pass
+			else:		
+				student_list = Student.objects.filter(interest_id=each)
+				total_student_list.append(student_list)
+				print("added", each)
+				print(total_student_list)#total_student_list = list[list, list, list...]
+		if not student_list or len(student_list) == 0:
+			print("1!")
+			return render(request,'search.html', {'student_list' : total_student_list, 'error' : True, 'len' : 0, 'keywords' : keywords})
+		else :
+			print("2!")
+			return render(request,'search.html', {'student_list' : total_student_list, 'error' : False, 'len' : len(total_student_list), 'keywords' : keywords})
+		return render_to_response('search.html', locals())	
+	else:
+		return render_to_response('search.html', locals())
+
+def oldsearch(request):
+	if 'search' in request.GET:
  		keyword = request.GET['search']
  		if not keyword:
  			return render(request,'index.html')
