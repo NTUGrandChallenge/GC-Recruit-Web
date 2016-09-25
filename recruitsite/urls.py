@@ -11,7 +11,7 @@ import allauth
 
 admin.autodiscover()
 urlpatterns = [
-    url(r'^$', index),
+    url(r'^$', login_required(profile)),
     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/', include(admin.site.urls)),
