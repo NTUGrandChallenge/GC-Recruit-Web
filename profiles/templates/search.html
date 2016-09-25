@@ -5,44 +5,57 @@
   
   {% block content %}
        <nav class="nav">
+                    <!--
+                     <li>
+                     <form class="pure-form" action="/search/" method="get">
+                     <input class="pure-input-3-3" type="text" name="search" placeholder="search">
+                     <input type="submit" value="搜尋">
+                     </form>
+                     </li>
+                     -->
                      <li>
                      <form name = "check_form" method="get">
-                     <input type="checkbox" name="1">Environment<p>
-                     <input type="checkbox" name="2">Food & Algriculture<p>
-                     <input type="checkbox" name="3">Health Care<p>
-                     <input type="checkbox" name="4">Society & Culture<p>
-                     <input type="checkbox" name="5">Smart Life<p>
-                     <input type="checkbox" name="checka">tech<p>
-                     <input type="checkbox" name="checkb">business<p>
-                     <input type="checkbox" name="checkc">project<p>
-                     <input type="checkbox" name="checkd">sales<p>
+                     <input type="checkbox" name="interest[]" value="1">Environment<p>
+                     <input type="checkbox" name="interest[]" value="2">Food & Algriculture<p>
+                     <input type="checkbox" name="interest[]" value="3">Health Care<p>
+                     <input type="checkbox" name="interest[]" value="4">Society & Culture<p>
+                     <input type="checkbox" name="interest[]" value="5">Smart Life<p>
+                     <input type="checkbox" name="role[]" value="1">tech<p>
+                     <input type="checkbox" name="role[]" value="2">business<p>
+                     <input type="checkbox" name="role[]" value="3">project<p>
+                     <input type="checkbox" name="role[]" value="4">sales<p>
                      <input type="submit" name="search" value="搜尋">
                      </form>
                      </li>
                  
        </nav>
-    {%if keywords%}
+    {%if search%}
     <div class="post">
      {% if error %}
          <h2 class="post-title">沒有人符合你的要求...</a></h2>
      {% else %}
          <h2 class="post-title">有 {{len}} 人符合你的要求</a></h2>
+         {%for interest in interests%}
+         <p>"{{interest}}"</p>
+         {%endfor%}
+         {%for role in roles%}
+          <p>"{{role}}"</p>
+         {%endfor%}
          <table class="table">
          <tr>
                  <th>姓名</th>
                  <th>系級</th>
-                 <th>座右銘</th>
+                 <th>角色</th>
                  <th>技能</th>
                  <th>興趣</th>
                  <th>詳細資料</th>
                  <th>收藏情況</th>
          </tr>
-     {% for item in student_list %}
-      {% for student in item %}
+     {% for student in student_list %}
          <tr>
                  <td> {{student.realname}} </td>
                  <td> {{student.department}} </td>
-                 <td> {{student.motto}} </td>
+                 <td> {{student.role}} </td>
                  <td> {{student.talent}} </td>
                  <td> {{student.interest}} </td>
                  <td> <a href="/other_profile/?id={{ student.id }}">檢視</a> </td>
@@ -57,7 +70,6 @@
                   {%endif%}
                  {%endif%}
                </tr>
-      {% endfor %}
      {% endfor %}
      </table>
      {% endif %}

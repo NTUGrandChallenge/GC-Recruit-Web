@@ -10,23 +10,49 @@ from django.contrib.auth.models import Permission, User
 
 def search(request):
 	if 'search' in request.GET:
-		keywords = []
-		for each in request.GET:
-			if each != 'seach':
-				keywords.append(each)
-		total_student_list = []
-		for each in keywords:
-			if each == 'search':
-				pass
-			else:		
-				student_list = Student.objects.filter(interest_id=each)
-				total_student_list.append(student_list)
-				print("added", each)
-				print(total_student_list)#total_student_list = list[list, list, list...]
-		if not student_list or len(student_list) == 0:
-			return render(request,'search.html', {'student_list' : total_student_list, 'error' : True, 'len' : 0, 'keywords' : keywords})
+		interests = request.GET.getlist("interest[]")
+		roles = request.GET.getlist("role[]")
+		student_list = []
+		for interest in interests:
+			students = Student.objects.filter(interest_id=interest)
+			for each in students:
+				student_list.append(each)
+#-------interest OR role search------
+		for role in roles:#OR search
+			students = Student.objects.filter(role_id=role)
+			for each in students:
+				if each not in student_list:
+					student_list.append(each)
+#-------interest OR role search------
+#-------interst AND role search-----
+#		final_student_list = []
+#		for role in roles:
+#			students = Student.objects.filter(role_id=role)
+#			for each in students:
+#				if each in student_list:
+#					final_student_list.append(each)
+#		if roles:
+#			if final_student_list:
+#				student_list = final_student_list
+#			else:
+#				student_list = []
+#-------interest And role search-----
+#-------to show the keyword on html-----
+		Interests = []
+		Roles = []
+		for each in interests:
+			tmp_interest = Interest.objects.filter(id=each)
+			for each in tmp_interest:
+				Interests.append(each)
+		for each in roles:
+			tmp_role = Role.objects.filter(id=each)
+			for each in tmp_role:
+				Roles.append(each)
+#-------to show the keyword on html-----
+		if len(student_list) == 0:
+			return render(request, 'search.html', {'student_list': [], 'error': True, 'len': 0, 'search': True, 'interests': Interests, 'roles': Roles})
 		else :
-			return render(request,'search.html', {'student_list' : total_student_list, 'error' : False, 'len' : len(total_student_list), 'keywords' : keywords})
+			return render(request, 'search.html', {'student_list': student_list, 'error' : False, 'len' : len(student_list), 'search': True, 'interests': Interests, 'roles': Roles})
 		return render_to_response('search.html', locals())	
 	else:
 		return render_to_response('search.html', locals())
