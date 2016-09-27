@@ -12,16 +12,53 @@ from django.contrib.auth.models import Permission, User
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def search(request):
 	if 'search' in request.GET:
-		keyword = request.GET['search']
-		if not keyword:
-			return render(request,'index.html')
-		else:
-			student_list = Student.objects.filter(talent__icontains = keyword)
-			if len(student_list) == 0 :
-				return render(request,'search.html', {'student_list' : student_list, 'error' : True, 'len' : 0, 'keyword' : keyword})
-			else :
-				return render(request,'search.html', {'student_list' : student_list, 'error' : False, 'len' : len(student_list), 'keyword' : keyword})
-	return render_to_response('search.html', RequestContext(request, locals()))
+		interests = request.GET.getlist("interest[]")
+		roles = request.GET.getlist("role[]")
+		student_list = []
+		for interest in interests:
+			students = Student.objects.filter(interest_id=interest)
+			for each in students:
+				student_list.append(each)
+#-------interest OR role search------
+		for role in roles:#OR search
+			students = Student.objects.filter(role_id=role)
+			for each in students:
+				if each not in student_list:
+					student_list.append(each)
+#-------interest OR role search------
+#-------interst AND role search-----
+#		final_student_list = []
+#		for role in roles:
+#			students = Student.objects.filter(role_id=role)
+#			for each in students:
+#				if each in student_list:
+#					final_student_list.append(each)
+#		if roles:
+#			if final_student_list:
+#				student_list = final_student_list
+#			else:
+#				student_list = []
+#-------interest And role search-----
+#-------to show the keyword on html-----
+		Interests = []
+		Roles = []
+		for each in interests:
+			tmp_interest = Interest.objects.filter(id=each)
+			for each in tmp_interest:
+				Interests.append(each)
+		for each in roles:
+			tmp_role = Role.objects.filter(id=each)
+			for each in tmp_role:
+				Roles.append(each)
+#-------to show the keyword on html-----
+		if len(student_list) == 0:
+			return render(request, 'search.html', {'student_list': [], 'error': True, 'len': 0, 'search': True, 'interests': Interests, 'roles': Roles})
+		else :
+			return render(request, 'search.html', {'student_list': student_list, 'error' : False, 'len' : len(student_list), 'search': True, 'interests': Interests, 'roles': Roles})
+		return render_to_response('search.html', RequestContext(request, locals()))
+	else:
+		return render_to_response('search.html', RequestContext(request, locals()))
+
 # Create your views here.
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def list_student(request):
@@ -68,8 +105,8 @@ def student_create(request):
 		motto = request.POST['motto']
 		talent = request.POST['talent']
 		none_team = Team.objects.get(name='none')
-		# if any(not request.POST[k] for k in request.POST):
-		# 	errors.append('* 有空白欄位！請不要留空！')
+#		if any(not request.POST[k] for k in request.POST):
+#			errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
 			Student.objects.create(
 				name=name,

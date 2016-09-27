@@ -4,29 +4,50 @@
   {% block h2 %} 台大創創挑戰賽 {% endblock %}
   
   {% block content %}
-  <p>請輸入關鍵字</p>
        <nav class="nav">
-                 
+                    <!--
                      <li>
                      <form class="pure-form" action="/search/" method="get">
                      <input class="pure-input-3-3" type="text" name="search" placeholder="search">
                      <input type="submit" value="搜尋">
                      </form>
                      </li>
+                     -->
+                     <li>
+                     <form name = "check_form" method="get">
+                     <input type="checkbox" name="interest[]" value="1">Environment<p>
+                     <input type="checkbox" name="interest[]" value="2">Food & Algriculture<p>
+                     <input type="checkbox" name="interest[]" value="3">Health Care<p>
+                     <input type="checkbox" name="interest[]" value="4">Society & Culture<p>
+                     <input type="checkbox" name="interest[]" value="5">Smart Life<p>
+                     <input type="checkbox" name="role[]" value="1">tech<p>
+                     <input type="checkbox" name="role[]" value="2">business<p>
+                     <input type="checkbox" name="role[]" value="3">project<p>
+                     <input type="checkbox" name="role[]" value="4">sales<p>
+                     <input type="submit" name="search" value="搜尋">
+                     </form>
+                     </li>
                  
        </nav>
- 
-     <div class="posts">
+    {%if search%}
+    <div class="post">
      {% if error %}
-         <h2 class="post-title">沒有人有相關技能...</a></h2>
+         <h2 class="post-title">沒有人符合你的要求...</a></h2>
      {% else %}
-         <h2 class="post-title">有 {{len}} 人有相關技能 '{{keyword}}'</a></h2>
+         <h2 class="post-title">有 {{len}} 人符合你的要求</a></h2>
+         {%for interest in interests%}
+         <p>"{{interest}}"</p>
+         {%endfor%}
+         {%for role in roles%}
+          <p>"{{role}}"</p>
+         {%endfor%}
          <table class="table">
          <tr>
                  <th>姓名</th>
                  <th>系級</th>
-                 <th>座右銘</th>
+                 <th>角色</th>
                  <th>技能</th>
+                 <th>興趣</th>
                  <th>詳細資料</th>
                  <th>收藏情況</th>
          </tr>
@@ -34,23 +55,24 @@
          <tr>
                  <td> {{student.realname}} </td>
                  <td> {{student.department}} </td>
-                 <td> {{student.motto}} </td>
+                 <td> {{student.role}} </td>
                  <td> {{student.talent}} </td>
+                 <td> {{student.interest}} </td>
                  <td> <a href="/other_profile/?id={{ student.id }}">檢視</a> </td>
                  {%if student in me.follow.all%}
                            <td>已收藏</td>
-                       {%else%}
-                           {%if student == me%}
+                 {%else%}
+                  {%if student == me%}
                            <td>是我自己</td>
-                         {%else%}
+                  {%else%}
                              <td>未收藏</td>
   
-                         {%endif%}
-                       {%endif%}
+                  {%endif%}
+                 {%endif%}
                </tr>
      {% endfor %}
      </table>
      {% endif %}
+     {% endif %}
  </div>
   {% endblock %}
-  {% block img %}
