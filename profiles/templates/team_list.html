@@ -6,11 +6,15 @@
 {% block content %}
 				<p>
 					{% for i in teams %}
-					<h2>{{i.name}}的參賽者</h2>
-						<p> <a href="/team_profile/{{ i.id }}/"> 團隊資訊 </a> </p>
-					{% if i.student_set.all %}
-						<p>本隊伍共有{{ i.student_set.all | length }}個參賽者 </p>
-						<table class="table">
+						{% if i.name == 'none' %}
+							<h2>尚未有團隊的參賽者</h2>
+							<p> <a href="/team_profile/{{ i.id }}/"> 列表 </a> </p>
+						{% else %}
+							<h2>{{i.name}}</h2>
+							<p> <a href="/team_profile/{{ i.id }}/"> 團隊資訊 </a> </p>
+							<p>本隊伍共有{{ i.student_set.all | length }}個參賽者 </p>
+						{% endif %}
+						<!-- <table class="table">
 							<tr>
 								<th>姓名</th>
 								<th>系級</th>
@@ -25,12 +29,9 @@
 								<td> <a href="/other_profile/?id={{ student.id }}">檢視</a> </td>
 							</tr>
 						{% endfor %}
-						</table>
-				</p>
-					{% else %}
-						<p> 本隊伍無參賽者! </p>
-					{% endif %}
+						</table> -->
 					{% endfor %}
+				</p>
 {% endblock %}
 {% block img %}
 	

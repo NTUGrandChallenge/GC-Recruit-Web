@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
 {% block title %} 團隊 {% endblock %}
-{% block h2 %} 團隊資料 {% endblock %}
+{% block h2 %}  {% endblock %}
 
 {% block content %}
-				<p>
+				{% if team.name != 'none' %}
+                    <h2>團隊資料</h2>
+                    <p>
 						<p> <a href="/teamroom/{{ team.id }}/"> 團隊聊天室 </a> </p>
 						<p> <a href="/applied_list/{{ team.id }}/"> 待審核成員 </a> </p>
 						<form action="" method="post">{% csrf_token %}
@@ -28,9 +30,26 @@
                  					<td><input type="hidden"  name="quit" value="{{team.id}}"></td>
                  						{%if team.id != me.team.id %}
                  							<td><input type="hidden"></td>
-                 							您不是此團隊成員
+                 							您還不是此團隊成員
+                 						{%elif team.captain_name == me.nickname %}
+                 							<td><input type="hidden"></td>
                  						{%else%}
                    							<td><input type="submit" value="退出團隊"></td>
+                 						{%endif%}
+                					</tr>
+            				</table>
+ 	          			</form>
+ 	          			<form action="" method="post">{% csrf_token %}
+             				<table align="center">
+               					<tr>
+                 					<td><input type="hidden"  name="dismiss" value="{{team.id}}"></td>
+                 						{%if team.captain_name != me.nickname %}
+                 							<td><input type="hidden"></td>
+                 						{%elif team.student_set.all|length > 1 %}
+                 							<td><input type="hidden"></td>
+                 							若團隊人數超過一人將無法解散團隊
+                 						{%else%}
+                   							<td><input type="submit" value="解散團隊"></td>
                  						{%endif%}
                 					</tr>
             				</table>
@@ -41,9 +60,14 @@
 							<tr> <td>團隊介紹：</td> <td>{{ team.content }}</td> </tr>
 
 						</table>
-						<p>團隊成員：</p>
+                    </p>
+                {% endif %}
+                    <p>
+						<p>成員：</p>
 						<table class="table">
 							<tr>
+                                <th></th>
+                                <th></th>
 								<th>姓名</th>
 								<th>系級</th>
 								<th>座右銘</th>
@@ -52,6 +76,10 @@
 							</tr>
 						{% for student in team.student_set.all %}
 							<tr>
+                                {%if team.captain_name == me.nickname %}
+                                    <td>隊長</td>
+                                {%endif%}
+                                <td> <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=small'> </td>
 								<td> {{student.realname}} </td>
 								<td> {{student.department}} </td>
 								<td> {{student.motto}} </td>
@@ -60,7 +88,7 @@
 							</tr>
 						{% endfor %}
 						</table>
-				</p>
+				    </p>
 {% endblock %}
 {% block img %}
 	

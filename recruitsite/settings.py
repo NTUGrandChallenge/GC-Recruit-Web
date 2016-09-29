@@ -178,4 +178,5 @@ LOGIN_REDIRECT_URL = "/index/"
 
 #one-to-one profile user
 #AUTH_PROFILE_MODULE = 'profiles.Student'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 

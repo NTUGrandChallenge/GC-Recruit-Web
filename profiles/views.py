@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils import timezone
-import shutil, os
+import shutil, os, allauth
 from django.contrib.auth.models import Permission, User
 
 
@@ -70,6 +70,8 @@ def list_student(request):
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def profile(request):
 	student = Student.objects.get(name=request.user)
+	if request.user.socialaccount_set.first() != None:
+		facebook_id = request.user.socialaccount_set.first().uid
 	#students = Student.objects.all()
 	return render_to_response('my_profile.html', RequestContext(request, locals()))
 
@@ -133,12 +135,15 @@ def chatroom(request, idfrom, idto):
 	if request.POST:
 		content = request.POST['content']
 		date_time = timezone.localtime(timezone.now())
+		# #如果session沒有被設置，才將資料加入資料庫
+		# if 'ok' not in request.session:
+		# 	request.session['ok'] = 'ok'
 		Chatroom.objects.create(
-			student1=Student.objects.get(id=idfrom),
-			student2=Student.objects.get(id=idto),
-			content=content,
-			date_time=date_time
-		)
+				student1=Student.objects.get(id=idfrom),
+				student2=Student.objects.get(id=idto),
+				content=content,
+				date_time=date_time
+			)
 	return render_to_response('chatroom.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
@@ -147,6 +152,9 @@ def other_profile(request):
 		myid = request.user.student_set.first().id
 		me = Student.objects.get(name=request.user)
 		student = Student.objects.get(id=request.GET['id'])
+		user = User.objects.get(student=student)
+		if user.socialaccount_set.first() != None:
+			facebook_id = user.socialaccount_set.first().uid
 		return render_to_response('other_profile.html', RequestContext(request, locals()))
 	if request.GET.get('follow'):
  		me = Student.objects.get(name=request.user)
@@ -273,6 +281,14 @@ def team_profile(request, teamid):
 		if me.team == team:
 			me.team = none_team	
 			me.save()
+			perm = Permission.objects.get(codename='can_create_team_profile')
+			request.user.user_permissions.add(perm)
+			return HttpResponseRedirect('/team_list/')
+	if request.POST.get('dismiss'):
+		if me.nickname == team.captain_name:
+			me.team = none_team	
+			me.save()
+			team.delete()
 			perm = Permission.objects.get(codename='can_create_team_profile')
 			request.user.user_permissions.add(perm)
 			return HttpResponseRedirect('/team_list/')

@@ -8,17 +8,18 @@
 					{% if chatroom %}
 
 						<table class="table">
-							<tr>
-								<th>綽號</th>
-								<th>時間</th>
-								<th>留言</th>
-							</tr>
 						{% for c in chatroom %}
-							<tr>
-								<td> {{c.student1.nickname}} </td>
-								<td> {{c.date_time}} </td>
-								<td> {{c.content}} </td>
-							</tr>
+							{% if c.student1 != me %}
+								<tr>
+									<td> <img src='http://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small'> </td>
+									<td> {{c.content}} </td>
+								</tr>
+							{% else %}
+								<tr>
+									<td> {{c.content}} </td>
+									<td> <img src='http://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small'> </td>
+								</tr>
+							{% endif %}
 						{% endfor %}
 						</table>
 				</p>
