@@ -85,3 +85,15 @@ class Teamroom(models.Model):
 	def __str__(self):
 		return self.content
 
+class Insurance(models.Model):
+	student = models.ForeignKey(Student, null=True)
+	birthday = models.DateField
+	security_id = models.CharField(max_length=10)
+	phone = models.CharField(max_length=15)
+	emergency = models.CharField(max_length=50)
+	emergency_relationship = models.CharField(max_length=50)
+	emergency_phone = models.CharField(max_length=15)
+	def __str__(self):
+		return self.student.realname
+
+

@@ -127,6 +127,7 @@ def student_create(request):
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def chatroom(request, idfrom, idto):
+	me = Student.objects.get(name=request.user)
 	s1=Student.objects.get(id=idfrom)
 	s2=Student.objects.get(id=idto)
 	chatroom1 = Chatroom.objects.filter(student1=s1, student2=s2)
@@ -313,4 +314,10 @@ def applied_list(request, teamid):
 	else:
 		return HttpResponseRedirect("/permission_error/")
 
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
+def chatroom_list(request):
+	me = Student.objects.get(name=request.user)
+	chatrooms = Chatroom.objects.filter(student2=me)
+	chatrooms = list(set(chatrooms)).order_by('-date_time')
+	return render_to_response('chatroom_list.html', locals())
 
