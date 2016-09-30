@@ -2,6 +2,5 @@
 __pycache__
 ENV/
 db.sqlite3
-/static
 .DS_Store
 recruitsite/secret.py

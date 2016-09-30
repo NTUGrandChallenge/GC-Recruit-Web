@@ -14,35 +14,39 @@
 		</style>
 	</head>
 	<body>
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<nav>
 			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="/index/">NTUChallenge</a>
-					
-					| <a href="/team_list/">團隊列表</a> |
-					| <a href="/create_team/">創建團隊</a> |
-					| <a href="/my_profile/">我的檔案</a> |
-					| <a href="/upload/">上傳文件</a> |
-					| <a href="/other_profile/?id=1">與大賽聊天</a> |
-					| <a href="/search/">搜尋</a> |
-
-					{% if request.user.is_authenticated %}
-						{{ request.user }}
-					|	<a href="/accounts/logout/">登出</a> |
-					{% else %}
-					|	<a href="/accounts/login">登入</a>	|
-					|	<a href="/accounts/register">註冊</a>	|
-					{% endif %}
-					
-				</div>
+			<div class="row">
+			  <div class="navbar-header">
+			      <a class="navbar-brand" href="/index">
+			      	NTU Challenge
+			      </a>
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ThisPlaceCollapse">
+			        <i class="fa fa-bars" aria-hidden="true"></i>
+			      </button>
+			  </div>
+			  <div class="navbar-right">
+			      <ul class="nav navbar-nav collapse navbar-collapse" id="ThisPlaceCollapse">
+			            <li><a href="/student_list/">學生列表</a></li>
+			            <li><a href="/team_list/">團隊列表</a></li>
+			            <li><a href="/create_team/">創建團隊</a></li>
+			            <li><a href="/my_profile/">我的檔案</a></li>
+			            <li><a href="/upload/">上傳文件</a></li>
+			            <li><a href="/other_profile/?id=1">與大賽聊天</a></li>
+			            <li><a href="/search/">搜尋</a></li>
+			            {% if request.user.is_authenticated %}
+							<!-- <li>{{ request.user }}</li> -->
+							<li><a href="/accounts/logout/">登出</a></li>
+						{% else %}
+							<li><a href="/accounts/login">登入</a></li>
+							<li><a href="/accounts/register">註冊</a></li>
+						{% endif %}
+			      </ul>
+			  </div>
+			</div>
 			</div>
 		</nav>
+
 		<div class="container">
 			<div class="menus">
 				<p>
