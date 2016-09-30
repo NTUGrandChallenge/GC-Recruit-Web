@@ -106,14 +106,8 @@ WSGI_APPLICATION = 'recruitsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'NAME': 'test1',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                   'NAME': 'gcdb',
-                    'USER': 'gc',
-                    'PASSWORD': 'gc',
-                      'HOST': 'localhost',
-                       'PORT ':'',
+        'NAME': 'test1',
         
     }
 }
