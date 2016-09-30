@@ -57,12 +57,11 @@ def wait(request):
 	return render_to_response('waiting.html', RequestContext(request, locals()))
 
 def use_session(request):
-	request.session['lucky_number'] = 8
-	if 'lucky_number' in request.session:
-		lucky_number = request.session['lucky_number']
-		response = HttpResponse('Your lucky_number is ' + str(lucky_number))
-	del request.session['lucky_number']
-	return response
+    if  'name' in request.session:
+        return HttpResponse('your name is %s'%request.session['name'])
+    else:
+        request.session['name'] = 'Jacky'
+        return HttpResponse('Set name as Jacky')
 
 def complete(request):
 	return render_to_response('complete.html', RequestContext(request, locals()))
