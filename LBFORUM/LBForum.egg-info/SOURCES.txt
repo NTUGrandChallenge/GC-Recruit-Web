@@ -1,0 +1,10 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.py
+LBForum.egg-info/PKG-INFO
+LBForum.egg-info/SOURCES.txt
+LBForum.egg-info/dependency_links.txt
+LBForum.egg-info/not-zip-safe
+LBForum.egg-info/requires.txt
+LBForum.egg-info/top_level.txt

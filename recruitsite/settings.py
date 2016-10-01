@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'recruitsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'test1',
+       'NAME': 'test1',
         
     }
 }
