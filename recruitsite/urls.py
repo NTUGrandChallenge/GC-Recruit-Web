@@ -44,5 +44,6 @@ urlpatterns = [
     #lbforum
     url(r'^forum/', include('lbforum.urls')),
     url(r'^attachments/', include('lbattachment.urls')),
+    
 
 ]
