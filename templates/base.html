@@ -1,56 +1,70 @@
 <!doctype html>
 <html>
-	<head>
-		<title>{% block title %} {% endblock %}</title>
-		<meta charset='utf-8'>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-		<style>
-		th { text-align : center;}
-		div.menus{
-			text-align : center;
-			padding: 40px 15px;
-		}
-		</style>
-	</head>
-	<body>
-		<nav>
-			<div class="container">
-			<div class="row">
-			  <div class="navbar-header">
-			      <a class="navbar-brand" href="/index">
-			      	NTU Challenge
-			      </a>
-			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ThisPlaceCollapse">
-			        <i class="fa fa-bars" aria-hidden="true"></i>
-			      </button>
-			  </div>
-			  <div class="navbar-right">
-			      <ul class="nav navbar-nav collapse navbar-collapse" id="ThisPlaceCollapse">
-			            <li><a href="/student_list/">學生列表</a></li>
-			            <li><a href="/team_list/">團隊列表</a></li>
-			            <li><a href="/create_team/">創建團隊</a></li>
-			            <li><a href="/my_profile/">我的檔案</a></li>
-			            <li><a href="/upload/">上傳文件</a></li>
-			            <li><a href="/other_profile/?id=1">與大賽聊天</a></li>
-			            <li><a href="/search/">搜尋</a></li>
-			            {% if request.user.is_authenticated %}
-							<!-- <li>{{ request.user }}</li> -->
+<head>
+	<title>{% block title %} {% endblock %}</title>
+	<meta charset='utf-8'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/static/css/general.css">
+	<link rel="stylesheet" href="/static/css/my_profile.css">
+</head>
+<body>
+	<nav>
+		<div class="container">
+		<div class="row">
+		  <div class="navbar-header">
+		      <a class="navbar-brand" href="/index">
+		      	NTU Challenge
+		      </a>
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ThisPlaceCollapse">
+		        <i class="fa fa-bars" aria-hidden="true"></i>
+		      </button>
+		  </div>
+		  <div class="navbar-right">
+		      <ul class="nav navbar-nav collapse navbar-collapse" id="ThisPlaceCollapse">
+					<li>
+						<a href="#" id="navbar-info" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">挑戰賽資訊<span class="caret"></span></a>
+		                <ul id="dropdown-info" class="dropdown-menu" role="menu" aria-labelledby="navbar-info">
+		                    <li><a href="#">最新消息</a></li>
+		                    <li><a href="#">活動相簿</a></li>
+		                </ul>
+					</li>
+					<li><a href="#">討論區</a></li>
+					<li>
+						<a href="#" id="navbar-info" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">參賽夥伴<span class="caret"></span></a>
+		                <ul id="dropdown-info" class="dropdown-menu" role="menu" aria-labelledby="navbar-info">
+				            <li><a href="/student_list/">挑戰者列表</a></li>
+				            <li><a href="/team_list/">團隊列表</a></li>
+				            <li><a href="/create_team/">創建團隊</a></li>
+				            <li><a href="/upload/">提案繳交</a></li>
+		                </ul>
+					</li>
+		            <li><a href="/other_profile/?id=1">與大賽聊天</a></li>
+		            <li><a href="/search/">搜尋</a></li>
+		            {% if request.user.is_authenticated %}
+					<li>
+						<a href="#" id="navbar-myself" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">{{ request.user }}<span class="caret"></span></a>
+		                <ul id="dropdown-myself" class="dropdown-menu" role="menu" aria-labelledby="navbar-myself">
+				            <li><a href="/my_profile/">個人資料</a></li>
 							<li><a href="/accounts/logout/">登出</a></li>
-						{% else %}
-							<li><a href="/accounts/login">登入</a></li>
-							<li><a href="/accounts/register">註冊</a></li>
-						{% endif %}
-			      </ul>
-			  </div>
-			</div>
-			</div>
-		</nav>
+		                </ul>
+					</li>
+					{% else %}
+					<li><a href="/accounts/login">登入</a></li>
+					<li><a href="/accounts/register">註冊</a></li>
+					{% endif %}
 
-		<h2>{% block h2 %} {% endblock %}</h2>
-		{% block content %} {% endblock %}
-						
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	</body>
+		      </ul>
+		  </div>
+		</div>
+		</div>
+	</nav>
+
+	{% block content %} 
+
+	{% endblock %}
+					
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
 </html>
