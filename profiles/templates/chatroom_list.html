@@ -6,40 +6,16 @@
 {% block content %}
 	<p>
 					{% for i in chatrooms %}
-					<h2>{{i.name}}的參賽者</h2>
-					{% if i.student_set.all %}
-						<p>本領域共有{{ i.student_set.all|length}}個參賽者 </p>
+					<h2>我的聊天列表</h2>
 						<table class="table">
 							<tr>
-								<th>姓名</th>
-								<th>系級</th>
-								<th>座右銘</th>
-								<th>詳細資料</th>
-								<th>收藏情況</th>
+								<td> {{i.student1.realname}} </td>
+								
+<!-- 								<td> <a href="/other_profile/?id={{ i.student1.id }}">檢視</a> </td>
+ --> 								<td> <a href="/chatroom/{{ me.id }}/{{ i.student1.id }}/">聊天</a> </td>
 							</tr>
-						{% for student in i.student_set.all %}
-							<tr>
-								<td> {{student.realname}} </td>
-								<td> {{student.department}} </td>
-								<td> {{student.motto}} </td>
-								<td> <a href="/other_profile/?id={{ student.id }}">檢視</a> </td>
- 								{%if student in me.follow.all%}
-               						<td>已收藏</td>
-             					{%else%}
-               						{%if student == me%}
-             							<td>是我自己</td>
-             						{%else%}
-               							<td>未收藏</td>
- 
-             						{%endif%}
-             					{%endif%}
-							</tr>
-						{% endfor %}
 						</table>
 				</p>
-					{% else %}
-						<p> 本領域無參賽者! </p>
-					{% endif %}
 					{% endfor %}
 {% endblock %}
 {% block img %}
