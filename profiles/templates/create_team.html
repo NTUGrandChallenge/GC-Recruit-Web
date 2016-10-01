@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block title %} 填寫資料 {% endblock %}
-{% block h2 %} 填寫您的資料 {% endblock %}
 
 {% block content %}
+
     <br><br>
             {% for e in errors %}
                     <p style="color:red;">{{ e }}</p>
@@ -26,9 +26,7 @@
                     {% endfor %}
                     </select>
                     <input type="submit" value="提交" class="btn btn-default">
+                </form>
 
-{% endblock %}
-{% block img %}
-    
 {% endblock %}
 
