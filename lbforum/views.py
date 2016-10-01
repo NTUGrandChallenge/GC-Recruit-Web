@@ -22,7 +22,6 @@ from .models import Topic, Forum, Post
 
 User = get_user_model()
 
-
 def get_all_topics(user, select_related=True):
     topics = Topic.objects.all()
     if not (user.has_perm('lbforum.sft_mgr_forum')):
@@ -52,7 +51,7 @@ def get_all_posts(user, select_related=True):
         )
     return qs.distinct()
 
-
+@login_required
 def index(request, template_name="lbforum/index.html"):
     ctx = {}
     topics = None

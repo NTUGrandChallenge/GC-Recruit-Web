@@ -202,11 +202,11 @@ HOST_URL = ''
 MEDIA_URL_ = '/media/'
 MEDIA_URL = HOST_URL + MEDIA_URL_
 
-SIGNUP_URL = '/forum/accounts/signup/'
-LOGIN_URL = '/forum/accounts/login/'
-LOGOUT_URL = '/forum/accounts/logout/'
-LOGIN_REDIRECT_URL = '/forum/'
-CHANGE_PASSWORD_URL = '/forum/accounts/password/change/'
+#SIGNUP_URL = '/forum/accounts/signup/'
+#LOGIN_URL = '/forum/accounts/login/'
+#LOGOUT_URL = '/forum/accounts/logout/'
+#LOGIN_REDIRECT_URL = '/forum/'
+#CHANGE_PASSWORD_URL = '/forum/accounts/password/change/'
 
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
