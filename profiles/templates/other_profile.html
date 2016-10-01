@@ -1,67 +1,42 @@
 {% extends 'base.html' %}
 
-{% block title %} Student Profile {% endblock %}
-{% block h2 %} {{student.nickname}}的個人資料 {% endblock %}
+{% block title %} {{student.nickname}} {% endblock %}
 
 {% block content %}
-	<p>
-						<table class="table">
-							<tr>
-								<th>姓名</th>
-								<th>暱稱</th>
-								<th>系級</th>
-								<th>座右銘</th>
-								<th>興趣</th>
-								<th>所屬隊伍</th>
-								<th>角色定位</th>
-								<th>徽章</th>
-								<th>我的最愛</th>
-								<th>特殊技能</th>
-							</tr>
-							<tr>
-								<td> {{student.realname}} </td>
-								<td> {{student.nickname}}</td>
-								<td> {{student.department}} </td>
-								<td> {{student.motto}} </td>
-								<td> {{student.interest.name}} </td>
-								<td> {{student.team}} </td>
-								<td> {{student.role}} </td>
-								<td> 
- 								{%for badge in student.badge.all%}
- 									{{badge.name}}
-     								<!-- <img src="{{ badge.image.url}}"> -->
- 								{%endfor%}
- 								</td>
- 								<td> 
- 								{%for follow in student.follow.all%}
- 									{{follow}}
- 								{%endfor%}
- 								</td>
-								<td> {{student.talent}} </td>
-							</tr>
-						</table>
-						<form action="" method="GET">
-             				<table align="center">
-               					<tr>
-                 					<td><input type="hidden"  name="follow" value="{{student.id}}"></td>
-                 					{%if student.id != myid%}
-                 						{%if student in me.follow.all%}
-                 							<td><input type="hidden"></td>
-                 						{%else%}
-                   							<td><input type="submit" value="收藏"></td>
-                 						{%endif%}
-                 					{%endif%}
-                					</tr>
-            				</table>
- 	          				</form>
-<!-- 						{% if perms.profiles.can_edit_base_profile %}
- -->						<a href="/chatroom/{{ myid }}/{{ student.id }}/">聊天</a>
-<!-- 							 <a href="/chatroom?idfrom={{ request.user.student.id }}&idto={{ student.id }}">聊天</a>
- -->						{% endif %}
-
-				</p>
-{% endblock %}
-{% block img %}
-		<img src='http://graph.facebook.com/{{facebook_id}}/picture?type=large'>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<img src="http://graph.facebook.com/{{facebook_id}}/picture?type=large" class="circular-img">
+		</div>
+		<div class="col-md-9">
+			<h1>{{student.realname}}({{student.nickname}})</h1>
+			<p>{{student.department}}</p>
+			<p>{{student.motto}}</p>
+			<p>{{student.department}}</p>
+		</div>
+	</div>
+	<form action="" method="GET">
+		<input type="hidden"  name="follow" value="{{student.id}}">
+		{%if student.id != myid%}
+			{%if student in me.follow.all%}
+				<td><input type="hidden"></td>
+			{%else%}
+				<td><input type="submit" value="追蹤"></td>
+			{%endif%}
+		{%endif%}
+	</form>
+	<a href="/chatroom/{{ myid }}/{{ student.id }}/">聊天</a>
+</div>
+<div class="container">
+	<div class="row">
+		所屬隊伍: <a href="/team_profile/{{student.team.id}}/">{{student.team}}</a>
+	</div>
+	<div class="row">
+		{{student.role}}
+	</div>
+	<div class="row">
+		{{student.talent}}
+	</div>
+</div>
 {% endblock %}
 
