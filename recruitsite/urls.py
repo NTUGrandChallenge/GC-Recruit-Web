@@ -41,4 +41,9 @@ urlpatterns = [
     url(r'^applied_list/(\d{1,5})/$', login_required(applied_list)),
     url(r'^search/$', login_required(search)),
 
+    #lbforum
+    url(r'^forum/', include('lbforum.urls')),
+    url(r'^attachments/', include('lbattachment.urls')),
+    
+
 ]

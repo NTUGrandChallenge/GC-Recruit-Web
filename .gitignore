@@ -4,3 +4,4 @@ ENV/
 db.sqlite3
 .DS_Store
 recruitsite/secret.py
+/lbattachment
