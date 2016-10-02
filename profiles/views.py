@@ -13,6 +13,26 @@ from django.contrib.auth.models import Permission, User
 def search(request):
 	first_user_list = []
 	first_user_list.append(User.objects.get(student=Student.objects.get(id=1)))
+	if 'word' in request.GET:
+		user_list = []
+		keyword = request.GET['word']
+		if not keyword:
+			return render(request,'index.html')
+		else:
+			students = Student.objects.filter(realname__icontains = keyword)
+			students2 = Student.objects.filter(nickname__icontains = keyword)
+
+			for each in students:
+				user = User.objects.get(student=each)
+				user_list.append(user)
+			for each in students2:
+				user = User.objects.get(student=each)
+				user_list.append(user)
+			user_list = list(set(user_list))
+			if len(user_list) == 0 :
+				return render(request,'search.html', {'user_list' : [], 'error' : True, 'len' : 0, 'word': True, 'keyword' : keyword})
+			else :
+				return render(request,'search.html', {'user_list' : user_list, 'error' : False, 'len' : len(user_list), 'search': True, 'keyword' : keyword})
 	if 'search' in request.GET:
 		interests = request.GET.getlist("interest[]")
 		roles = request.GET.getlist("role[]")
