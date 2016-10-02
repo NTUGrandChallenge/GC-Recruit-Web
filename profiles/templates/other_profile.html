@@ -9,10 +9,13 @@
 			<img src="http://graph.facebook.com/{{facebook_id}}/picture?type=large" class="circular-img">
 		</div>
 		<div class="col-md-9">
-			<h1>{{student.realname}}({{student.nickname}})</h1>
+			<h1>{{student.nickname}}({{student.team}})</h1>
+			<p>{{student.realname}}</p>
+			<p>{{student.school}}</p>
+			<p>{{student.domain}}</p>
 			<p>{{student.department}}</p>
+			<p>{{student.grade}}</p>
 			<p>{{student.motto}}</p>
-			<p>{{student.department}}</p>
 		</div>
 	</div>
 	<form action="" method="GET">
@@ -31,11 +34,17 @@
 	<div class="row">
 		所屬隊伍: <a href="/team_profile/{{student.team.id}}/">{{student.team}}</a>
 	</div>
+	<div>
+		{{student.interest}}
+	</div>
 	<div class="row">
 		{{student.role}}
 	</div>
 	<div class="row">
-		{{student.talent}}
+		{{student.talent.all}}
+	</div>
+	<div>
+		{{student.experience}}
 	</div>
 </div>
 {% endblock %}

@@ -93,6 +93,8 @@ def list_student(request):
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def profile(request):
+	if request.user.has_perm('profiles.kicked'):
+		return HttpResponseRedirect('/kick/')
 	student = Student.objects.get(name=request.user)
 	if request.user.socialaccount_set.first() != None:
 		facebook_id = request.user.socialaccount_set.first().uid
@@ -486,6 +488,22 @@ def team_profile(request, teamid):
 			perm = Permission.objects.get(codename='can_create_team_profile')
 			request.user.user_permissions.add(perm)
 			return HttpResponseRedirect('/team_list/')
+	if request.POST.get('cancel'):
+		if me.team != team:
+			me.applied.remove(team)	
+			me.save()
+	if request.POST.get('kick'):
+		student = Student.objects.get(id=request.POST['kick'])
+		if student.team == team:
+			student.team = none_team	
+			student.save()
+			perm = Permission.objects.get(codename='can_create_team_profile')
+			user = User.objects.get(student=student)
+			user.user_permissions.add(perm)
+			perm = Permission.objects.get(codename='kicked')
+			user.user_permissions.add(perm)
+			user.save()
+			return HttpResponseRedirect('/team_list/')
 	return render_to_response('team_profile.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_view_base_profile', login_url='/permission_error/')
@@ -514,3 +532,10 @@ def chatroom_list(request):
 	chatrooms = list(set(chatrooms))
 	return render_to_response('chatroom_list.html', locals())
 
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
+def kick(request):
+	if 'agree' in request.POST:
+		perm = Permission.objects.get(codename='kicked')
+		request.user.user_permissions.remove(perm)
+		return HttpResponseRedirect('/my_profile/')
+	return render_to_response('kick.html', RequestContext(request, locals()))
