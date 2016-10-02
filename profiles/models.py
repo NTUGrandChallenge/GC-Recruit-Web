@@ -51,6 +51,8 @@ class Student(models.Model):
 			("can_edit_base_profile", "Can edit base profile"),
 			("can_view_base_profile", "Can view base profile"),
 			("wait", "Wait"),
+			("can_insurance", "Can insurance"),
+			("can_write_student", "Can write student"),
 
 		)
 	def __str__(self):
@@ -87,7 +89,10 @@ class Teamroom(models.Model):
 
 class Insurance(models.Model):
 	student = models.ForeignKey(Student, null=True)
-	birthday = models.DateField
+	birthday_y = models.IntegerField(default=2000)
+	birthday_m = models.IntegerField(default=1)
+	birthday_d = models.IntegerField(default=1)
+
 	security_id = models.CharField(max_length=10)
 	phone = models.CharField(max_length=15)
 	emergency = models.CharField(max_length=50)

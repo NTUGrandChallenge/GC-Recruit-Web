@@ -52,7 +52,7 @@ def register(request):
 def perror(request):
 	return render_to_response('permission_error.html', RequestContext(request, locals()))
 
-@permission_required('profiles.wait', login_url='/create_student/')
+@permission_required('profiles.wait', login_url='/agree/')
 def wait(request):
 	return render_to_response('waiting.html', RequestContext(request, locals()))
 

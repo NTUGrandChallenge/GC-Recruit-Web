@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} 填寫資料 {% endblock %}
+{% block h2 %} 填寫您的資料 {% endblock %}
+
+{% block content %}
+                {% for e in errors %}
+
+                    <p style="color:red;">{{ e }}</p>
+                {% endfor %}
+
+                <form action="" method="post" class="form-horizontal" role="form" style="width:33%; margin:auto; text-align:left">{% csrf_token %}
+                    <div class="form-group">
+                    <label for="birthday_y">生日:</label>
+                    <select  name="birthday_y" >
+                    {% for y in year %}
+                    <option value="{{ y }}"> {{ y }} </option>
+                    {% endfor %}
+                    </select>
+                    <select  name="birthday_m" >
+                    {% for m in month %}
+                    <option value="{{ m }}"> {{ m }} </option>
+                    {% endfor %}
+                    </select>
+                    <select  name="birthday_d" >
+                    {% for d in day %}
+                    <option value="{{ d }}"> {{ d }} </option>
+                    {% endfor %}
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label for="security_id">身分證字號:</label>
+                    <input id="security_id" type="text" name="security_id" class="form-control" value="{{security_id}}">
+                    </div>
+                    <div class="form-group">
+                    <label for="phone">手機:</label>
+                    <input id="phone" type="text" name="phone" class="form-control" value="{{phone}}">
+                    </div>
+                    <div class="form-group">
+                    <label for="emergency">緊急聯絡人姓名:</label>
+                    <textarea id="emergency" name="emergency" class="form-control">{{emergency}}</textarea>
+                    </div>
+                    <div class="form-group">
+                    <label for="emergency_relationship">緊急聯絡人關係:</label>
+                    <textarea id="emergency_relationship" name="emergency_relationship" class="form-control">{{emergency_relationship}}</textarea>
+                    </div>
+                    <div class="form-group">
+                    <label for="emergency_phone">緊急聯絡人手機:</label>
+                    <input id="emergency_phone" type="text" name="emergency_phone" class="form-control" value="{{emergency_phone}}">
+                    </div>
+                    
+                    <input type="submit" value="提交" class="btn btn-default">
+{% endblock %}
+{% block img %}
+    
+{% endblock %}
+

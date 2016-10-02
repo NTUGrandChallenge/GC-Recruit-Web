@@ -5,7 +5,7 @@ from django.contrib import admin
 from recruitsite.views import welcome, index, register, logout, perror, use_session, complete, wait#, login#, logout
 from django.contrib.auth.views import login#, logout
 from django.contrib.auth.decorators import login_required
-from profiles.views import list_student, profile, edit, student_create, other_profile, chatroom, upload, follow_complete, list_team, create_team, teamroom, team_profile, applied_list, search, chatroom_list
+from profiles.views import list_student, profile, edit, student_create, other_profile, chatroom, upload, follow_complete, list_team, create_team, teamroom, team_profile, applied_list, search, chatroom_list, insurance_create, agree
 from django.views.static import serve
 import allauth
 
@@ -41,6 +41,8 @@ urlpatterns = [
     url(r'^applied_list/(\d{1,5})/$', login_required(applied_list)),
     url(r'^search/$', login_required(search)),
     url(r'^chatroom_list/$', login_required(chatroom_list)),
+    url(r'^insurance_create/$', login_required(insurance_create)),
+    url(r'^agree/$', login_required(agree)),
 
     #lbforum
     url(r'^forum/', include('lbforum.urls')),

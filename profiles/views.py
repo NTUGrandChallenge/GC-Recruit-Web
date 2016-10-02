@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, render_to_response
-from profiles.models import Student, Interest, Chatroom, Team, Badge, up_file, file_info, Teamroom, Role
+from profiles.models import Student, Interest, Chatroom, Team, Badge, up_file, file_info, Teamroom, Role, Insurance
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required, permission_required
@@ -93,10 +93,19 @@ def edit(request):
 	else:
 		return render_to_response('edit_profile.html', RequestContext(request, locals()))
 
-#@permission_required('profiles.wait', login_url='/wait/')
+def agree(request):
+	if request.user.has_perm('profiles.can_write_student'):
+		return HttpResponseRedirect('/create_student/')
+	if 'agree' in request.POST:
+		perm = Permission.objects.get(codename='can_write_student')
+		request.user.user_permissions.add(perm)
+		return render_to_response('create_student.html', RequestContext(request, locals()))
+	return render_to_response('agree.html', RequestContext(request, locals()))
+
+
 def student_create(request):
-	if request.user.has_perm('profiles.wait'):
-		return HttpResponseRedirect('/wait/')
+	if request.user.has_perm('profiles.can_insurance'):
+		return HttpResponseRedirect('/insurance_create/')
 	errors = []
 	# inter = Interest.objects.all()
 	if request.POST:
@@ -119,11 +128,69 @@ def student_create(request):
 				talent = talent,
 				team = none_team
 			)
-			perm = Permission.objects.get(codename='wait')
+			perm = Permission.objects.get(codename='can_insurance')
 			request.user.user_permissions.add(perm)
-		return render_to_response('complete.html', RequestContext(request, locals()))
+		return render_to_response('insurance.html', RequestContext(request, locals()))
 	else:
 		return render_to_response('create_student.html', RequestContext(request, locals()))
+
+def check(y,m,d):
+	
+	if (y % 4) == 0:
+		if m == 2:
+			if d > 29:
+				return False
+		if m == 4 or 6 or 9 or 11:
+			if d ==31:
+				return False
+	else:
+		if m == 2:
+			if d > 28:
+				return False
+		if m == 4 or 6 or 9 or 11:
+			if d ==31:
+				return False
+	return True
+
+def insurance_create(request):
+	if request.user.has_perm('profiles.wait'):
+		return HttpResponseRedirect('/wait/')
+	errors = []
+	year = list(range(1950, 2001))
+	month = list(range(1, 13))
+	day = list(range(1, 32))
+	if request.POST:
+		student = request.user.student_set.first()
+		birthday_y = request.POST["birthday_y"]
+		birthday_m = request.POST["birthday_m"]
+		birthday_d = request.POST["birthday_d"]
+
+		security_id = request.POST['security_id']
+		phone = request.POST['phone']
+		emergency = request.POST['emergency']
+		emergency_relationship = request.POST['emergency_relationship']
+		emergency_phone = request.POST['emergency_phone']
+#		if any(not request.POST[k] for k in request.POST):
+#			errors.append('* 有空白欄位！請不要留空！')
+		if check(int(birthday_y), int(birthday_m), int(birthday_d))==False:
+			errors.append('生日錯誤請重新輸入！')
+
+		if not errors:
+			Insurance.objects.create(
+				student=student,
+				birthday_y=birthday_y,
+				birthday_m=birthday_m,
+				birthday_d=birthday_d,
+				security_id=security_id,
+				phone=phone,
+				emergency=emergency,
+				emergency_relationship=emergency_relationship,
+				emergency_phone=emergency_phone
+			)
+			perm = Permission.objects.get(codename='wait')
+			request.user.user_permissions.add(perm)
+			return render_to_response('complete.html', RequestContext(request, locals()))
+	return render_to_response('insurance.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def chatroom(request, idfrom, idto):
