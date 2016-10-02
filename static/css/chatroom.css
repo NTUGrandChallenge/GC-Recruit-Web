@@ -1,0 +1,10 @@
+#chatroom #dialogue .one-message{
+	padding: 10px;
+	border-bottom: 1px solid #EEE;
+	margin-bottom: 5px;
+}
+#chatroom #input textarea{
+	width: 100%;
+	height: 100px;
+	resize: none;
+}

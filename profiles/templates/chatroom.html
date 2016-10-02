@@ -1,45 +1,49 @@
 {% extends 'base.html' %}
 
-{% block title %} Chat Room {% endblock %}
-{% block h2 %} {{ s1.nickname }}與{{ s2.nickname }}的聊天室 {% endblock %}
+{% block title %} 與{{ s2.nickname }}的聊天室 {% endblock %}
 
 {% block content %}
-				<p>
-					{% if chatroom %}
+<div id="chatroom">
+<div class="container">
+	<div class="col-md-4">
 
-						<table class="table">
-						{% for c in chatroom %}
-							{% if c.student1 != me %}
-								<tr>
-									<td> <img src='http://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small'> </td>
-									<td> {{c.content}} </td>
-								</tr>
-							{% else %}
-								<tr>
-									<td> {{c.content}} </td>
-									<td> <img src='http://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small'> </td>
-								</tr>
-							{% endif %}
-						{% endfor %}
-						</table>
-				</p>
-					{% else %}
-						<p> 目前還沒有留言! </p>
-					{% endif %}
-					<br><br>
-					<form action="" method="post"> {% csrf_token %}
-						<table>
-							<tr>
-								<td> <label for="content">留言：</label></td>
-								<td>
-									<textarea id="content" rows="10" cols="48" name="content"></textarea>
-								</td>
-							</tr>
-						</table>
-						<input type="submit" value="留言">
-					</form>
-{% endblock %}
-{% block img %}
-	
+	</div>
+	<div class="col-md-8">
+	<div id="dialogue">
+	{% if chatroom %}
+		{% for c in chatroom %}
+			{% if c.student1 != me %}
+				<div class="row one-message">
+					<div class="col-xs-2">
+						<img src='https://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small'>
+					</div>
+					<div class="col-xs-10">
+						<p>{{c.content}}</p>
+					</div>
+				</div>
+			{% else %}
+				<div class="row one-message">
+					<div class="col-xs-10">
+						<p class="text-right">{{c.content}}</p>
+					</div>
+					<div class="col-xs-2">
+						<img src='https://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small'>
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	{% else %}
+		<h2>開始你們的對話吧！</h2>
+	{% endif %}
+	</div>
+	<div id="input">
+		<form action="" method="post"> {% csrf_token %}
+			<textarea id="content" name="content"></textarea>
+			<input type="submit" value="傳送">
+		</form>
+	</div>
+	</div>
+</div>
+</div>
 {% endblock %}
 
