@@ -317,7 +317,7 @@ def applied_list(request, teamid):
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def chatroom_list(request):
 	me = Student.objects.get(name=request.user)
-	chatrooms = Chatroom.objects.filter(student2=me)
-	chatrooms = list(set(chatrooms)).order_by('-date_time')
+	chatrooms = Chatroom.objects.filter(student2=me).order_by('-date_time')
+	chatrooms = list(set(chatrooms))
 	return render_to_response('chatroom_list.html', locals())
 
