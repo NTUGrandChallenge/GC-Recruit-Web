@@ -11,21 +11,25 @@ from django.contrib.auth.models import Permission, User
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def search(request):
+	first_user_list = []
+	first_user_list.append(User.objects.get(student=Student.objects.get(id=1)))
 	if 'search' in request.GET:
 		interests = request.GET.getlist("interest[]")
 		roles = request.GET.getlist("role[]")
-		student_list = []
+		#student_list = []
+		user_list = []
 		for interest in interests:
 			students = Student.objects.filter(interest_id=interest)
 			for each in students:
-				student_list.append(each)
+				user = User.objects.get(student=each)
+				user_list.append(user)
 #-------interest OR role search------
 		for role in roles:#OR search
 			students = Student.objects.filter(role_id=role)
 			for each in students:
 				if each not in student_list:
-					student_list.append(each)
-#-------interest OR role search------
+					user = User.objects.get(student=each)
+					user_list.append(user)
 #-------interst AND role search-----
 #		final_student_list = []
 #		for role in roles:
@@ -51,10 +55,10 @@ def search(request):
 			for each in tmp_role:
 				Roles.append(each)
 #-------to show the keyword on html-----
-		if len(student_list) == 0:
-			return render(request, 'search.html', {'student_list': [], 'error': True, 'len': 0, 'search': True, 'interests': Interests, 'roles': Roles})
+		if len(user_list) == 0:
+			return render(request, 'search.html', {'user_list': [], 'error': True, 'len': 0, 'search': True, 'interests': Interests, 'roles': Roles})
 		else :
-			return render(request, 'search.html', {'student_list': student_list, 'error' : False, 'len' : len(student_list), 'search': True, 'interests': Interests, 'roles': Roles})
+			return render(request, 'search.html', {'user_list': user_list, 'error' : False, 'len' : len(user_list), 'search': True, 'interests': Interests, 'roles': Roles})
 		return render_to_response('search.html', RequestContext(request, locals()))
 	else:
 		return render_to_response('search.html', RequestContext(request, locals()))
