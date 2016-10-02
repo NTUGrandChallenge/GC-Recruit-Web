@@ -6,26 +6,51 @@
 {% block content %}
     <form action="" method="post" class="form-horizontal" role="form" style="width:33%; margin:auto; text-align:left">{% csrf_token %}
                     <div class="form-group">
-                    <label for="motto">motto:</label>
+                    <label for="motto">座右銘:</label>
                     <input id="motto" type="text" name="motto" class="form-control" value="{{student.motto}}">
-                    <label for="talent">特殊技能:</label>
-                    <input id="talent" type="text" name="talent" class="form-control" value="{{student.talent}}">
-                    
-                    <label for="interest">interest:</label>
+                    <label for="experience">人生經歷:</label>
+                    <input id="experience" type="text" name="experience" class="form-control" value="{{student.experience}}">
+                    </div>
+                    <div>
+                    <label for="interest">感興趣的領域:</label>
                     <select  name="interest" >
                     {% for i in interest %}
                     <option value="{{ i }}"> {{ i }} </option>
                     {% endfor %}
                     </select>
-
-                    <label for="role">role:</label>
+                    </div>
+                    <div>
+                    <label for="role">團隊中角色定位:</label>
                     <select  name="role" >
-                    {% for ta in role %}
-                    <option value="{{ ta }}"> {{ ta }} </option>
+                    {% for r in role %}
+                    <option value="{{ r }}"> {{ r }} </option>
                     {% endfor %}
                     </select>
-                    
                     </div>
+
+                    {% for m in mytalents %}
+                    <div>
+                    <label for="category">C:</label>
+                    <select  name="category" >
+                    {% for c in categorys %}
+                    <option value="{{ c }}"> {{ c }} </option>
+                    {% endfor %}
+                    </select>
+                    <label for="group">G:</label>
+                    <select  name="group" >
+                    {% for g in groups %}
+                    <option value="{{ g }}"> {{ g }} </option>
+                    {% endfor %}
+                    </select>
+                    <label for="talent">特殊技能名稱:</label>
+                    <select  name="talent" default="{{m}}">
+                    {% for t in talents %}
+                    <option value="{{ t }}" {% if t == m %}selected{% endif %}> {{ t }} </option>
+                    {% endfor %}
+                    </select>
+                    </div>
+                    {% endfor %}
+
 
                     <input type="submit" value="送出" class="btn btn-default">
                 </form>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, render_to_response
-from profiles.models import Student, Interest, Chatroom, Team, Badge, up_file, file_info, Teamroom, Role, Insurance
+from profiles.models import Student, Interest, Chatroom, Team, Badge, up_file, file_info, Teamroom, Role, Insurance, Domain, Talent, Grade, Category, Group
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required, permission_required
@@ -104,14 +104,23 @@ def edit(request):
 	student = Student.objects.get(name=request.user)
 	interest = Interest.objects.all()
 	role = Role.objects.all()
+	categorys = Category.objects.all()
+	groups = Group.objects.all()
+	talents = Talent.objects.all()
+	mytalents = Talent.objects.filter(student=student)
 	if request.POST:
 		motto = request.POST['motto']
-		talent = request.POST['talent']
+		experience = request.POST['experience']
+
+		#talent = request.POST['talent']
 		myinterest = request.POST['interest']
 		myrole = request.POST['role']
+		talent = request.POST['talent']
 		student.motto = motto
+		student.experience = experience
 		student.interest = Interest.objects.get(name=myinterest)
 		student.role = Role.objects.get(name=myrole)
+		student.talent.add(Talent.objects.get(name=talent))
 		student.save()
 		return render_to_response('my_profile.html', RequestContext(request, locals()))
 	else:
@@ -123,11 +132,20 @@ def agree(request):
 	if 'agree' in request.POST:
 		perm = Permission.objects.get(codename='can_write_student')
 		request.user.user_permissions.add(perm)
-		return render_to_response('create_student.html', RequestContext(request, locals()))
+		return HttpResponseRedirect('/create_student/')
 	return render_to_response('agree.html', RequestContext(request, locals()))
 
 
 def student_create(request):
+	interests = Interest.objects.all()
+	roles = Role.objects.all()
+	domains = Domain.objects.all()
+	grades = Grade.objects.all()
+	categorys = Category.objects.all()
+	groups = Group.objects.all()
+	talents = Talent.objects.all()
+	counters = list(range(1,11))
+
 	if request.user.has_perm('profiles.can_insurance'):
 		return HttpResponseRedirect('/insurance_create/')
 	errors = []
@@ -136,24 +154,37 @@ def student_create(request):
 		name = request.user
 		realname = request.POST['realname']
 		nickname = request.POST['nickname']
+		school = request.POST['school']
 		department = request.POST['department']
+		grade = request.POST['grade']
 		motto = request.POST['motto']
-		talent = request.POST['talent']
+		experience = request.POST['experience']
 		none_team = Team.objects.get(name='none')
+		domain = request.POST['domain']
+		interest = request.POST['interest']
+		talent = request.POST['talent']
+		role = request.POST['role']
 #		if any(not request.POST[k] for k in request.POST):
 #			errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
-			Student.objects.create(
+			student = Student.objects.create(
 				name=name,
 				realname = realname,
 				nickname = nickname,
+				school = school,
 				department = department,
 				motto = motto,
-				talent = talent,
-				team = none_team
+				experience = experience,
+				team = none_team,
+				grade = Grade.objects.get(name=grade),
+				domain = Domain.objects.get(name=domain),
+				interest = Interest.objects.get(name=interest),
+				role = Role.objects.get(name=role)
 			)
+			student.talent.add(Talent.objects.get(name=talent))
 			perm = Permission.objects.get(codename='can_insurance')
 			request.user.user_permissions.add(perm)
+			return HttpResponseRedirect('/insurance_create/')
 		return render_to_response('insurance.html', RequestContext(request, locals()))
 	else:
 		return render_to_response('create_student.html', RequestContext(request, locals()))

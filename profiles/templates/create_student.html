@@ -19,22 +19,78 @@
                     <input id="nickname" type="text" name="nickname" class="form-control" value="{{nickname}}">
                     </div>
                     <div class="form-group">
-                    <label for="department">系級:</label>
+                    <label for="school">學校:</label>
+                    <input id="school" type="text" name="school" class="form-control" value="{{school}}">
+                    </div>
+                    <div>
+                    <label for="domain">科系領域:</label>
+                    <select  name="domain" >
+                    {% for d in domains %}
+                    <option value="{{ d }}"> {{ d }} </option>
+                    {% endfor %}
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label for="department">科系:</label>
                     <input id="department" type="text" name="department" class="form-control" value="{{department}}">
+                    </div>
+                    <div>
+                    <label for="grade">系級:</label>
+                    <select  name="grade" >
+                    {% for g in grades %}
+                    <option value="{{ g }}"> {{ g }} </option>
+                    {% endfor %}
+                    </select>
                     </div>
                     <div class="form-group">
                     <label for="motto">座右銘:</label>
-                    <textarea id="motto" rows="10" cols="48" name="motto" class="form-control">{{motto}}</textarea>
+                    <textarea id="motto" rows="3" cols="48" name="motto" class="form-control">{{motto}}</textarea>
                     </div>
                     <div class="form-group">
-                    <label for="talent">具備才能:</label>
-                    <textarea id="talent" rows="10" cols="48" name="talent" class="form-control">{{talent}}</textarea>
+                    <label for="experience">人生經歷:</label>
+                    <textarea id="experience" rows="10" cols="48" name="experience" class="form-control">{{experience}}</textarea>
                     </div>
-                    <!-- <div class="form-group">
-                    <label for="interest">興趣:</label>
-                    <input id="interest" type="text" name="interest" class="form-control" value="{{interest}}">
-                    </div> -->
                     
+                    <div>
+                    <label for="interest">interest:</label>
+                    <select  name="interest" >
+                    {% for i in interests %}
+                    <option value="{{ i }}"> {{ i }} </option>
+                    {% endfor %}
+                    </select>
+                    </div>
+                    <div>
+                    <label for="role">團隊中角色定位:</label>
+                    <select  name="role" >
+                    {% for r in roles %}
+                    <option value="{{ r }}"> {{ r }} </option>
+                    {% endfor %}
+                    </select>
+                    </div>
+                    
+                    {% for counter in counters %}
+                    <div>
+                    <label for="category">C:</label>
+                    <select  name="category" >
+                    {% for c in categorys %}
+                    <option value="{{ c }}"> {{ c }} </option>
+                    {% endfor %}
+                    </select>
+                    <label for="group">G:</label>
+                    <select  name="group" >
+                    {% for g in groups %}
+                    <option value="{{ g }}"> {{ g }} </option>
+                    {% endfor %}
+                    </select>
+                    <label for="talent">特殊技能名稱:</label>
+                    <select  name="talent" default="{{m}}">
+                    {% for t in talents %}
+                    <option value="{{ t }}"> {{ t }} </option>
+                    {% endfor %}
+                    </select>
+                    </div>
+                    {% endfor %}
+
                     <input type="submit" value="提交" class="btn btn-default">
 {% endblock %}
 {% block img %}

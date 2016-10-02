@@ -8,6 +8,11 @@ class Interest(models.Model):
 	def __str__(self):
 		return str(self.name)
 
+class Domain(models.Model):
+	name = models.CharField(max_length=50)
+	def __str__(self):
+		return str(self.name)
+
 class Badge(models.Model):
 	name = models.CharField(max_length=50)
 	def __str__(self):
@@ -31,19 +36,41 @@ class Role(models.Model):
 	def __str__(self):
 		return self.name
 
-# class Grade(models.Model):
-# 	name = models.CharField(max_length=50)
-# 	def __str__(self):
-# 		return self.name
+class Grade(models.Model):
+	name = models.CharField(max_length=50)
+	def __str__(self):
+		return self.name
+
+class Category(models.Model):
+	name = models.CharField(max_length=50)
+	def __str__(self):
+		return self.name
+
+class Group(models.Model):
+	name = models.CharField(max_length=50)
+	category = models.ForeignKey(Category, null=True)
+	def __str__(self):
+		return self.name
+
+class Talent(models.Model):
+	name = models.CharField(max_length=50)
+	familiar = models.IntegerField(max_length=2)
+	group = models.ForeignKey(Group, null=True)
+	def __str__(self):
+		return self.name
 
 class Student(models.Model):
 	name = models.ForeignKey(User, unique=True)
 	realname = models.CharField(max_length=50, blank=True)
 	nickname = models.CharField(max_length=50, blank=True)
+	school = models.CharField(max_length=50, blank=True)
 	department = models.CharField(max_length=50, blank=True)
-	motto = models.CharField(max_length=20, blank=True)
+	domain = models.ForeignKey(Domain, null=True)
+	grade = models.ForeignKey(Grade, null=True)
+	motto = models.CharField(max_length=50, blank=True)
+	experience = models.CharField(max_length=350, blank=True)
 	interest = models.ForeignKey(Interest, null=True)
-	talent = models.CharField(max_length=20, blank=True)
+	talent = models.ManyToManyField(Talent, blank=True)
 	#talent = models.ManyToManyField(Talent, default=1 )#one student can have many badges, one badge can have many students
 	badge = models.ManyToManyField(Badge, blank=True )#one student can have many badges, one badge can have many students
 	role = models.ForeignKey(Role, null=True)
