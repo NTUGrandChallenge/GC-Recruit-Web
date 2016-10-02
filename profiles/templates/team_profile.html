@@ -32,6 +32,16 @@
                     <input type="submit" class="btn btn-danger" value="退出團隊">
                 {%endif%}
         	</form>
+            <form action="" method="post">{% csrf_token %}
+                {%if team.id != me.team.id%}
+                    {%if team in me.applied.all%}
+                        <input type="hidden"  name="cancel" value="{{team.id}}">
+                        <input type="submit" class="btn btn-success" value="取消申請">
+                    {%else%}
+                        
+                    {%endif%}
+                {%endif%}
+            </form>
             <div><button class="btn btn-default"><a href="/teamroom/{{ team.id }}/">團隊聊天室</a></button></div>
             <div><button class="btn btn-default"><a href="/applied_list/{{ team.id }}/">待審核成員</a></button></div>
             {% if team.captain_name == me.nickname %}
@@ -43,7 +53,7 @@
         <div class="col-md-9">
             {% for student in team.student_set.all %}
             <div class="row">
-                {%if team.captain_name == me.nickname %}
+                {%if team.captain_name == student.nickname %}
                     <p>隊長</p>
                 {%endif%}
                 <div class="col-xs-3">
@@ -55,6 +65,14 @@
                     <p>{{student.motto}}</p>
                     <p>{{student.role}}</p>
                     <p><a href="/other_profile/?id={{ student.id }}">檢視</a></p>
+                    <form action="" method="post">{% csrf_token %}
+                        {%if team.captain_name == me.nickname %}
+                            {% if student != me %}
+                                <input type="hidden"  name="kick" value="{{student.id}}">
+                                <input type="submit" class="btn btn-success" value="踢出">
+                          {%endif%}
+                        {%endif%}
+                     </form>
                 </div>
             </div>
             {% endfor %}

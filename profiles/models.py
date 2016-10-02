@@ -27,6 +27,7 @@ class Team(models.Model):
 		permissions = (
 			("can_create_team_profile", "Can create team profile"),
 			("can_edit_team_profile", "Can edit team profile"),
+			("kicked", "Kicked")
 
 		)
 	def __str__(self):
