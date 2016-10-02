@@ -31,6 +31,10 @@ class Role(models.Model):
 	def __str__(self):
 		return self.name
 
+# class Grade(models.Model):
+# 	name = models.CharField(max_length=50)
+# 	def __str__(self):
+# 		return self.name
 
 class Student(models.Model):
 	name = models.ForeignKey(User, unique=True)
@@ -75,7 +79,7 @@ class up_file(models.Model):
 class file_info(models.Model):
 	File = models.ForeignKey(up_file, null=True)
 	local_name = models.CharField(max_length=50)
-	upload_name = models.CharField(max_length=50)
+	upload_name = models.CharField(max_length=200)
 	def __str__(self):
 		return self.upload_name
 

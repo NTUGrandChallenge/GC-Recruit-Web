@@ -5,7 +5,7 @@ from django.contrib import admin
 from recruitsite.views import welcome, index, register, logout, perror, use_session, complete, wait#, login#, logout
 from django.contrib.auth.views import login#, logout
 from django.contrib.auth.decorators import login_required
-from profiles.views import list_student, profile, edit, student_create, other_profile, chatroom, upload, follow_complete, list_team, create_team, teamroom, team_profile, applied_list, search, chatroom_list, insurance_create, agree
+from profiles.views import list_student, profile, edit, student_create, other_profile, chatroom, upload, upload2, follow_complete, list_team, create_team, teamroom, team_profile, applied_list, search, chatroom_list, insurance_create, agree, get_file, get_file2
 from django.views.static import serve
 import allauth
 
@@ -34,6 +34,8 @@ urlpatterns = [
     url(r'^follow_complete/$', follow_complete),
     url(r'^chatroom/(\d{1,5})/(\d{1,5})/$', login_required(chatroom)),
     url(r'^upload/$', login_required(upload)),
+    url(r'^upload2/$', login_required(upload2)),
+
     url(r'^team_list/$', login_required(list_team)),
     url(r'^create_team/$', login_required(create_team)),
     url(r'^teamroom/(\d{1,5})/$', login_required(teamroom)),
@@ -43,6 +45,8 @@ urlpatterns = [
     url(r'^chatroom_list/$', login_required(chatroom_list)),
     url(r'^insurance_create/$', login_required(insurance_create)),
     url(r'^agree/$', login_required(agree)),
+    url(r'^get_file/$', login_required(get_file)),
+    url(r'^get_file2/$', login_required(get_file2)),
 
     #lbforum
     url(r'^forum/', include('lbforum.urls')),
