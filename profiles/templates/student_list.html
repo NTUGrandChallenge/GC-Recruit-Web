@@ -1,48 +1,33 @@
 {% extends 'base.html' %}
 
 {% block title %} Student Profile {% endblock %}
-{% block h2 %} 台大創創挑戰賽 {% endblock %}
 
 {% block content %}
-	<p>
-					{% for i in interests %}
-					<h2>{{i.name}}的參賽者</h2>
-					{% if i.student_set.all %}
-						<p>本領域共有{{ i.student_set.all|length}}個參賽者 </p>
-						<table class="table">
-							<tr>
-								<th>姓名</th>
-								<th>系級</th>
-								<th>座右銘</th>
-								<th>詳細資料</th>
-								<th>收藏情況</th>
-							</tr>
-						{% for student in i.student_set.all %}
-							<tr>
-								<td> {{student.realname}} </td>
-								<td> {{student.department}} </td>
-								<td> {{student.motto}} </td>
-								<td> <a href="/other_profile/?id={{ student.id }}">檢視</a> </td>
- 								{%if student in me.follow.all%}
-               						<td>已收藏</td>
-             					{%else%}
-               						{%if student == me%}
-             							<td>是我自己</td>
-             						{%else%}
-               							<td>未收藏</td>
- 
-             						{%endif%}
-             					{%endif%}
-							</tr>
-						{% endfor %}
-						</table>
-				</p>
-					{% else %}
-						<p> 本領域無參賽者! </p>
-					{% endif %}
-					{% endfor %}
-{% endblock %}
-{% block img %}
-	
-{% endblock %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
 
+		</div>
+		<div class="col-md-9">
+			{% for i in interests %}
+			<h2>{{i.name}}的參賽者</h2>
+			{% if i.student_set.all %}
+			<p>本領域共有{{ i.student_set.all|length}}個參賽者 </p>
+			<div class="row">
+				{% for student in i.student_set.all %}
+				<div class="col-md-4">
+					<img src="http://graph.facebook.com/{{student.facebook_id}}/picture?type=large" class="circular-img">
+					<p>{{student.realname}}</p>
+					<p>{{student.department}}</p>
+					<p>{{student.motto}}</p>
+					<a href="/other_profile/?id={{ student.id }}">檢視</a>
+					<p>收藏</p>
+				</div>
+				{% endfor %}
+			{% endif %}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+{% endblock %}
