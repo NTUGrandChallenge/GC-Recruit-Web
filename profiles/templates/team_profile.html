@@ -34,6 +34,11 @@
         	</form>
             <div><button class="btn btn-default"><a href="/teamroom/{{ team.id }}/">團隊聊天室</a></button></div>
             <div><button class="btn btn-default"><a href="/applied_list/{{ team.id }}/">待審核成員</a></button></div>
+            {% if team.captain_name == me.nickname %}
+            <div><button class="btn btn-default"><a href="/upload/">提案簡報繳交</a></button></div>
+            <div><button class="btn btn-default"><a href="/upload2/">提案書繳交</a></button></div>
+            {% endif %}
+
         </div>
         <div class="col-md-9">
             {% for student in team.student_set.all %}

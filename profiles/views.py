@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.utils import timezone
 import shutil, os, allauth
 from django.contrib.auth.models import Permission, User
-
+import urllib
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def search(request):
@@ -268,31 +268,102 @@ def upload(request):
 		files = [f for key, f in request.FILES.items()] #抓取檔案(可能多個檔案)
 		if len(files) > 0:
 			try:
-				file_dir = os.path.join('/Users/handsome/Desktop/upload' , str(form.pk))
+				file_dir = os.path.join('/Users/handsome/Desktop/upload' , str(form.student.name))
                 #如果路徑中的檔案夾不存在就建立一個新的
 				if not os.path.exists(file_dir):
 					os.makedirs(file_dir) 
-					for file in files:    
-                        #為了避免檔案名稱重複，因此存在server端時，把修改檔案名稱
-						local_name = timezone.now().strftime('%Y%m%d%H%M%S')
-						file_path = os.path.join(file_dir, local_name)
-                        #存入資料庫
-						file_save = file_info(
-									File = up_file.objects.get(id=form.pk),
-									local_name = local_name, #存在server檔名
-									upload_name = file.name #原本檔名
-									)
-						file_save.save()
+				for file in files:    
+               	    #為了避免檔案名稱重複，因此存在server端時，把修改檔案名稱
+					local_name = '1'#timezone.now().strftime('%Y%m%d%H%M%S')
+					file_path = os.path.join(file_dir, local_name)
+               		    #存入資料庫
+					file_info.objects.create(
+							File = up_file.objects.get(id=form.pk),
+							local_name = local_name, #存在server檔名
+							upload_name = file.name #原本檔名
+							)
 				# 開始讀寫檔案至server
     #              'b' 如果檔案存在就會被覆蓋
-						destination =open(file_path,'wb+')
-						for chunk in file.chunks():
- 							destination.write(chunk)
- 							destination.close()
+					destination =open(file_path,'wb+')
+					for chunk in file.chunks():
+ 						destination.write(chunk)
+ 						destination.close()
 			except:
-				pass
+					pass
 			# 		shutil.rmtree(file_dir, True)   #發生例外，就刪除路徑檔案
 	return render_to_response('upload.html', RequestContext(request, locals()))
+
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
+def upload2(request):
+	s1=Student.objects.get(id=request.user.student_set.first().id)
+	if request.method == 'POST':# request.POST.get 如果沒有request到資料時會丟回None
+		date = timezone.localtime(timezone.now())
+        # 存入資料庫
+		form = up_file(upload_datetime = date, student = s1) 
+		form.save()
+		files = [f for key, f in request.FILES.items()] #抓取檔案(可能多個檔案)
+		if len(files) > 0:
+			try:
+				file_dir = os.path.join('/Users/handsome/Desktop/upload' , str(form.student.name))
+                #如果路徑中的檔案夾不存在就建立一個新的
+				if not os.path.exists(file_dir):
+					os.makedirs(file_dir) 
+				for file in files:    
+               	    #為了避免檔案名稱重複，因此存在server端時，把修改檔案名稱
+					local_name = '2'#timezone.now().strftime('%Y%m%d%H%M%S')
+					file_path = os.path.join(file_dir, local_name)
+               		    #存入資料庫
+					file_info.objects.create(
+							File = up_file.objects.get(id=form.pk),
+							local_name = local_name, #存在server檔名
+							upload_name = file.name #原本檔名
+							)
+				# 開始讀寫檔案至server
+    #              'b' 如果檔案存在就會被覆蓋
+					destination =open(file_path,'wb+')
+					for chunk in file.chunks():
+ 						destination.write(chunk)
+ 						destination.close()
+			except:
+					pass
+			# 		shutil.rmtree(file_dir, True)   #發生例外，就刪除路徑檔案
+	return render_to_response('upload.html', RequestContext(request, locals()))
+
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
+def get_file (request):
+	try:
+		file_dir = os.path.join('/Users/handsome/Desktop/upload' , str(request.user)) 	
+		file_path = os.path.join( file_dir , '1')
+		f=open(file_path,'rb')
+		data=f.read()   #開始讀寫檔案至data變數裡面
+		f.close()
+		# content_type有很多種，有強制下載轉乘PDF的、有ZIP的，我就用force-download
+		response = HttpResponse(data , content_type='application/zip')
+		#要import urllib
+		#檔案原本名稱.encode("utf-8") 記得要換回檔案原本的名稱，轉成utf-8格式以免亂碼
+		#不是存在service端的檔案名稱唷！
+		response['Content-Disposition'] = 'attachment; filename=1.zip'# % urllib.quote( '1'.encode("utf-8") )
+		return response
+	except:
+		return HttpResponse('error to download file')
+
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
+def get_file2 (request):
+	try:
+		file_dir = os.path.join('/Users/handsome/Desktop/upload' , str(request.user)) 	
+		file_path = os.path.join( file_dir , '2')
+		f=open(file_path,'rb')
+		data=f.read()   #開始讀寫檔案至data變數裡面
+		f.close()
+		# content_type有很多種，有強制下載轉乘PDF的、有ZIP的，我就用force-download
+		response = HttpResponse(data , content_type='application/zip')
+		#要import urllib
+		#檔案原本名稱.encode("utf-8") 記得要換回檔案原本的名稱，轉成utf-8格式以免亂碼
+		#不是存在service端的檔案名稱唷！
+		response['Content-Disposition'] = 'attachment; filename=2.zip'# % urllib.quote( '1'.encode("utf-8") )
+		return response
+	except:
+		return HttpResponse('error to download file')
 
 
 def follow_complete(request):
