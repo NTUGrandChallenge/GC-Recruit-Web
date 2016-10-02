@@ -5,9 +5,11 @@
 	<meta charset='utf-8'>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/static/plugins/bootstrap-social-gh-pages/bootstrap-social.css">
 	<link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/static/css/general.css">
 	<link rel="stylesheet" href="/static/css/my_profile.css">
+	<link rel="stylesheet" href="/static/css/chatroom.css">
 </head>
 <body>
 	<nav>
@@ -64,6 +66,54 @@
 	{% block content %} 
 
 	{% endblock %}
+
+	<footer>
+		<div class="triangle"></div>
+		<div class="container">
+		    <div class="row">
+		        <div class="col-md-3">
+		            <a href="/news/index.html"><h4 class="footer-title">活動消息</h4></a>
+		            <a href="javascript: void(0)" onclick="comingSoon()"><h4 class="footer-title">Challengers<span style="font-family: 'Noto Sans TC'">'</span> Club</h4></a>
+		        </div>
+		        
+		        <div class="col-md-3">
+		            <h4 class="hidden-xs footer-title">挑戰賽介紹</h4>
+		            <a href="#introductionCollapse" data-toggle="collapse" class="visible-xs toggle-collapse">
+		                <h4 class="footer-title">挑戰賽介紹</h4>
+		            </a>
+		            <ul id="introductionCollapse" class="footer-menu collapse in">
+		                <li><a href="/timeline.html">賽程總覽</a></li>
+		                <li><a href="/five.html">五大領域</a></li>
+		                <li><a href="javascript: void(0)" onclick="comingSoon()">評審及導師</a></li>
+		                <li><a href="/faq.html">常見問題</a></li>
+		            </ul>
+		        </div>
+		        
+		        <div class="col-md-3">
+		            <h4 class="hidden-xs footer-title">關於我們</h4>
+		            <a href="#aboutCollapse" data-toggle="collapse" class="visible-xs toggle-collapse">
+		                <h4 class="footer-title">關於我們</h4>
+		            </a>
+		            <ul id="aboutCollapse" class="footer-menu collapse in">
+		                <li><a href="/related.html">相關單位</a></li>
+		<!--                    <li><a href="/students.html">學生團隊</a></li>-->
+		            </ul>
+		        </div>
+		        
+		        <div class="col-md-3">
+		            <h4 class="hidden-xs footer-title">聯絡我們</h4>
+		            <a href="#connectCollapse" data-toggle="collapse" class="visible-xs toggle-collapse">
+		                <h4 class="footer-title">聯絡我們</h4>
+		            </a>
+		            <ul id="connectCollapse" class="footer-menu collapse in">
+		                <li><a href="https://www.facebook.com/ntuchallenge/">Facebook粉絲專頁</a></li>
+		                <li><a href="mailto:ntuchallenge2016@gmail.com" target="_top">ntuchallenge2016@gmail.com</a></li>
+		                <li>(02)3366-1573</li>
+		            </ul>
+		        </div>
+		    </div>
+		</div>
+	</footer>
 					
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>

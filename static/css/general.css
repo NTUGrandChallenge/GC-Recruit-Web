@@ -2,3 +2,36 @@
 	width: 100%;
 	border-radius: 50%;
 }
+
+/*footer*/
+footer{
+    position: relative;
+    padding-bottom: 25px;
+    background-color: #666;
+    color: #FFF;
+    overflow-x: hidden;
+}
+footer .triangle{
+    display: block;
+/*    position: absolute;*/
+    left: 0;
+    top: 0;
+    width: 0;
+    border-width: 30px 30px 50px 100vw;
+    border-style: solid;
+    border-color: #ffeb32 transparent transparent #ffeb32;
+}
+footer .footer-title{
+    color: #FFF;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+footer a,
+footer a:hover{
+    color: #FFF;
+    text-decoration: none;
+}
+footer .footer-menu{
+    list-style: none;
+    padding-left: 0px;
+}
