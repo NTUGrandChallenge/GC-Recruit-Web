@@ -5,3 +5,8 @@ db.sqlite3
 .DS_Store
 recruitsite/secret.py
 /lbattachment
+/build
+/dist
+/lbforum
+/LBForum.egg-info
+/node_modules
