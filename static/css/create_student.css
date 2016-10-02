@@ -1,0 +1,25 @@
+.content-wrapper{
+	width: 60vw;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#create_student .form-group{
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#create_student label{
+	width: 10vw;
+}
+#create_student input,
+#create_student textarea{
+	width: 70%;
+}
+
+#create_student .ability-table{
+	width: 100%;
+}
+#create_student .ability-table td{
+	width: 33%;
+}

@@ -6,7 +6,7 @@
 <div id="chatroom">
 <div class="container">
 	<div class="col-md-4">
-
+		
 	</div>
 	<div class="col-md-8">
 	<div id="dialogue">
@@ -15,7 +15,7 @@
 			{% if c.student1 != me %}
 				<div class="row one-message">
 					<div class="col-xs-2">
-						<img src='https://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small'>
+						<img src='https://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small' class="profile-photo">
 					</div>
 					<div class="col-xs-10">
 						<p>{{c.content}}</p>
@@ -27,7 +27,7 @@
 						<p class="text-right">{{c.content}}</p>
 					</div>
 					<div class="col-xs-2">
-						<img src='https://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small'>
+						<img src='https://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small' class="profile-photo">
 					</div>
 				</div>
 			{% endif %}

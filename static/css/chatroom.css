@@ -3,6 +3,9 @@
 	border-bottom: 1px solid #EEE;
 	margin-bottom: 5px;
 }
+#chatroom #dialogue .profile-photo{
+	height: 40px;
+}
 #chatroom #input textarea{
 	width: 100%;
 	height: 100px;

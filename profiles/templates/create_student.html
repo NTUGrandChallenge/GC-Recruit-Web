@@ -4,96 +4,132 @@
 {% block h2 %} 填寫您的資料 {% endblock %}
 
 {% block content %}
-            {% for e in errors %}
+<div class="container" id="create_student">
+<div class="content-wrapper">
+     {% for e in errors %}
+          <p style="color:red;">{{ e }}</p>
+     {% endfor %}
+     <form action="" method="post" class="form-inline" role="form">{% csrf_token %}
+     <div class="row basic">
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="realname">真實姓名：</label>
+               <input id="realname" type="text" name="realname" class="form-control" value="{{realname}}">
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="nickname">暱稱：</label>
+               <input id="nickname" type="text" name="nickname" class="form-control" value="{{nickname}}">
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="school">學校：</label>
+               <input id="school" type="text" name="school" class="form-control" value="{{school}}">
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="domain">科系領域：</label>
+               <select  name="domain" >
+               {% for d in domains %}
+               <option value="{{ d }}"> {{ d }} </option>
+               {% endfor %}
+               </select>
+          </div>
+          </div>
+          <div class="col-xs-8">
+          <div class="form-group">
+               <label for="department" style="width: 10vw;">系所：</label>
+               <input id="department" type="text" name="department" class="form-control" value="{{department}}">
+          </div>
+          </div>
+          <div class="col-xs-4">
+          <div class="form-group">
+               <label for="grade" style="width: 5vw">年級：</label>
+               <select  name="grade" >
+               {% for g in grades %}
+               <option value="{{ g }}"> {{ g }} </option>
+               {% endfor %}
+               </select>
+          </div>
+          </div>
+     </div>
 
-                    <p style="color:red;">{{ e }}</p>
-                {% endfor %}
-
-                <form action="" method="post" class="form-horizontal" role="form" style="width:33%; margin:auto; text-align:left">{% csrf_token %}
-                    <div class="form-group">
-                    <label for="realname">真實姓名:</label>
-                    <input id="realname" type="text" name="realname" class="form-control" value="{{realname}}">
-                    </div>
-                    <div class="form-group">
-                    <label for="nickname">暱稱:</label>
-                    <input id="nickname" type="text" name="nickname" class="form-control" value="{{nickname}}">
-                    </div>
-                    <div class="form-group">
-                    <label for="school">學校:</label>
-                    <input id="school" type="text" name="school" class="form-control" value="{{school}}">
-                    </div>
-                    <div>
-                    <label for="domain">科系領域:</label>
-                    <select  name="domain" >
-                    {% for d in domains %}
-                    <option value="{{ d }}"> {{ d }} </option>
-                    {% endfor %}
-                    </select>
-                    </div>
-                    <div class="form-group">
-                    <label for="department">科系:</label>
-                    <input id="department" type="text" name="department" class="form-control" value="{{department}}">
-                    </div>
-                    <div>
-                    <label for="grade">系級:</label>
-                    <select  name="grade" >
-                    {% for g in grades %}
-                    <option value="{{ g }}"> {{ g }} </option>
-                    {% endfor %}
-                    </select>
-                    </div>
-                    <div class="form-group">
-                    <label for="motto">座右銘:</label>
-                    <textarea id="motto" rows="3" cols="48" name="motto" class="form-control">{{motto}}</textarea>
-                    </div>
-                    <div class="form-group">
-                    <label for="experience">人生經歷:</label>
-                    <textarea id="experience" rows="10" cols="48" name="experience" class="form-control">{{experience}}</textarea>
-                    </div>
-                    
-                    <div>
-                    <label for="interest">interest:</label>
-                    <select  name="interest" >
-                    {% for i in interests %}
+     <div class="row description">
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="experience">人生經歷：</label>
+               <textarea id="experience" rows="10" cols="48" name="experience" class="form-control">{{experience}}</textarea>
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="interest">interest：</label>
+               <select  name="interest" >
+               {% for i in interests %}
                     <option value="{{ i }}"> {{ i }} </option>
-                    {% endfor %}
-                    </select>
-                    </div>
-                    <div>
-                    <label for="role">團隊中角色定位:</label>
-                    <select  name="role" >
-                    {% for r in roles %}
+               {% endfor %}
+               </select>
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="role">團隊中角色定位：</label>
+               <select  name="role" >
+               {% for r in roles %}
                     <option value="{{ r }}"> {{ r }} </option>
-                    {% endfor %}
-                    </select>
-                    </div>
-                    
+               {% endfor %}
+               </select>
+          </div>
+          </div>
+          <div class="col-xs-12">
+               <table class="ability-table">
+               <thead>
+                    <tr>
+                         <th>技能類別</th>
+                         <th>子類別</th>
+                         <th>技能名稱</th>
+                    </tr>
+               </thead>
+               <tbody>
                     {% for counter in counters %}
-                    <div>
-                    <label for="category">C:</label>
-                    <select  name="category" >
-                    {% for c in categorys %}
-                    <option value="{{ c }}"> {{ c }} </option>
+                    <tr>
+                         <td>
+                              <select  name="category" >
+                              {% for c in categorys %}
+                                   <option value="{{ c }}"> {{ c }} </option>
+                              {% endfor %}
+                              </select>
+                         </td>
+                         <td>
+                              <select  name="group" >
+                              {% for g in groups %}
+                                   <option value="{{ g }}"> {{ g }} </option>
+                              {% endfor %}
+                              </select>
+                         </td>
+                         <td>
+                              <select  name="talent" default="{{m}}">
+                              {% for t in talents %}
+                                   <option value="{{ t }}"> {{ t }} </option>
+                              {% endfor %}
+                              </select>
+                         </td>
+                    </tr>
                     {% endfor %}
-                    </select>
-                    <label for="group">G:</label>
-                    <select  name="group" >
-                    {% for g in groups %}
-                    <option value="{{ g }}"> {{ g }} </option>
-                    {% endfor %}
-                    </select>
-                    <label for="talent">特殊技能名稱:</label>
-                    <select  name="talent" default="{{m}}">
-                    {% for t in talents %}
-                    <option value="{{ t }}"> {{ t }} </option>
-                    {% endfor %}
-                    </select>
-                    </div>
-                    {% endfor %}
-
-                    <input type="submit" value="提交" class="btn btn-default">
+               </tbody>
+               </table>
+          </div>
+          
+          <div class="form-group">
+               <label for="motto">最能代表自己的一段話：</label>
+               <textarea id="motto" rows="3" cols="48" name="motto" class="form-control">{{motto}}</textarea>
+          </div>
+     </div>
+     <input type="submit" value="提交" class="btn btn-default">
+     </form>
+</div>
+</div>
 {% endblock %}
-{% block img %}
-    
-{% endblock %}
-
