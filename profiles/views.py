@@ -538,7 +538,14 @@ def applied_list(request, teamid):
 def chatroom_list(request):
 	me = Student.objects.get(name=request.user)
 	chatrooms = Chatroom.objects.filter(student2=me).order_by('-date_time')
-	chatrooms = list(set(chatrooms))
+	s_list = []
+	c_list = []
+	for chatroom in chatrooms:
+		if chatroom not in c_list and chatroom.student1 not in s_list:
+			c_list.append(chatroom)
+			s_list.append(chatroom.student1)
+	chatrooms = c_list
+
 	return render_to_response('chatroom_list.html', locals())
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
