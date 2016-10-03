@@ -2,6 +2,12 @@
 	width: 100%;
 	border-radius: 50%;
 }
+.square-img{
+    object-fit: none;
+    object-position: center;
+    height: 150px;
+    width: 150px;s
+}
 
 /*footer*/
 footer{

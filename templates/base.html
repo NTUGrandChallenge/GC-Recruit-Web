@@ -38,13 +38,12 @@
 					<li>
 						<a href="#" id="navbar-info" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">參賽夥伴<span class="caret"></span></a>
 		                <ul id="dropdown-info" class="dropdown-menu" role="menu" aria-labelledby="navbar-info">
-				            <li><a href="/student_list/">挑戰者列表</a></li>
+				            <li><a href="/search/">挑戰者列表</a></li>
 				            <li><a href="/team_list/">團隊列表</a></li>
 				            <li><a href="/create_team/">創建團隊</a></li>
 		                </ul>
 					</li>
 		            <li><a href="/other_profile/?id=1">與大賽聊天</a></li>
-		            <li><a href="/search/">搜尋</a></li>
 		            {% if request.user.is_authenticated %}
 					<li>
 						<a href="#" id="navbar-myself" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">{{ request.user }}<span class="caret"></span></a>

@@ -11,11 +11,11 @@
                 <input type="submit" value="搜尋">
             </form>
             <form name = "check_form" method="get">
-                <input type="checkbox" name="interest[]" value="2">Environment<p>
-                <input type="checkbox" name="interest[]" value="3">Food & Algriculture<p>
-                <input type="checkbox" name="interest[]" value="4">Health Care<p>
-                <input type="checkbox" name="interest[]" value="5">Society & Culture<p>
-                <input type="checkbox" name="interest[]" value="6">Smart Life<p>
+                <input type="checkbox" name="interest[]" value="2">智慧生活<p>
+                <input type="checkbox" name="interest[]" value="3">健康醫療<p>
+                <input type="checkbox" name="interest[]" value="4">永續環境<p>
+                <input type="checkbox" name="interest[]" value="5">社會文化<p>
+                <input type="checkbox" name="interest[]" value="6">食品與農業<p>
                 <input type="checkbox" name="role[]" value="2">tech<p>
                 <input type="checkbox" name="role[]" value="3">business<p>
                 <input type="checkbox" name="role[]" value="4">project<p>
@@ -39,7 +39,7 @@
                     {% for user in user_list %}
                     <div class="col-md-4">
                         <!-- {{student.motto}} -->
-                        <img src="http://graph.facebook.com/{{user.socialaccount_set.first.uid}}/picture?type=large" class="circular-img">
+                        <img src="http://graph.facebook.com/{{user.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
                         <h4>{{user.student_set.first.realname}}</h4>
                         <p>{{user.student_set.first.department}}</p>
                         <a href="/other_profile/?id={{ user.student_set.first.id }}">檢視</a> 
@@ -50,7 +50,7 @@
                 {% for user in first_user_list %}
                 <div class="col-md-4">
                     <!-- {{student.motto}} -->
-                    <img src="http://graph.facebook.com/{{user.socialaccount_set.first.uid}}/picture?type=large" class="circular-img">
+                    <img src="http://graph.facebook.com/{{user.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
                     <h4>{{user.student_set.first.realname}}</h4>
                     <p>{{user.student_set.first.department}}</p>
                     <a href="/other_profile/?id={{ user.student_set.first.id }}">檢視</a> 
