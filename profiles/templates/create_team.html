@@ -4,29 +4,34 @@
 
 {% block content %}
 
-    <br><br>
-            {% for e in errors %}
-                    <p style="color:red;">{{ e }}</p>
-                {% endfor %}
-
-                <form action="" method="post" class="form-horizontal" role="form" style="width:33%; margin:auto; text-align:left">{% csrf_token %}
-                    <div class="form-group">
-                    <label for="teamname">隊名:</label>
-                    <input id="teamname" type="text" name="teamname" class="form-control" value="{{teamname}}">
-                    </div>
-                    <div class="form-group">
-                    <label for="content">隊伍介紹:</label>
-                    <input id="content" type="text" name="content" class="form-control" value="{{content}}">
-                    </div>
-                    
-                   <label for="interest">interest:</label>
-                    <select  name="interest" >
-                    {% for i in interests %}
-                    <option value="{{ i }}"> {{ i }} </option>
-                    {% endfor %}
-                    </select>
-                    <input type="submit" value="提交" class="btn btn-default">
-                </form>
+<div class="container" id="create_team">
+<div class="content-wrapper">
+    {% for e in errors %}
+        <p style="color:red;">{{ e }}</p>
+    {% endfor %}
+    <form action="" method="post" class="form-horizontal" role="form">{% csrf_token %}
+    <div class="row">
+        <div class="form-group">
+            <label for="tramname">隊名</label>
+            <input id="teamname" type="text" name="teamname" class="form-control" value="{{teamname}}">
+        </div>
+        <div class="form-group">
+            <label for="content">隊伍描述</label>
+            <input id="content" type="text" name="content" class="form-control" value="{{content}}">
+        </div>
+        <div class="form-group">
+            <label for="interest">欲參加之領域</label>
+            <select  name="interest" class="selectpicker">
+            {% for i in interests %}
+                <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <input type="submit" value="提交" class="btn btn-default">
+    </div>
+    </form>
+</div>
+</div>
 
 {% endblock %}
 
