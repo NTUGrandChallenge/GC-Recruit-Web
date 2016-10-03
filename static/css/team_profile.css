@@ -1,0 +1,9 @@
+#team_profile .functions input,
+#team_profile .functions button{
+	width: 80%;
+	margin-bottom: 5px;
+}
+
+#team_profile .one-teammate{
+	background-color: #EEE;
+}

@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/css/team_profile.css">
+{% endblock %}
+
 {% block title %} 團隊 {% endblock %}
 
 {% block content %}
 {% if team.name != 'none' %}
-<div class="container">
+<div class="container" id="team_profile">
     <h2>{{ team.name }}</h2>
     <p>{{ team.content }}</p>
     <div class="row">
@@ -12,69 +16,63 @@
             <div>
                 領域：{{ team.interest }}
             </div>
-        	<form action="" method="post">{% csrf_token %}
+            <div class="functions full-width">
+            	<form action="" method="post">{% csrf_token %}
                 {%if team.id != me.team.id%}
                     {%if team in me.applied.all%}
-                        申請已經發送
+                        <p>申請已經發送</p>
+                        <input type="hidden"  name="cancel" value="{{team.id}}">
+                        <input type="submit" class="btn btn-success" value="取消申請">
                     {%else%}
                         <input type="hidden"  name="applied" value="{{team.id}}">
                         <input type="submit" class="btn btn-success" value="申請加入團隊">
                     {%endif%}
                 {%elif team.captain_name == me.nickname %}
                     {%if team.student_set.all|length > 1 %}
-                        若團隊人數超過一人將無法解散團隊
+                        <p>團隊人數超過一人將無法解散團隊</p>
                     {%else%}
                         <input type="hidden"  name="dismiss" value="{{team.id}}">
-                        <input type="submit" class="btn btn-success" value="解散團隊">
+                        <input type="submit" class="btn btn-danger" value="解散團隊">
                     {%endif%}
                 {%else%}
                     <input type="hidden" name="quit" value="{{team.id}}">
                     <input type="submit" class="btn btn-danger" value="退出團隊">
                 {%endif%}
-        	</form>
-            <form action="" method="post">{% csrf_token %}
-                {%if team.id != me.team.id%}
-                    {%if team in me.applied.all%}
-                        <input type="hidden"  name="cancel" value="{{team.id}}">
-                        <input type="submit" class="btn btn-success" value="取消申請">
-                    {%else%}
-                        
-                    {%endif%}
-                {%endif%}
-            </form>
-            <div><button class="btn btn-default"><a href="/teamroom/{{ team.id }}/">團隊聊天室</a></button></div>
-            <div><button class="btn btn-default"><a href="/applied_list/{{ team.id }}/">待審核成員</a></button></div>
-            {% if team.captain_name == me.nickname %}
-            <div><button class="btn btn-default"><a href="/upload/">提案簡報繳交</a></button></div>
-            <div><button class="btn btn-default"><a href="/upload2/">提案書繳交</a></button></div>
-            {% endif %}
-
+            	</form>
+                <div><button class="btn btn-default"><a href="/teamroom/{{ team.id }}/">團隊聊天室</a></button></div>
+                <div><button class="btn btn-default"><a href="/applied_list/{{ team.id }}/">待審核成員</a></button></div>
+                {% if team.captain_name == me.nickname %}
+                <div><button class="btn btn-default"><a href="/upload/">提案簡報繳交</a></button></div>
+                <div><button class="btn btn-default"><a href="/upload2/">提案書繳交</a></button></div>
+                {% endif %}
+            </div>
         </div>
         <div class="col-md-9">
             {% for student in team.student_set.all %}
-            <div class="row">
+            <a href="/other_profile/?id={{ student.id }}">
+            <div class="row one-teammate">
                 {%if team.captain_name == student.nickname %}
                     <p>隊長</p>
                 {%endif%}
                 <div class="col-xs-3">
-                    <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=small' class="square-img">
+                    <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large' class="square-img">
                 </div>
                 <div class="col-xs-9">
                     <h4>姓名：{{student.realname}}</h4>
                     <p>學院：{{student.department}}</p>
                     <p>一句話：{{student.motto}}</p>
                     <p>團隊角色：{{student.role}}</p>
-                    <p><a href="/other_profile/?id={{ student.id }}">檢視</a></p>
                     <form action="" method="post">{% csrf_token %}
                         {%if team.captain_name == me.nickname %}
                             {% if student != me %}
                                 <input type="hidden"  name="kick" value="{{student.id}}">
                                 <input type="submit" class="btn btn-success" value="踢出">
-                          {%endif%}
+                            {%endif%}
                         {%endif%}
                      </form>
                 </div>
             </div>
+            </a>
             {% endfor %}
         </div>
     </div>
