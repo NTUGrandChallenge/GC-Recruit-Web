@@ -66,7 +66,7 @@ class Student(models.Model):
 	nickname = models.CharField(max_length=50, blank=True)
 	school = models.CharField(max_length=50, blank=True)
 	department = models.CharField(max_length=50, blank=True)
-	domain = models.ForeignKey(Domain, null=True)
+	domain = models.ManyToManyField(Domain, blank=True)
 	grade = models.ForeignKey(Grade, null=True)
 	motto = models.CharField(max_length=50, blank=True)
 	experience = models.CharField(max_length=350, blank=True)

@@ -162,9 +162,9 @@ def student_create(request):
 		motto = request.POST['motto']
 		experience = request.POST['experience']
 		none_team = Team.objects.get(name='none')
-		domain = request.POST['domain']
+		domain = request.POST.getlist('domain')
 		interest = request.POST['interest']
-		talent = request.POST['talent']
+		talent = request.POST.getlist('talent')
 		role = request.POST['role']
 #		if any(not request.POST[k] for k in request.POST):
 #			errors.append('* 有空白欄位！請不要留空！')
@@ -179,11 +179,20 @@ def student_create(request):
 				experience = experience,
 				team = none_team,
 				grade = Grade.objects.get(name=grade),
-				domain = Domain.objects.get(name=domain),
+				#domain = Domain.objects.get(name=domain),
 				interest = Interest.objects.get(name=interest),
 				role = Role.objects.get(name=role)
 			)
-			student.talent.add(Talent.objects.get(name=talent))
+			talent = list(set(talent))
+			mytalent = []
+			mydomain = []
+			for item in talent:
+				mytalent.append(Talent.objects.get(name=item))
+			for item2 in domain:
+				mydomain.append(Domain.objects.get(name=item2))
+
+			student.talent.set(mytalent)
+			student.domain.set(mydomain)
 			perm = Permission.objects.get(codename='can_insurance')
 			request.user.user_permissions.add(perm)
 			return HttpResponseRedirect('/insurance_create/')
