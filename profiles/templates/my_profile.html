@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} {{ student.nickname }} {% endblock %}
+{% block title %} {{student.nickname}} {% endblock %}
 
 {% block content %}
 <div class="container">
@@ -13,34 +13,26 @@
 			{% if student.team.name == 'none' %}
 			<h2>您尚未加入任何團隊</h2>
 			{% endif %}
-			<h1>{{student.nickname}}({{student.team}})</h1>
-			<p>{{student.realname}}</p>
+			<h1>{{student.realname}}({{student.nickname}})</h1>
 			<p>{{student.school}}</p>
 			<p>{{student.domain}}</p>
-			<p>{{student.department}}</p>
-			<p>{{student.grade}}</p>
+			<p>{{student.department}} {{student.grade}}</p>
 			<p>{{student.motto}}</p>
 		</div>
 	</div>
 	{% if perms.profiles.can_edit_base_profile %}
-		<a href="/edit_profile/">編輯</a>
+		<a href="/edit_profile/"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
 	{% endif %}
-</div>
-<div class="container">
 	<div class="row">
-		所屬隊伍: <a href="/team_profile/{{student.team.id}}/">{{student.team}}</a>
-	</div>
-	<div>
-		{{student.interest}}
-	</div>
-	<div class="row">
-		{{student.role}}
-	</div>
-	<div class="row">
-		{{student.talent.all}}
-	</div>
-	<div>
-		{{student.experience}}
+		<p>所屬隊伍: <a href="/team_profile/{{student.team.id}}/">{{student.team}}</a></p>
+		<p>領域:{{student.interest}}</p>
+		<p>角色:{{student.role}}</p>
+		<div>
+			<p>{{student.talent.all}}</p>
+		</div>
+		<div>
+			<p>{{student.experience}}</p>
+		</div>
 	</div>
 </div>
 {% endblock %}

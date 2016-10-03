@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/css/team_list.css">
+{% endblock %}
 {% block title %} 學生列表 {% endblock %}
 
-
 {% block content %}
-<h2>團隊列表</h2>
-<div class="container">
+<div class="container" id="team_list">
 	<div class="row">
 		<div class="col-md-3">
 
@@ -15,9 +16,12 @@
 				{% for i in teams %}
 					{% if i.name != 'none' %}
 					<div class="col-md-4">
+					<a href="/team_profile/{{ i.id }}/">
+					<div class="one-team">
 						<h2>{{i.name}}</h2>
-						<p><a href="/team_profile/{{ i.id }}/"> 團隊資訊 </a></p>
-						<p>本隊伍共有{{ i.student_set.all | length }}個參賽者 </p>
+						<p>團隊人數：{{ i.student_set.all | length }} / 6 </p>
+					</div>
+					</a>
 					</div>
 					{% endif %}
 				{% endfor %}
@@ -30,20 +34,3 @@
 	</div>
 </div>
 {% endblock %}
-
-		<!-- <table class="table">
-			<tr>
-				<th>姓名</th>
-				<th>系級</th>
-				<th>座右銘</th>
-				<th>詳細資料</th>
-			</tr>
-		{% for student in i.student_set.all %}
-			<tr>
-				<td> {{student.realname}} </td>
-				<td> {{student.department}} </td>
-				<td> {{student.motto}} </td>
-				<td> <a href="/other_profile/?id={{ student.id }}">檢視</a> </td>
-			</tr>
-		{% endfor %}
-		</table> -->
