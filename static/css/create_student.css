@@ -1,14 +1,15 @@
-.content-wrapper{
-	width: 60vw;
-	margin-left: auto;
-	margin-right: auto;
+@media screen and (min-width: 768px){
+	.content-wrapper{
+		width: 60vw;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 #create_student .form-group{
 	width: 100%;
 	margin-bottom: 10px;
 }
-
 #create_student label{
 	width: 10vw;
 }
@@ -17,9 +18,17 @@
 	width: 70%;
 }
 
-#create_student .ability-table{
-	width: 100%;
+#create_student .one-talent{
+	margin-bottom: 10px;
+	display: none;
 }
-#create_student .ability-table td{
-	width: 33%;
+#create_student .one-talent:nth-child(2){
+	display: block;
 }
+#create_student .one-talent .add-talent{
+	cursor: pointer;
+}
+#create_student .one-talent:nth-child(11) .add-talent{
+	display: none;
+}
+

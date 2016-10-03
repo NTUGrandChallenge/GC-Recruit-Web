@@ -48,7 +48,7 @@
           <div class="col-xs-4">
           <div class="form-group">
                <label for="grade" style="width: 5vw">年級：</label>
-               <select  name="grade" >
+               <select name="grade" class="selectpicker" data-width="fit">
                {% for g in grades %}
                <option value="{{ g }}"> {{ g }} </option>
                {% endfor %}
@@ -85,42 +85,45 @@
           </div>
           </div>
           <div class="col-xs-12">
-               <table class="ability-table">
-               <thead>
-                    <tr>
-                         <th>技能類別</th>
-                         <th>子類別</th>
-                         <th>技能名稱</th>
-                    </tr>
-               </thead>
-               <tbody>
-                    {% for counter in counters %}
-                    <tr>
-                         <td>
-                              <select  name="category" >
-                              {% for c in categorys %}
-                                   <option value="{{ c }}"> {{ c }} </option>
-                              {% endfor %}
-                              </select>
-                         </td>
-                         <td>
-                              <select  name="group" >
-                              {% for g in groups %}
-                                   <option value="{{ g }}"> {{ g }} </option>
-                              {% endfor %}
-                              </select>
-                         </td>
-                         <td>
-                              <select  name="talent" default="{{m}}">
-                              {% for t in talents %}
-                                   <option value="{{ t }}"> {{ t }} </option>
-                              {% endfor %}
-                              </select>
-                         </td>
-                    </tr>
+          <div class="row">
+               <div class="col-xs-4">
+                    <h4>技能類別</h4>
+               </div>
+               <div class="col-xs-4">
+                    <h4>子類別</h4>
+               </div>
+               <div class="col-xs-4">
+                    <h4>技能名稱</h4>
+               </div>
+          </div>
+          {% for counter in counters %}
+          <div class="row one-talent">
+               <div class="col-xs-4">
+                    <select  name="category" class="selectpicker" data-width="fit">
+                    {% for c in categorys %}
+                         <option value="{{ c }}"> {{ c }} </option>
                     {% endfor %}
-               </tbody>
-               </table>
+                    </select>
+               </div>
+               <div class="col-xs-4">
+                    <select  name="group" class="selectpicker" data-width="fit">
+                    {% for g in groups %}
+                         <option value="{{ g }}"> {{ g }} </option>
+                    {% endfor %}
+                    </select>
+               </div>
+               <div class="col-xs-4">
+                    <select  name="talent" default="{{m}}" class="selectpicker" data-live-search="true" data-width="fit">
+                    {% for t in talents %}
+                         <option value="{{ t }}"> {{ t }} </option>
+                    {% endfor %}
+                    </select>
+               </div>
+               <div class="col-xs-2">
+                    <div class="add-talent"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></div>
+               </div>
+          </div>
+          {% endfor %}
           </div>
           
           <div class="form-group">
