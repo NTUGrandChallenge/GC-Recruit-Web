@@ -3,11 +3,11 @@
 {% block title %} Student Profile {% endblock %}
   
 {% block content %}
-<div class="container">
+<div class="container" id="search">
     <div class="row">
         <div class="col-md-3">
             <form class="pure-form" action="/search/" method="get">
-                <input class="pure-input-3-3" type="text" name="word" placeholder="search">
+                <input class="" type="text" name="word" placeholder="search">
                 <input type="submit" value="搜尋">
             </form>
             <form name = "check_form" method="get">
@@ -38,22 +38,31 @@
                     {%endfor%}
                     {% for user in user_list %}
                     <div class="col-md-4">
+                    <div class="one-student">
                         <!-- {{student.motto}} -->
                         <img src="http://graph.facebook.com/{{user.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
                         <h4>{{user.student_set.first.realname}}</h4>
                         <p>{{user.student_set.first.department}}</p>
+                        <p>{{user.student_set.first.interest}}</p>
                         <a href="/other_profile/?id={{ user.student_set.first.id }}">檢視</a> 
+                    </div>
                     </div>
                     {% endfor %}
                 {% endif %}
             {% else %}
                 {% for user in first_user_list %}
                 <div class="col-md-4">
+                <a href="/other_profile/?id={{ user.student_set.first.id }}">
+                <div class="one-student text-center">
                     <!-- {{student.motto}} -->
                     <img src="http://graph.facebook.com/{{user.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
-                    <h4>{{user.student_set.first.realname}}</h4>
-                    <p>{{user.student_set.first.department}}</p>
-                    <a href="/other_profile/?id={{ user.student_set.first.id }}">檢視</a> 
+                    <div class="text-left">
+                        <h4>姓名:{{user.student_set.first.realname}}</h4>
+                        <p>系:{{user.student_set.first.department}}</p>
+                        <p>領域:{{user.student_set.first.interest}}</p>
+                    </div>
+                </div>
+                </a>
                 </div>
                 {% endfor %}
             {% endif %}
