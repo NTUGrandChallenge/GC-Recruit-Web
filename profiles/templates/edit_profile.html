@@ -28,7 +28,7 @@
                     </select>
                     </div>
 
-                    {% for m in mytalents %}
+                    {% for counter in counters %}
                     <div>
                     <label for="category">C:</label>
                     <select  name="category" >
@@ -45,7 +45,7 @@
                     <label for="talent_{{ forloop.counter0 }}">特殊技能名稱:</label>
                     <select  name="talent_{{ forloop.counter0 }}">
                     {% for t in talents %}
-                    <option value="{{ t }}" {% if t == m %}selected{% endif %}> {{ t }} </option>
+                    <option value="{{ t }}" {% if t in mytalents %}selected{% endif %}> {{ t }} </option>
                     {% endfor %}
                     </select>
                     <label for="familiar_{{ forloop.counter0 }}">精熟程度:</label>

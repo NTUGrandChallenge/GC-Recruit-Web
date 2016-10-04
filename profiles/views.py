@@ -110,12 +110,16 @@ def edit(request):
 	groups = Group.objects.all()
 	talents = Talent.objects.all()
 	mytalents = Talent.objects.filter(student=student)
+	counters = list(range(1,11))
+
 	alltalents = []
 	namelist = []
 	for thing in talents:
-		if thing.name not in namelist and thing not in alltalents:
+		if thing.name not in namelist and thing not in alltalents and thing not in mytalents:
 			alltalents.append(thing)
 			namelist.append(thing.name)
+	for thing2 in mytalents:
+		alltalents.append(thing2)
 	talents = alltalents
 	if request.POST:
 		motto = request.POST['motto']
@@ -125,17 +129,26 @@ def edit(request):
 
 		talent_0 = request.POST['talent_0']
 		talent_1 = request.POST['talent_1']
-		# talent_2 = request.POST['talent_2']
-		# talent_3 = request.POST['talent_3']
-		# talent_4 = request.POST['talent_4']
-		# talent_5 = request.POST['talent_5']
-		# talent_6 = request.POST['talent_6']
-		# talent_7 = request.POST['talent_7']
-		# talent_8 = request.POST['talent_8']
-		# talent_9 = request.POST['talent_9']
+		talent_2 = request.POST['talent_2']
+		talent_3 = request.POST['talent_3']
+		talent_4 = request.POST['talent_4']
+		talent_5 = request.POST['talent_5']
+		talent_6 = request.POST['talent_6']
+		talent_7 = request.POST['talent_7']
+		talent_8 = request.POST['talent_8']
+		talent_9 = request.POST['talent_9']
 		
 		familiar_0 = request.POST['familiar_0']
 		familiar_1 = request.POST['familiar_1']
+		familiar_2 = request.POST['familiar_2']
+		familiar_3 = request.POST['familiar_3']
+		familiar_4 = request.POST['familiar_4']
+		familiar_5 = request.POST['familiar_5']
+		familiar_6 = request.POST['familiar_6']
+		familiar_7 = request.POST['familiar_7']
+		familiar_8 = request.POST['familiar_8']
+		familiar_9 = request.POST['familiar_9']
+
 		mytalent = []
 		mytalent.append(Talent.objects.filter(name=talent_0, familiar=familiar_0).first())
 		mytalent.append(Talent.objects.filter(name=talent_1, familiar=familiar_1).first())
