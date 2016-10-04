@@ -6,4 +6,31 @@
 
 #team_profile .one-teammate{
 	background-color: #EEE;
+	position: relative;
+	padding: 10px;
+}
+#team_profile .one-teammate:hover{
+	background-color: #ffeb32;
+}
+#team_profile .one-teammate .ribbon-wrapper{
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#team_profile .one-teammate .ribbon-wrapper .ribbon{
+    text-align: center;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    position: relative;
+    top: 30px;
+    padding: 5px 0;
+    width: 160px;
+    background-color: #f00;
+    color: #fff;
+}
+#team_profile .one-teammate img{
+	margin: 10px;
 }

@@ -23,7 +23,7 @@ body > .container{
 
 .circular-img{
 	width: 100%;
-	border-radius: 50%;
+	-webkit-clip-path: circle(50% at center);
 }
 .square-img{
     object-fit: none;

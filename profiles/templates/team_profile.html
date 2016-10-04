@@ -52,7 +52,7 @@
             <a href="/other_profile/?id={{ student.id }}">
             <div class="row one-teammate">
                 {%if team.captain_name == student.nickname %}
-                    <p>隊長</p>
+                    <div class="ribbon-wrapper"><div class="ribbon">隊長</div></div>
                 {%endif%}
                 <div class="col-xs-3">
                     <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large' class="square-img">
