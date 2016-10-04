@@ -28,7 +28,7 @@
                     </select>
                     </div>
 
-                    {% for counter in counters %}
+                    {% for m in mytalents %}
                     <div>
                     <label for="category">C:</label>
                     <select  name="category" >
@@ -45,7 +45,7 @@
                     <label for="talent_{{ forloop.counter0 }}">特殊技能名稱:</label>
                     <select  name="talent_{{ forloop.counter0 }}">
                     {% for t in talents %}
-                    <option value="{{ t }}" {% if t in mytalents %}selected{% endif %}> {{ t }} </option>
+                    <option value="{{ t }}" {% if t == m %}selected{% endif %}> {{ t }} </option>
                     {% endfor %}
                     </select>
                     <label for="familiar_{{ forloop.counter0 }}">精熟程度:</label>
@@ -54,6 +54,36 @@
                          <option value="2" {% if 2 == m.familiar %}selected{% endif %}> 上手 </option>
                          <option value="3" {% if 3 == m.familiar %}selected{% endif %}> 熟手 </option>
                          <option value="4" {% if 4 == m.familiar %}selected{% endif %}> 精通 </option>
+                    </select>
+                    </div>
+                    {% endfor %}
+
+                    {% for counter in counters %}
+                    <div>
+                    <label for="category">C:</label>
+                    <select  name="category" >
+                    {% for c in categorys %}
+                    <option value="{{ c }}"> {{ c }} </option>
+                    {% endfor %}
+                    </select>
+                    <label for="group">G:</label>
+                    <select  name="group" >
+                    {% for g in groups %}
+                    <option value="{{ g }}"> {{ g }} </option>
+                    {% endfor %}
+                    </select>
+                    <label for="talent_{{ counter }}">特殊技能名稱:</label>
+                    <select  name="talent_{{ counter }}">
+                    {% for t in talents %}
+                    <option value="{{ t }}"> {{ t }} </option>
+                    {% endfor %}
+                    </select>
+                    <label for="familiar_{{ counter }}">精熟程度:</label>
+                    <select  name="familiar_{{ counter }}" class="selectpicker" data-width="fit">
+                         <option value="1" > 略懂 </option>
+                         <option value="2" > 上手 </option>
+                         <option value="3" > 熟手 </option>
+                         <option value="4" > 精通 </option>
                     </select>
                     </div>
                     {% endfor %}

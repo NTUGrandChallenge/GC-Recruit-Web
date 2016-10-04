@@ -110,7 +110,8 @@ def edit(request):
 	groups = Group.objects.all()
 	talents = Talent.objects.all()
 	mytalents = Talent.objects.filter(student=student)
-	counters = list(range(1,11))
+	number = len(mytalents)
+	counters = list(range(number,10))
 
 	alltalents = []
 	namelist = []
@@ -152,6 +153,14 @@ def edit(request):
 		mytalent = []
 		mytalent.append(Talent.objects.filter(name=talent_0, familiar=familiar_0).first())
 		mytalent.append(Talent.objects.filter(name=talent_1, familiar=familiar_1).first())
+		mytalent.append(Talent.objects.filter(name=talent_2, familiar=familiar_2).first())
+		mytalent.append(Talent.objects.filter(name=talent_3, familiar=familiar_3).first())
+		mytalent.append(Talent.objects.filter(name=talent_4, familiar=familiar_4).first())
+		mytalent.append(Talent.objects.filter(name=talent_5, familiar=familiar_5).first())
+		mytalent.append(Talent.objects.filter(name=talent_6, familiar=familiar_6).first())
+		mytalent.append(Talent.objects.filter(name=talent_7, familiar=familiar_7).first())
+		mytalent.append(Talent.objects.filter(name=talent_8, familiar=familiar_8).first())
+		mytalent.append(Talent.objects.filter(name=talent_9, familiar=familiar_9).first())
 		student.motto = motto
 		student.experience = experience
 		student.interest = Interest.objects.get(name=myinterest)
