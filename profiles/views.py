@@ -171,6 +171,7 @@ def student_create(request):
 	talents = Talent.objects.all()
 	counters = list(range(1,11))
 
+
 	if request.user.has_perm('profiles.can_insurance'):
 		return HttpResponseRedirect('/insurance_create/')
 	errors = []
@@ -185,10 +186,39 @@ def student_create(request):
 		motto = request.POST['motto']
 		experience = request.POST['experience']
 		none_team = Team.objects.get(name='none')
-		domain = request.POST.getlist('domain')
 		interest = request.POST['interest']
-		talent = request.POST.getlist('talent')
 		role = request.POST['role']
+
+		talent_0 = request.POST['talent_0']
+		talent_1 = request.POST['talent_1']
+		talent_2 = request.POST['talent_2']
+		talent_3 = request.POST['talent_3']
+		talent_4 = request.POST['talent_4']
+		talent_5 = request.POST['talent_5']
+		talent_6 = request.POST['talent_6']
+		talent_7 = request.POST['talent_7']
+		talent_8 = request.POST['talent_8']
+		talent_9 = request.POST['talent_9']
+
+		familiar_0 = request.POST['familiar_0']
+		familiar_1 = request.POST['familiar_1']
+		familiar_2 = request.POST['familiar_2']
+		familiar_3 = request.POST['familiar_3']
+		familiar_4 = request.POST['familiar_4']
+		familiar_5 = request.POST['familiar_5']
+		familiar_6 = request.POST['familiar_6']
+		familiar_7 = request.POST['familiar_7']
+		familiar_8 = request.POST['familiar_8']
+		familiar_9 = request.POST['familiar_9']
+
+		domain_0 = request.POST['domain_0']
+		domain_1 = request.POST['domain_1']
+		domain_2 = request.POST['domain_2']
+		domain_3 = request.POST['domain_3']
+		domain_4 = request.POST['domain_4']
+		domain_5 = request.POST['domain_5']
+		domain_6 = request.POST['domain_6']
+		domain_7 = request.POST['domain_7']
 #		if any(not request.POST[k] for k in request.POST):
 #			errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
@@ -206,16 +236,33 @@ def student_create(request):
 				interest = Interest.objects.get(name=interest),
 				role = Role.objects.get(name=role)
 			)
-			talent = list(set(talent))
 			mytalent = []
+			mytalent.append(Talent.objects.filter(name=talent_0, familiar=familiar_0).first())
+			mytalent.append(Talent.objects.filter(name=talent_1, familiar=familiar_1).first())
+			mytalent.append(Talent.objects.filter(name=talent_2, familiar=familiar_2).first())
+			mytalent.append(Talent.objects.filter(name=talent_3, familiar=familiar_3).first())
+			mytalent.append(Talent.objects.filter(name=talent_4, familiar=familiar_4).first())
+			mytalent.append(Talent.objects.filter(name=talent_5, familiar=familiar_5).first())
+			mytalent.append(Talent.objects.filter(name=talent_6, familiar=familiar_6).first())
+			mytalent.append(Talent.objects.filter(name=talent_7, familiar=familiar_7).first())
+			mytalent.append(Talent.objects.filter(name=talent_8, familiar=familiar_8).first())
+			mytalent.append(Talent.objects.filter(name=talent_9, familiar=familiar_9).first())
 			mydomain = []
-			for item in talent:
-				mytalent.append(Talent.objects.get(name=item))
-			for item2 in domain:
-				mydomain.append(Domain.objects.get(name=item2))
-
-			student.talent.set(mytalent)
-			student.domain.set(mydomain)
+			mydomain.append(Domain.objects.get(name=domain_0))
+			mydomain.append(Domain.objects.get(name=domain_1))
+			mydomain.append(Domain.objects.get(name=domain_2))
+			mydomain.append(Domain.objects.get(name=domain_3))
+			mydomain.append(Domain.objects.get(name=domain_4))
+			mydomain.append(Domain.objects.get(name=domain_5))
+			mydomain.append(Domain.objects.get(name=domain_6))
+			mydomain.append(Domain.objects.get(name=domain_7))
+			for item in mytalent:
+				student.talent.add(item)
+			for item2 in mydomain:
+				student.domain.add(item2)
+			student.save()
+			#student.talent.set(mytalent)
+			#student.domain.set(mydomain)
 			perm = Permission.objects.get(codename='can_insurance')
 			request.user.user_permissions.add(perm)
 			return HttpResponseRedirect('/insurance_create/')
