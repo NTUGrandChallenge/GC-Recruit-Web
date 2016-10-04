@@ -1,4 +1,8 @@
 #team_list .one-team{
 	background-color: #EEE;
 	padding: 10px 20px;
+	margin: 10px auto;
+}
+#team_list .one-team:hover{
+	background-color: #ffeb32;
 }

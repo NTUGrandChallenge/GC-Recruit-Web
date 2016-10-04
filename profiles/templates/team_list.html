@@ -3,7 +3,7 @@
 {% block css %}
 <link rel="stylesheet" href="/static/css/team_list.css">
 {% endblock %}
-{% block title %} 學生列表 {% endblock %}
+{% block title %} 團隊列表 {% endblock %}
 
 {% block content %}
 <div class="container" id="team_list">
@@ -12,6 +12,9 @@
 
 		</div>
 		<div class="col-md-9">
+			<div class="row text-right">
+				<a href="/create_team/" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>創建團隊</a>
+			</div>
 			<div class="row">
 				{% for i in teams %}
 					{% if i.name != 'none' %}
