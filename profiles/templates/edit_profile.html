@@ -42,11 +42,18 @@
                     <option value="{{ g }}"> {{ g }} </option>
                     {% endfor %}
                     </select>
-                    <label for="talent">特殊技能名稱:</label>
-                    <select  name="talent" default="{{m}}">
+                    <label for="talent_{{ forloop.counter0 }}">特殊技能名稱:</label>
+                    <select  name="talent_{{ forloop.counter0 }}">
                     {% for t in talents %}
                     <option value="{{ t }}" {% if t == m %}selected{% endif %}> {{ t }} </option>
                     {% endfor %}
+                    </select>
+                    <label for="familiar_{{ forloop.counter0 }}">精熟程度:</label>
+                    <select  name="familiar_{{ forloop.counter0 }}" class="selectpicker" data-width="fit">
+                         <option value="1" {% if 1 == m.familiar %}selected{% endif %}> 略懂 </option>
+                         <option value="2" {% if 2 == m.familiar %}selected{% endif %}> 上手 </option>
+                         <option value="3" {% if 3 == m.familiar %}selected{% endif %}> 熟手 </option>
+                         <option value="4" {% if 4 == m.familiar %}selected{% endif %}> 精通 </option>
                     </select>
                     </div>
                     {% endfor %}
