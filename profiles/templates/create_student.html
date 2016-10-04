@@ -34,6 +34,7 @@
                <label for="domain">科系領域：</label>
                {% for d in domains %}
                <input type="checkbox" value="{{d}}" name="domain" style="width: auto;">{{d}}</input>
+               <input type="checkbox" value="{{d}}" name="domain_{{forloop.counter0}}">{{d}}</input>
                {% endfor %}
           </div>
           </div>
@@ -112,13 +113,14 @@
                </div>
                <div class="col-xs-3">
                     <select  name="talent" class="selectpicker" data-live-search="true" data-width="fit">
+                    <select name="talent_{{forloop.counter0}}" class="selectpicker" data-live-search="true" data-width="fit">
                     {% for t in talents %}
                          <option value="{{ t }}"> {{ t }} </option>
                     {% endfor %}
                     </select>
                </div>
                <div class="col-xs-3">
-                    <select  name="familiar" class="selectpicker" data-width="fit">
+                    <select name="familiar_{{forloop.counter0}}" class="selectpicker" data-live-search="true" data-width="fit">
                          <option value="1"> 略懂 </option>
                          <option value="2"> 上手 </option>
                          <option value="3"> 熟手 </option>
