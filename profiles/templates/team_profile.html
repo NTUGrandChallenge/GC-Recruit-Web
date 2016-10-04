@@ -39,8 +39,10 @@
                     <input type="submit" class="btn btn-danger" value="退出團隊">
                 {%endif%}
             	</form>
+                {%if team.id == me.team.id%}
                 <div><button class="btn btn-default"><a href="/teamroom/{{ team.id }}/">團隊聊天室</a></button></div>
                 <div><button class="btn btn-default"><a href="/applied_list/{{ team.id }}/">待審核成員</a></button></div>
+                {% endif %}
                 {% if team.captain_name == me.nickname %}
                 <div><button class="btn btn-default"><a href="/upload/">提案簡報繳交</a></button></div>
                 <div><button class="btn btn-default"><a href="/upload2/">提案書繳交</a></button></div>
