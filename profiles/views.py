@@ -110,21 +110,44 @@ def edit(request):
 	groups = Group.objects.all()
 	talents = Talent.objects.all()
 	mytalents = Talent.objects.filter(student=student)
+	alltalents = []
+	namelist = []
+	for thing in talents:
+		if thing.name not in namelist and thing not in alltalents:
+			alltalents.append(thing)
+			namelist.append(thing.name)
+	talents = alltalents
 	if request.POST:
 		motto = request.POST['motto']
 		experience = request.POST['experience']
-
-		#talent = request.POST['talent']
 		myinterest = request.POST['interest']
 		myrole = request.POST['role']
-		talent = request.POST['talent']
+
+		talent_0 = request.POST['talent_0']
+		talent_1 = request.POST['talent_1']
+		# talent_2 = request.POST['talent_2']
+		# talent_3 = request.POST['talent_3']
+		# talent_4 = request.POST['talent_4']
+		# talent_5 = request.POST['talent_5']
+		# talent_6 = request.POST['talent_6']
+		# talent_7 = request.POST['talent_7']
+		# talent_8 = request.POST['talent_8']
+		# talent_9 = request.POST['talent_9']
+		
+		familiar_0 = request.POST['familiar_0']
+		familiar_1 = request.POST['familiar_1']
+		mytalent = []
+		mytalent.append(Talent.objects.filter(name=talent_0, familiar=familiar_0).first())
+		mytalent.append(Talent.objects.filter(name=talent_1, familiar=familiar_1).first())
 		student.motto = motto
 		student.experience = experience
 		student.interest = Interest.objects.get(name=myinterest)
 		student.role = Role.objects.get(name=myrole)
-		student.talent.add(Talent.objects.get(name=talent))
+		student.talent.clear()
+		for item in mytalent:
+			student.talent.add(item)
 		student.save()
-		return render_to_response('my_profile.html', RequestContext(request, locals()))
+		return HttpResponseRedirect('/my_profile/')
 	else:
 		return render_to_response('edit_profile.html', RequestContext(request, locals()))
 

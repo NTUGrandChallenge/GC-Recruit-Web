@@ -112,10 +112,18 @@
                     </select>
                </div>
                <div class="col-xs-4">
-                    <select  name="talent" default="{{m}}" class="selectpicker" data-live-search="true" data-width="fit">
+                    <select  name="talent" class="selectpicker" data-live-search="true" data-width="fit">
                     {% for t in talents %}
                          <option value="{{ t }}"> {{ t }} </option>
                     {% endfor %}
+                    </select>
+               </div>
+               <div class="col-xs-4">
+                    <select  name="familiar" class="selectpicker" data-live-search="true" data-width="fit">
+                         <option value="1"> 略懂 </option>
+                         <option value="2"> 上手 </option>
+                         <option value="3"> 熟手 </option>
+                         <option value="4"> 精通 </option>
                     </select>
                </div>
                <div class="col-xs-2">
