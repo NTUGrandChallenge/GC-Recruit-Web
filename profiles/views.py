@@ -213,20 +213,36 @@ def student_create(request):
 
 		if 'domain_0' in request.POST:
 			domain_0 = request.POST['domain_0']
+		else:
+			domain_0 = ''
 		if 'domain_1' in request.POST:
 			domain_1 = request.POST['domain_1']
+		else:
+			domain_1 = ''
 		if 'domain_2' in request.POST:
 			domain_2 = request.POST['domain_2']
+		else:
+			domain_2 = ''
 		if 'domain_3' in request.POST:
 			domain_3 = request.POST['domain_3']
+		else:
+			domain_3 = ''
 		if 'domain_4' in request.POST:
 			domain_4 = request.POST['domain_4']
+		else:
+			domain_4 = ''
 		if 'domain_5' in request.POST:
 			domain_5 = request.POST['domain_5']
+		else:
+			domain_5 = ''
 		if 'domain_6' in request.POST:
 			domain_6 = request.POST['domain_6']
+		else:
+			domain_6 = ''
 		if 'domain_7' in request.POST:
 			domain_7 = request.POST['domain_7']
+		else:
+			domain_7 = ''
 #		if any(not request.POST[k] for k in request.POST):
 #			errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
