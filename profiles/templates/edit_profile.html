@@ -4,60 +4,132 @@
 {% block h2 %} {{ student.nickname }}的個人資料 {% endblock %}
 
 {% block content %}
-    <form action="" method="post" class="form-horizontal" role="form" style="width:33%; margin:auto; text-align:left">{% csrf_token %}
-                    <div class="form-group">
-                    <label for="motto">座右銘:</label>
-                    <input id="motto" type="text" name="motto" class="form-control" value="{{student.motto}}">
-                    <label for="experience">人生經歷:</label>
-                    <input id="experience" type="text" name="experience" class="form-control" value="{{student.experience}}">
-                    </div>
-                    <div>
-                    <label for="interest">感興趣的領域:</label>
-                    <select  name="interest" >
-                    {% for i in interest %}
-                    <option value="{{ i }}"> {{ i }} </option>
-                    {% endfor %}
-                    </select>
-                    </div>
-                    <div>
-                    <label for="role">團隊中角色定位:</label>
-                    <select  name="role" >
-                    {% for r in role %}
-                    <option value="{{ r }}"> {{ r }} </option>
-                    {% endfor %}
-                    </select>
-                    </div>
+<div class="container" id="create_student">
+<div class="content-wrapper">
+     {% for e in errors %}
+          <p style="color:red;">{{ e }}</p>
+     {% endfor %}
+     <form action="" method="post" class="form-inline" role="form">{% csrf_token %}
+     <div class="row basic">
+     <!-- <div class="col-xs-12">
+          <div class="form-group">
+               <label for="realname">真實姓名：</label>
+               <input id="realname" type="text" name="realname" class="form-control" value="{{realname}}">
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="nickname">暱稱：</label>
+               <input id="nickname" type="text" name="nickname" class="form-control" value="{{nickname}}">
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="school">學校：</label>
+               <input id="school" type="text" name="school" class="form-control" value="{{school}}">
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="domain">科系領域：</label>
+               {% for d in domains %}
+               <input type="checkbox" value="{{d}}" name="domain" style="width: auto;">{{d}}</input>
+               <input type="checkbox" value="{{d}}" name="domain_{{forloop.counter0}}">{{d}}</input>
+               {% endfor %}
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="department">系所：</label>
+               <input id="department" type="text" name="department" class="form-control" value="{{department}}" style="width: 50%;">
+               <label for="grade" style="width: 50px;margin-left: 10px;">年級：</label>
+               <select name="grade" class="selectpicker" data-width="fit">
+               {% for g in grades %}
+               <option value="{{ g }}"> {{ g }} </option>
+               {% endfor %}
+               </select>
+          </div>
+          </div> -->
+     </div>
 
-                    {% for m in mytalents %}
-                    <div>
-                    <label for="category">C:</label>
-                    <select  name="category" >
+     <div class="row description">
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="experience">經歷：</label>
+               <textarea id="experience" rows="10" cols="48" name="experience" class="form-control">{{experience}}</textarea>
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="interest">interest：</label>
+               <select  name="interest" >
+               {% for i in interest %}
+                    <option value="{{ i }}"> {{ i }} </option>
+               {% endfor %}
+               </select>
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="role">團隊中角色定位：</label>
+               <select  name="role" >
+               {% for r in role %}
+                    <option value="{{ r }}"> {{ r }} </option>
+               {% endfor %}
+               </select>
+          </div>
+          </div>
+          <div class="col-xs-12">
+
+          <div class="row">
+               <div class="col-xs-3">
+                    <h4>技能類別</h4>
+               </div>
+               <div class="col-xs-3">
+                    <h4>子類別</h4>
+               </div>
+               <div class="col-xs-3">
+                    <h4>技能名稱</h4>
+               </div>
+               <div class="col-xs-3">
+                    <h4>精熟程度</h4>
+               </div>
+          </div>
+          {% for m in mytalents %}
+          <div class="row one-talent">
+               <div class="col-xs-3">
+                    <select  name="category" class="selectpicker" data-width="fit">
                     {% for c in categorys %}
-                    <option value="{{ c }}"> {{ c }} </option>
+                         <option value="{{ c }}"> {{ c }} </option>
                     {% endfor %}
                     </select>
-                    <label for="group">G:</label>
-                    <select  name="group" >
+               </div>
+               <div class="col-xs-3">
+                    <select  name="group" class="selectpicker" data-width="fit">
                     {% for g in groups %}
-                    <option value="{{ g }}"> {{ g }} </option>
+                         <option value="{{ g }}"> {{ g }} </option>
                     {% endfor %}
                     </select>
-                    <label for="talent_{{ forloop.counter0 }}">特殊技能名稱:</label>
-                    <select  name="talent_{{ forloop.counter0 }}">
+               </div>
+               <div class="col-xs-3">
+                    <select  name="talent_{{forloop.counter0}}" class="selectpicker" data-live-search="true" data-width="fit">
                     {% for t in talents %}
                     <option value="{{ t }}" {% if t == m %}selected{% endif %}> {{ t }} </option>
                     {% endfor %}
                     </select>
-                    <label for="familiar_{{ forloop.counter0 }}">精熟程度:</label>
-                    <select  name="familiar_{{ forloop.counter0 }}" class="selectpicker" data-width="fit">
-                         <option value="1" {% if 1 == m.familiar %}selected{% endif %}> 略懂 </option>
-                         <option value="2" {% if 2 == m.familiar %}selected{% endif %}> 上手 </option>
-                         <option value="3" {% if 3 == m.familiar %}selected{% endif %}> 熟手 </option>
-                         <option value="4" {% if 4 == m.familiar %}selected{% endif %}> 精通 </option>
+               </div>
+               <div class="col-xs-3">
+                    <select name="familiar_{{forloop.counter0}}" class="selectpicker" data-live-search="true" data-width="fit">
+                         <option value="1"> 略懂 </option>
+                         <option value="2"> 上手 </option>
+                         <option value="3"> 熟手 </option>
+                         <option value="4"> 精通 </option>
                     </select>
-                    </div>
-                    {% endfor %}
-
+               </div>
+               
+          </div>
+          {% endfor %}
+                   
                     {% for counter in counters %}
                     <div>
                     <label for="category">C:</label>
@@ -85,12 +157,23 @@
                          <option value="3" > 熟手 </option>
                          <option value="4" > 精通 </option>
                     </select>
+                    
+                    <div class="col-xs-2" style="margin-top: 5px;">
+                         <div class="add-talent btn btn-default"><i class="fa fa-plus fa-lg" aria-hidden="true"></i>新增技能</div>
+                    </div>
                     </div>
                     {% endfor %}
 
 
-                    <input type="submit" value="送出" class="btn btn-default">
-                </form>
+          <div class="form-group">
+               <label for="motto">最能代表自己的一段話：</label>
+               <textarea id="motto" rows="3" cols="48" name="motto" class="form-control">{{motto}}</textarea>
+          </div>
+     </div>
+     <input type="submit" value="更改" class="btn btn-default">
+     </form>
+</div>
+</div>
 {% endblock %}
 {% block img %}
     
