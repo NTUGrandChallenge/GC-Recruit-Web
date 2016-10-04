@@ -211,14 +211,22 @@ def student_create(request):
 		familiar_8 = request.POST['familiar_8']
 		familiar_9 = request.POST['familiar_9']
 
-		domain_0 = request.POST['domain_0']
-		domain_1 = request.POST['domain_1']
-		domain_2 = request.POST['domain_2']
-		domain_3 = request.POST['domain_3']
-		domain_4 = request.POST['domain_4']
-		domain_5 = request.POST['domain_5']
-		domain_6 = request.POST['domain_6']
-		domain_7 = request.POST['domain_7']
+		if 'domain_0' in request.POST:
+			domain_0 = request.POST['domain_0']
+		if 'domain_1' in request.POST:
+			domain_1 = request.POST['domain_1']
+		if 'domain_2' in request.POST:
+			domain_2 = request.POST['domain_2']
+		if 'domain_3' in request.POST:
+			domain_3 = request.POST['domain_3']
+		if 'domain_4' in request.POST:
+			domain_4 = request.POST['domain_4']
+		if 'domain_5' in request.POST:
+			domain_5 = request.POST['domain_5']
+		if 'domain_6' in request.POST:
+			domain_6 = request.POST['domain_6']
+		if 'domain_7' in request.POST:
+			domain_7 = request.POST['domain_7']
 #		if any(not request.POST[k] for k in request.POST):
 #			errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
@@ -232,7 +240,6 @@ def student_create(request):
 				experience = experience,
 				team = none_team,
 				grade = Grade.objects.get(name=grade),
-				#domain = Domain.objects.get(name=domain),
 				interest = Interest.objects.get(name=interest),
 				role = Role.objects.get(name=role)
 			)
