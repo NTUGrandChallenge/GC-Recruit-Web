@@ -109,11 +109,9 @@
           </div>
           <div class="form-group">
                <label for="interest">interest：</label>
-               <select  name="interest" >
                {% for i in interests %}
-                    <option value="{{ i }}"> {{ i }} </option>
+                    <input type="radio" name="interest" value="{{ i }}"> {{ i }} </option>
                {% endfor %}
-               </select>
           </div>
           </div>
      </div>

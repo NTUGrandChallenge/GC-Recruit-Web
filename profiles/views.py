@@ -36,34 +36,25 @@ def search(request):
 	if 'search' in request.GET:
 		interests = request.GET.getlist("interest[]")
 		roles = request.GET.getlist("role[]")
-		#student_list = []
-		user_list = []
+		interest_list = []
+		role_list = []
+		#user_list = []
 		for interest in interests:
 			students = Student.objects.filter(interest_id=interest)
 			for each in students:
 				user = User.objects.get(student=each)
-				user_list.append(user)
+				interest_list.append(user)
 #-------interest OR role search------
 		for role in roles:#OR search
 			students = Student.objects.filter(role_id=role)
 			for each in students:
-				if each not in student_list:
-					user = User.objects.get(student=each)
-					user_list.append(user)
-#-------interst AND role search-----
-#		final_student_list = []
-#		for role in roles:
-#			students = Student.objects.filter(role_id=role)
-#			for each in students:
-#				if each in student_list:
-#					final_student_list.append(each)
-#		if roles:
-#			if final_student_list:
-#				student_list = final_student_list
-#			else:
-#				student_list = []
-#-------interest And role search-----
-#-------to show the keyword on html-----
+				user = User.objects.get(student=each)
+				role_list.append(user)
+				##
+				##  AND
+		user_list = list(set(interest_list).intersection(set(role_list)))
+				##
+				##
 		Interests = []
 		Roles = []
 		for each in interests:
@@ -108,11 +99,15 @@ def edit(request):
 	role = Role.objects.all()
 	categorys = Category.objects.all()
 	groups = Group.objects.all()
+	group_father = []
+	for group_item in groups:
+		group_father.append(Category.objects.get(group=group_item))
+
 	talents = Talent.objects.all()
 	mytalents = Talent.objects.filter(student=student)
 	number = len(mytalents)
 	counters = list(range(number,10))
-
+	####偷偷將talents變成不重複的
 	alltalents = []
 	namelist = []
 	for thing in talents:
@@ -122,6 +117,7 @@ def edit(request):
 	for thing2 in mytalents:
 		alltalents.append(thing2)
 	talents = alltalents
+	############
 	if request.POST:
 		motto = request.POST['motto']
 		experience = request.POST['experience']
@@ -599,7 +595,7 @@ def team_profile(request, teamid):
 
 	if request.POST.get('quit'):
 		if me.team == team:
-			me.team = none_team	
+			me.team = none_team
 			me.save()
 			perm = Permission.objects.get(codename='can_create_team_profile')
 			request.user.user_permissions.add(perm)
