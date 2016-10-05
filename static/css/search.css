@@ -1,3 +1,33 @@
+body{
+	background-color: #b2b2b2;
+}
+#search #sidebar{
+	background-color: #ffeb32;
+	padding-top: 30px;
+}
+#search #sidebar #filter{
+	background-color: #fff;
+	margin-top: 20px;
+	margin-bottom: 50px;
+	padding: 10px;
+}
+
+
+#search #challenger_list{
+	padding-top: 30px;
+}
 #search .one-student{
-	background-color: #EEE;
+	background-color: #FFF;
+	display: flex;
+}
+#search .one-student:hover{
+	outline: 5px solid #142598;
+}
+#search .one-student .name{
+	flex: 1;
+	background-color: #ffeb32;
+	writing-mode: vertical-lr;
+}
+#search .one-student .info{
+	flex: 3;
 }
