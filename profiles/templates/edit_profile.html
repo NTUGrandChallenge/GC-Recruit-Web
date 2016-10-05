@@ -56,17 +56,15 @@
           <div class="col-xs-12">
           <div class="form-group">
                <label for="experience">經歷：</label>
-               <textarea id="experience" rows="10" cols="48" name="experience" class="form-control">{{experience}}</textarea>
+               <textarea id="experience" rows="10" cols="48" name="experience" class="form-control">{{ student.experience}}</textarea>
           </div>
           </div>
           <div class="col-xs-12">
           <div class="form-group">
                <label for="interest">interest：</label>
-               <select  name="interest" >
                {% for i in interest %}
-                    <option value="{{ i }}"> {{ i }} </option>
+                    <input type="radio" name="interest" value="{{ i }}" {% if i == student.interest %}checked{% endif %}> {{ i }}</option>
                {% endfor %}
-               </select>
           </div>
           </div>
           <div class="col-xs-12">
@@ -91,9 +89,6 @@
                <div class="col-xs-3">
                     <h4>技能名稱</h4>
                </div>
-               <div class="col-xs-3">
-                    <h4>精熟程度</h4>
-               </div>
           </div>
           {% for m in mytalents %}
           <div class="row one-talent">
@@ -106,24 +101,22 @@
                </div>
                <div class="col-xs-3">
                     <select  name="group" class="selectpicker" data-width="fit">
-                    {% for g in groups %}
-                         <option value="{{ g }}"> {{ g }} </option>
-                    {% endfor %}
+                         {% for c in categorys %}
+                              {% for g in c.group_set.all %}
+                                   <option value="{{ g }}" data-father="{{ c }}"> {{ g }}</option>
+                              {% endfor %}
+                         {% endfor %}
                     </select>
                </div>
                <div class="col-xs-3">
-                    <select  name="talent_{{ forloop.counter0 }}" class="selectpicker" data-live-search="true" data-width="fit">
-                    {% for t in talents %}
-                    <option value="{{ t }}" {% if t == m %}selected{% endif %}> {{ t }} </option>
+                    <select  name="talent[]" class="selectpicker" data-live-search="true" data-width="fit">
+                    {% for c in categorys %}
+                              {% for g in c.group_set.all %}
+                                   {% for t in g.talent_set.all %}
+                              <option value="{{ t }}" data-father="{{ g }}" {% if t == m %}selected{% endif %}> {{ t }} </option>
+                              {% endfor %}
+                         {% endfor %}
                     {% endfor %}
-                    </select>
-               </div>
-               <div class="col-xs-3">
-                    <select name="familiar_{{ forloop.counter0 }}" class="selectpicker" data-live-search="true" data-width="fit">
-                         <option value="1" {% if 1 == m.familiar %}selected{% endif %}> 略懂 </option>
-                         <option value="2" {% if 2 == m.familiar %}selected{% endif %}> 上手 </option>
-                         <option value="3" {% if 3 == m.familiar %}selected{% endif %}> 熟手 </option>
-                         <option value="4" {% if 4 == m.familiar %}selected{% endif %}> 精通 </option>
                     </select>
                </div>
                <div class="col-xs-2" style="margin-top: 5px;">
@@ -133,7 +126,6 @@
           {% endfor %}
                    
           {% for counter in counters %}
-          {{ counter }}
           <div class="row one-talent">
                <div class="col-xs-3">
                     <select  name="category" class="selectpicker" data-width="fit">
@@ -144,24 +136,22 @@
                </div>
                <div class="col-xs-3">
                     <select  name="group" class="selectpicker" data-width="fit">
-                    {% for g in groups %}
-                         <option value="{{ g }}"> {{ g }} </option>
-                    {% endfor %}
+                         {% for c in categorys %}
+                              {% for g in c.group_set.all %}
+                              <option value="{{ g }}" data-father="{{ c }}"> {{ g }}</option>
+                              {% endfor %}
+                         {% endfor %}
                     </select>
                </div>
                <div class="col-xs-3">
-                    <select  name="talent_{{ counter }}" class="selectpicker" data-live-search="true" data-width="fit">
-                    {% for t in talents %}
-                    <option value="{{ t }}"> {{ t }} </option>
-                    {% endfor %}
-                    </select>
-               </div>
-               <div class="col-xs-3">
-                    <select name="familiar_{{ counter }}" class="selectpicker" data-live-search="true" data-width="fit">
-                         <option value="1"> 略懂 </option>
-                         <option value="2"> 上手 </option>
-                         <option value="3"> 熟手 </option>
-                         <option value="4"> 精通 </option>
+                    <select  name="talent[]" class="selectpicker" data-live-search="true" data-width="fit">
+                         {% for c in categorys %}
+                              {% for g in c.group_set.all %}
+                                   {% for t in g.talent_set.all %}
+                                   <option value="{{ t }}" data-father="{{ g }}"> {{ t }} </option>
+                                   {% endfor %}
+                              {% endfor %}
+                         {% endfor %}
                     </select>
                </div>
                <div class="col-xs-2" style="margin-top: 5px;">

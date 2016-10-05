@@ -36,34 +36,25 @@ def search(request):
 	if 'search' in request.GET:
 		interests = request.GET.getlist("interest[]")
 		roles = request.GET.getlist("role[]")
-		#student_list = []
-		user_list = []
+		interest_list = []
+		role_list = []
+		#user_list = []
 		for interest in interests:
 			students = Student.objects.filter(interest_id=interest)
 			for each in students:
 				user = User.objects.get(student=each)
-				user_list.append(user)
+				interest_list.append(user)
 #-------interest OR role search------
 		for role in roles:#OR search
 			students = Student.objects.filter(role_id=role)
 			for each in students:
-				if each not in student_list:
-					user = User.objects.get(student=each)
-					user_list.append(user)
-#-------interst AND role search-----
-#		final_student_list = []
-#		for role in roles:
-#			students = Student.objects.filter(role_id=role)
-#			for each in students:
-#				if each in student_list:
-#					final_student_list.append(each)
-#		if roles:
-#			if final_student_list:
-#				student_list = final_student_list
-#			else:
-#				student_list = []
-#-------interest And role search-----
-#-------to show the keyword on html-----
+				user = User.objects.get(student=each)
+				role_list.append(user)
+				##
+				##  AND
+		user_list = list(set(interest_list).intersection(set(role_list)))
+				##
+				##
 		Interests = []
 		Roles = []
 		for each in interests:
@@ -112,62 +103,21 @@ def edit(request):
 	mytalents = Talent.objects.filter(student=student)
 	number = len(mytalents)
 	counters = list(range(number,10))
-
-	alltalents = []
-	namelist = []
-	for thing in talents:
-		if thing.name not in namelist and thing not in alltalents and thing not in mytalents:
-			alltalents.append(thing)
-			namelist.append(thing.name)
-	for thing2 in mytalents:
-		alltalents.append(thing2)
-	talents = alltalents
 	if request.POST:
 		motto = request.POST['motto']
 		experience = request.POST['experience']
 		myinterest = request.POST['interest']
 		myrole = request.POST['role']
 
-		talent_0 = request.POST['talent_0']
-		talent_1 = request.POST['talent_1']
-		talent_2 = request.POST['talent_2']
-		talent_3 = request.POST['talent_3']
-		talent_4 = request.POST['talent_4']
-		talent_5 = request.POST['talent_5']
-		talent_6 = request.POST['talent_6']
-		talent_7 = request.POST['talent_7']
-		talent_8 = request.POST['talent_8']
-		talent_9 = request.POST['talent_9']
+		talent = request.POST.getlist("talent[]")
 		
-		familiar_0 = request.POST['familiar_0']
-		familiar_1 = request.POST['familiar_1']
-		familiar_2 = request.POST['familiar_2']
-		familiar_3 = request.POST['familiar_3']
-		familiar_4 = request.POST['familiar_4']
-		familiar_5 = request.POST['familiar_5']
-		familiar_6 = request.POST['familiar_6']
-		familiar_7 = request.POST['familiar_7']
-		familiar_8 = request.POST['familiar_8']
-		familiar_9 = request.POST['familiar_9']
-
-		mytalent = []
-		mytalent.append(Talent.objects.filter(name=talent_0, familiar=familiar_0).first())
-		mytalent.append(Talent.objects.filter(name=talent_1, familiar=familiar_1).first())
-		mytalent.append(Talent.objects.filter(name=talent_2, familiar=familiar_2).first())
-		mytalent.append(Talent.objects.filter(name=talent_3, familiar=familiar_3).first())
-		mytalent.append(Talent.objects.filter(name=talent_4, familiar=familiar_4).first())
-		mytalent.append(Talent.objects.filter(name=talent_5, familiar=familiar_5).first())
-		mytalent.append(Talent.objects.filter(name=talent_6, familiar=familiar_6).first())
-		mytalent.append(Talent.objects.filter(name=talent_7, familiar=familiar_7).first())
-		mytalent.append(Talent.objects.filter(name=talent_8, familiar=familiar_8).first())
-		mytalent.append(Talent.objects.filter(name=talent_9, familiar=familiar_9).first())
 		student.motto = motto
 		student.experience = experience
 		student.interest = Interest.objects.get(name=myinterest)
 		student.role = Role.objects.get(name=myrole)
-		student.talent.clear()
-		for item in mytalent:
-			student.talent.add(item)
+		student.talent.remove()
+		for item in talent:
+			student.talent.add(Talent.objects.get(name=item))
 		student.save()
 		return HttpResponseRedirect('/my_profile/')
 	else:
@@ -180,6 +130,8 @@ def agree(request):
 		perm = Permission.objects.get(codename='can_write_student')
 		request.user.user_permissions.add(perm)
 		return HttpResponseRedirect('/create_student/')
+	if 'no' in request.POST:
+		return HttpResponseRedirect('/index/')
 	return render_to_response('agree.html', RequestContext(request, locals()))
 
 
@@ -211,27 +163,7 @@ def student_create(request):
 		interest = request.POST['interest']
 		role = request.POST['role']
 
-		talent_0 = request.POST['talent_0']
-		talent_1 = request.POST['talent_1']
-		talent_2 = request.POST['talent_2']
-		talent_3 = request.POST['talent_3']
-		talent_4 = request.POST['talent_4']
-		talent_5 = request.POST['talent_5']
-		talent_6 = request.POST['talent_6']
-		talent_7 = request.POST['talent_7']
-		talent_8 = request.POST['talent_8']
-		talent_9 = request.POST['talent_9']
-
-		familiar_0 = request.POST['familiar_0']
-		familiar_1 = request.POST['familiar_1']
-		familiar_2 = request.POST['familiar_2']
-		familiar_3 = request.POST['familiar_3']
-		familiar_4 = request.POST['familiar_4']
-		familiar_5 = request.POST['familiar_5']
-		familiar_6 = request.POST['familiar_6']
-		familiar_7 = request.POST['familiar_7']
-		familiar_8 = request.POST['familiar_8']
-		familiar_9 = request.POST['familiar_9']
+		talent = request.POST.getlist('talent[]')
 
 		if 'domain_0' in request.POST:
 			domain_0 = request.POST['domain_0']
@@ -281,17 +213,7 @@ def student_create(request):
 				interest = Interest.objects.get(name=interest),
 				role = Role.objects.get(name=role)
 			)
-			mytalent = []
-			mytalent.append(Talent.objects.filter(name=talent_0, familiar=familiar_0).first())
-			mytalent.append(Talent.objects.filter(name=talent_1, familiar=familiar_1).first())
-			mytalent.append(Talent.objects.filter(name=talent_2, familiar=familiar_2).first())
-			mytalent.append(Talent.objects.filter(name=talent_3, familiar=familiar_3).first())
-			mytalent.append(Talent.objects.filter(name=talent_4, familiar=familiar_4).first())
-			mytalent.append(Talent.objects.filter(name=talent_5, familiar=familiar_5).first())
-			mytalent.append(Talent.objects.filter(name=talent_6, familiar=familiar_6).first())
-			mytalent.append(Talent.objects.filter(name=talent_7, familiar=familiar_7).first())
-			mytalent.append(Talent.objects.filter(name=talent_8, familiar=familiar_8).first())
-			mytalent.append(Talent.objects.filter(name=talent_9, familiar=familiar_9).first())
+			
 			mydomain = []
 			mydomain.append(Domain.objects.get(name=domain_0))
 			mydomain.append(Domain.objects.get(name=domain_1))
@@ -301,8 +223,8 @@ def student_create(request):
 			mydomain.append(Domain.objects.get(name=domain_5))
 			mydomain.append(Domain.objects.get(name=domain_6))
 			mydomain.append(Domain.objects.get(name=domain_7))
-			for item in mytalent:
-				student.talent.add(item)
+			for item in talent:
+				student.talent.add(Talent.objects.get(name=item))
 			for item2 in mydomain:
 				student.domain.add(item2)
 			student.save()
@@ -541,7 +463,7 @@ def create_team(request):
 		teamname = request.POST['teamname']
 		content = request.POST['content']
 		team_interest = request.POST['interest']
-		captain_name = student.nickname
+		captain_name = student.name
 		if any(not request.POST[k] for k in request.POST):
 			errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
@@ -599,13 +521,13 @@ def team_profile(request, teamid):
 
 	if request.POST.get('quit'):
 		if me.team == team:
-			me.team = none_team	
+			me.team = none_team
 			me.save()
 			perm = Permission.objects.get(codename='can_create_team_profile')
 			request.user.user_permissions.add(perm)
 			return HttpResponseRedirect('/team_list/')
 	if request.POST.get('dismiss'):
-		if me.nickname == team.captain_name :
+		if me.name == team.captain_name :
 			if len(team.student_set.all()) == 1:
 				me.team = none_team	
 				me.save()
@@ -621,7 +543,7 @@ def team_profile(request, teamid):
 			me.applied.remove(team)	
 			me.save()
 			return render_to_response('team_profile.html', RequestContext(request, locals()))
-	if request.POST.get('kick'):
+	if request.POST.get('kick') and me.name == team.captain_name :
 		student = Student.objects.get(id=request.POST['kick'])
 		if student.team == team:
 			student.team = none_team	

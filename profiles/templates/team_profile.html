@@ -27,7 +27,7 @@
                         <input type="hidden"  name="applied" value="{{team.id}}">
                         <input type="submit" class="btn btn-success" value="申請加入團隊">
                     {%endif%}
-                {%elif team.captain_name == me.nickname %}
+                {%elif team.captain_name == me.name %}
                     {%if team.student_set.all|length > 1 %}
                         <p>團隊人數超過一人將無法解散團隊</p>
                     {%else%}
@@ -43,7 +43,7 @@
                 <div><button class="btn btn-default"><a href="/teamroom/{{ team.id }}/">團隊聊天室</a></button></div>
                 <div><button class="btn btn-default"><a href="/applied_list/{{ team.id }}/">待審核成員</a></button></div>
                 {% endif %}
-                {% if team.captain_name == me.nickname %}
+                {% if team.captain_name == name %}
                 <div><button class="btn btn-default"><a href="/upload/">提案簡報繳交</a></button></div>
                 <div><button class="btn btn-default"><a href="/upload2/">提案書繳交</a></button></div>
                 {% endif %}
@@ -54,7 +54,7 @@
             {% for student in team.student_set.all %}
             <a href="/other_profile/?id={{ student.id }}">
             <div class="row one-teammate">
-                {%if team.captain_name == student.nickname %}
+                {%if team.captain_name == student.name %}
                     <div class="ribbon-wrapper"><div class="ribbon">隊長</div></div>
                 {%endif%}
                 <div class="col-xs-3">
@@ -66,7 +66,7 @@
                     <p>一句話：{{student.motto}}</p>
                     <p>團隊角色：{{student.role}}</p>
                     <form action="" method="post">{% csrf_token %}
-                        {%if team.captain_name == me.nickname %}
+                        {%if team.captain_name == me.name %}
                             {% if student != me %}
                                 <input type="hidden"  name="kick" value="{{student.id}}">
                                 <input type="submit" class="btn btn-success" value="踢出">

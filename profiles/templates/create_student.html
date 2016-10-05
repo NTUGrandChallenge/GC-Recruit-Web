@@ -36,7 +36,7 @@
           <div class="form-group">
                <label for="domain">科系領域：</label>
                {% for d in domains %}
-                    <input type="checkbox" value="{{d}}" name="domain_{{forloop.counter0}}" style="width: auto;">{{d}}</input>
+                    <input type="checkbox" value="{{d}}" name="domain_{{forloop.counter0}}" style="width: auto;" checked>{{d}}</input>
                {% endfor %}
           </div>
           </div>
@@ -112,11 +112,9 @@
           </div>
           <div class="form-group">
                <label for="interest">interest：</label>
-               <select  name="interest" >
                {% for i in interests %}
-                    <option value="{{ i }}"> {{ i }} </option>
+                    <input type="radio" name="interest" value="{{ i }}" checked> {{ i }} </option>
                {% endfor %}
-               </select>
           </div>
           </div>
      </div>
@@ -152,9 +150,7 @@
                <div class="col-xs-3">
                     <h4>技能名稱</h4>
                </div>
-               <div class="col-xs-3">
-                    <h4>精熟程度</h4>
-               </div>
+               
           </div>
           {% for counter in counters %}
           <div class="row one-talent">
@@ -167,26 +163,25 @@
                </div>
                <div class="col-xs-3">
                     <select  name="group" class="selectpicker" data-width="fit">
-                    {% for g in groups %}
+                    {% for c in categorys %}
+                         {% for g in c.group_set.all %}
                          <option value="{{ g }}"> {{ g }} </option>
+                         {% endfor %}
                     {% endfor %}
                     </select>
                </div>
                <div class="col-xs-3">
-                    <select name="talent_{{forloop.counter0}}" class="selectpicker" data-live-search="true" data-width="fit">
-                    {% for t in talents %}
-                         <option value="{{ t }}"> {{ t }} </option>
+                    <select name="talent[]" class="selectpicker" data-live-search="true" data-width="fit">
+                    {% for c in categorys %}
+                         {% for g in c.group_set.all %}
+                              {% for t in g.talent_set.all %}
+                              <option value="{{ t }}"> {{ t }} </option>
+                              {% endfor %}
+                         {% endfor %}
                     {% endfor %}
                     </select>
                </div>
-               <div class="col-xs-3">
-                    <select name="familiar_{{forloop.counter0}}" class="selectpicker" data-live-search="true" data-width="fit">
-                         <option value="1"> 略懂 </option>
-                         <option value="2"> 上手 </option>
-                         <option value="3"> 熟手 </option>
-                         <option value="4"> 精通 </option>
-                    </select>
-               </div>
+               
                <div class="col-xs-2" style="margin-top: 5px;">
                     <div class="add-talent btn btn-default"><i class="fa fa-plus fa-lg" aria-hidden="true"></i>新增技能</div>
                </div>
