@@ -593,7 +593,7 @@ def team_profile(request, teamid):
 		if me.team == none_team:
 			me.applied.add(team)	
 			me.save()
-			return render_to_response('applied_complete.html', locals())
+			return render_to_response('team_profile.html', RequestContext(request, locals()))
 		else:
 			return HttpResponseRedirect("/permission_error/")
 
@@ -605,17 +605,22 @@ def team_profile(request, teamid):
 			request.user.user_permissions.add(perm)
 			return HttpResponseRedirect('/team_list/')
 	if request.POST.get('dismiss'):
-		if me.nickname == team.captain_name:
-			me.team = none_team	
-			me.save()
-			team.delete()
-			perm = Permission.objects.get(codename='can_create_team_profile')
-			request.user.user_permissions.add(perm)
-			return HttpResponseRedirect('/team_list/')
+		if me.nickname == team.captain_name :
+			if len(team.student_set.all()) == 1:
+				me.team = none_team	
+				me.save()
+				team.delete()
+				perm = Permission.objects.get(codename='can_create_team_profile')
+				request.user.user_permissions.add(perm)
+				return HttpResponseRedirect('/team_list/')
+			else:
+				return HttpResponseRedirect('/permission_error/')
+
 	if request.POST.get('cancel'):
 		if me.team != team:
 			me.applied.remove(team)	
 			me.save()
+			return render_to_response('team_profile.html', RequestContext(request, locals()))
 	if request.POST.get('kick'):
 		student = Student.objects.get(id=request.POST['kick'])
 		if student.team == team:
@@ -627,7 +632,7 @@ def team_profile(request, teamid):
 			perm = Permission.objects.get(codename='kicked')
 			user.user_permissions.add(perm)
 			user.save()
-			return HttpResponseRedirect('/team_list/')
+			return render_to_response('team_profile.html', RequestContext(request, locals()))
 	return render_to_response('team_profile.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_view_base_profile', login_url='/permission_error/')
