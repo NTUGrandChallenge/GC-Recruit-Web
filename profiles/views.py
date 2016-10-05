@@ -130,6 +130,8 @@ def agree(request):
 		perm = Permission.objects.get(codename='can_write_student')
 		request.user.user_permissions.add(perm)
 		return HttpResponseRedirect('/create_student/')
+	if 'no' in request.POST:
+		return HttpResponseRedirect('/index/')
 	return render_to_response('agree.html', RequestContext(request, locals()))
 
 
@@ -461,7 +463,7 @@ def create_team(request):
 		teamname = request.POST['teamname']
 		content = request.POST['content']
 		team_interest = request.POST['interest']
-		captain_name = student.nickname
+		captain_name = student.name
 		if any(not request.POST[k] for k in request.POST):
 			errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
@@ -525,7 +527,7 @@ def team_profile(request, teamid):
 			request.user.user_permissions.add(perm)
 			return HttpResponseRedirect('/team_list/')
 	if request.POST.get('dismiss'):
-		if me.nickname == team.captain_name :
+		if me.name == team.captain_name :
 			if len(team.student_set.all()) == 1:
 				me.team = none_team	
 				me.save()
@@ -541,7 +543,7 @@ def team_profile(request, teamid):
 			me.applied.remove(team)	
 			me.save()
 			return render_to_response('team_profile.html', RequestContext(request, locals()))
-	if request.POST.get('kick'):
+	if request.POST.get('kick') and me.name == team.captain_name :
 		student = Student.objects.get(id=request.POST['kick'])
 		if student.team == team:
 			student.team = none_team	
