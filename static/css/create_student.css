@@ -79,7 +79,7 @@
 #create_student .interest .description p{
 	position: absolute;
 	visibility: hidden;
-	text-align: justify;
+	text-align: center;
 }
 #create_student .interest .description p.locked{
 	visibility: visible;

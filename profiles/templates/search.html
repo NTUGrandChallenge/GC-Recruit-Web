@@ -1,29 +1,86 @@
 {% extends 'base.html' %}
- 
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/search.css">
+{% endblock %}
 {% block title %} Student Profile {% endblock %}
   
 {% block content %}
-<div class="container" id="search">
+<div class="container-fluid" id="search">
     <div class="row">
-        <div class="col-md-3">
-            <form class="pure-form" action="/search/" method="get">
-                <input class="" type="text" name="word" placeholder="search">
-                <input type="submit" value="搜尋">
+        <div class="col-md-3 full-height" id="sidebar">
+            <div>
+                <h1>挑戰者列表</h1>
+            </div>
+            <div id="search">
+            <form action="/search/" method="get">
+                <input class="" type="text" name="word" placeholder="搜尋">
+                <button type="submit"><i class="fa fa-search fa-lg" aria-hidden="true"></i></button>
             </form>
-            <form name = "check_form" method="get">
-                <input type="checkbox" name="interest[]" value="2">智慧生活<p>
-                <input type="checkbox" name="interest[]" value="3">健康醫療<p>
-                <input type="checkbox" name="interest[]" value="4">永續環境<p>
-                <input type="checkbox" name="interest[]" value="5">社會文化<p>
-                <input type="checkbox" name="interest[]" value="6">食品與農業<p>
-                <input type="checkbox" name="role[]" value="2">tech<p>
-                <input type="checkbox" name="role[]" value="3">business<p>
-                <input type="checkbox" name="role[]" value="4">project<p>
-                <input type="checkbox" name="role[]" value="5">sales<p>
-                <input type="submit" name="search" value="搜尋">
+            </div>
+            <div id="filter">
+            <form name="check_form" method="get">
+                <h4>領域分類</h4>
+                <div class="checkbox">
+                    <input type="checkbox" name="interest[]" id="interest_2" value="2">
+                    <label for="interest_2">
+                        智慧生活
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="interest[]" id="interest_3" value="3">
+                    <label for="interest_3">
+                        健康醫療
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="interest[]" id="interest_4" value="4">
+                    <label for="interest_4">
+                        永續環境
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="interest[]" id="interest_5" value="5">
+                    <label for="interest_5">
+                        社會文化
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="interest[]" id="interest_6" value="6">
+                    <label for="interest_6">
+                        食品與農業
+                    </label>
+                </div>
+                <h4>團隊角色</h4>
+                <div class="checkbox">
+                    <input type="checkbox" name="role[]" id="role_2" value="2">
+                    <label for="role_2">
+                        Technique
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="role[]" id="role_3" value="3">
+                    <label for="role_3">
+                        Business
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="role[]" id="role_4" value="4">
+                    <label for="role_4">
+                        Design
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="role[]" id="role_5" value="5">
+                    <label for="role_5">
+                        Domain Expert
+                    </label>
+                </div>
+                <input type="submit" name="search" class="btn" value="查詢">
             </form>
+            </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9" id="challenger_list">
             <div class="row">
             {%if search%}
                 {% if error %}
@@ -39,9 +96,14 @@
                     {% for user in user_list %}
                     <div class="col-md-4">
                     <div class="one-student">
+                        <div class="name">
+                            <h4>{{user.student_set.first.realname}}</h4>
+                        </div>
+                        <div class="info">
+
+                        </div>
                         <!-- {{student.motto}} -->
                         <img src="http://graph.facebook.com/{{user.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
-                        <h4>{{user.student_set.first.realname}}</h4>
                         <p>{{user.student_set.first.department}}</p>
                         <p>{{user.student_set.first.interest}}</p>
                         <a href="/other_profile/?id={{ user.student_set.first.id }}">檢視</a> 
@@ -54,12 +116,14 @@
                 <div class="col-md-4">
                 <a href="/other_profile/?id={{ user.student_set.first.id }}">
                 <div class="one-student text-center">
+                    <div class="name">
+                        <h4>{{user.student_set.first.realname}}</h4>
+                    </div>
                     <!-- {{student.motto}} -->
-                    <img src="http://graph.facebook.com/{{user.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
-                    <div class="text-left">
-                        <h4>姓名:{{user.student_set.first.realname}}</h4>
-                        <p>系:{{user.student_set.first.department}}</p>
-                        <p>領域:{{user.student_set.first.interest}}</p>
+                    <div class="info">
+                        <img src="http://graph.facebook.com/{{user.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
+                        <p>{{user.student_set.first.department}}</p>
+                        <p>{{user.student_set.first.interest}}</p>
                     </div>
                 </div>
                 </a>
