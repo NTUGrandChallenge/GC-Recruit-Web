@@ -55,7 +55,6 @@ class Group(models.Model):
 
 class Talent(models.Model):
 	name = models.CharField(max_length=50)
-	familiar = models.IntegerField(max_length=2)
 	group = models.ForeignKey(Group, null=True)
 	def __str__(self):
 		return self.name

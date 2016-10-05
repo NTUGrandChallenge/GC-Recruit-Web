@@ -99,71 +99,25 @@ def edit(request):
 	role = Role.objects.all()
 	categorys = Category.objects.all()
 	groups = Group.objects.all()
-	group_father = []
-	for group_item in groups:
-		group_father.append(Category.objects.get(group=group_item))
-
 	talents = Talent.objects.all()
 	mytalents = Talent.objects.filter(student=student)
 	number = len(mytalents)
 	counters = list(range(number,10))
-	####偷偷將talents變成不重複的
-	alltalents = []
-	namelist = []
-	for thing in talents:
-		if thing.name not in namelist and thing not in alltalents and thing not in mytalents:
-			alltalents.append(thing)
-			namelist.append(thing.name)
-	for thing2 in mytalents:
-		alltalents.append(thing2)
-	talents = alltalents
-	############
 	if request.POST:
 		motto = request.POST['motto']
 		experience = request.POST['experience']
 		myinterest = request.POST['interest']
 		myrole = request.POST['role']
 
-		talent_0 = request.POST['talent_0']
-		talent_1 = request.POST['talent_1']
-		talent_2 = request.POST['talent_2']
-		talent_3 = request.POST['talent_3']
-		talent_4 = request.POST['talent_4']
-		talent_5 = request.POST['talent_5']
-		talent_6 = request.POST['talent_6']
-		talent_7 = request.POST['talent_7']
-		talent_8 = request.POST['talent_8']
-		talent_9 = request.POST['talent_9']
+		talent = request.POST.getlist("talent[]")
 		
-		familiar_0 = request.POST['familiar_0']
-		familiar_1 = request.POST['familiar_1']
-		familiar_2 = request.POST['familiar_2']
-		familiar_3 = request.POST['familiar_3']
-		familiar_4 = request.POST['familiar_4']
-		familiar_5 = request.POST['familiar_5']
-		familiar_6 = request.POST['familiar_6']
-		familiar_7 = request.POST['familiar_7']
-		familiar_8 = request.POST['familiar_8']
-		familiar_9 = request.POST['familiar_9']
-
-		mytalent = []
-		mytalent.append(Talent.objects.filter(name=talent_0, familiar=familiar_0).first())
-		mytalent.append(Talent.objects.filter(name=talent_1, familiar=familiar_1).first())
-		mytalent.append(Talent.objects.filter(name=talent_2, familiar=familiar_2).first())
-		mytalent.append(Talent.objects.filter(name=talent_3, familiar=familiar_3).first())
-		mytalent.append(Talent.objects.filter(name=talent_4, familiar=familiar_4).first())
-		mytalent.append(Talent.objects.filter(name=talent_5, familiar=familiar_5).first())
-		mytalent.append(Talent.objects.filter(name=talent_6, familiar=familiar_6).first())
-		mytalent.append(Talent.objects.filter(name=talent_7, familiar=familiar_7).first())
-		mytalent.append(Talent.objects.filter(name=talent_8, familiar=familiar_8).first())
-		mytalent.append(Talent.objects.filter(name=talent_9, familiar=familiar_9).first())
 		student.motto = motto
 		student.experience = experience
 		student.interest = Interest.objects.get(name=myinterest)
 		student.role = Role.objects.get(name=myrole)
-		student.talent.clear()
-		for item in mytalent:
-			student.talent.add(item)
+		student.talent.remove()
+		for item in talent:
+			student.talent.add(Talent.objects.get(name=item))
 		student.save()
 		return HttpResponseRedirect('/my_profile/')
 	else:
@@ -207,27 +161,7 @@ def student_create(request):
 		interest = request.POST['interest']
 		role = request.POST['role']
 
-		talent_0 = request.POST['talent_0']
-		talent_1 = request.POST['talent_1']
-		talent_2 = request.POST['talent_2']
-		talent_3 = request.POST['talent_3']
-		talent_4 = request.POST['talent_4']
-		talent_5 = request.POST['talent_5']
-		talent_6 = request.POST['talent_6']
-		talent_7 = request.POST['talent_7']
-		talent_8 = request.POST['talent_8']
-		talent_9 = request.POST['talent_9']
-
-		familiar_0 = request.POST['familiar_0']
-		familiar_1 = request.POST['familiar_1']
-		familiar_2 = request.POST['familiar_2']
-		familiar_3 = request.POST['familiar_3']
-		familiar_4 = request.POST['familiar_4']
-		familiar_5 = request.POST['familiar_5']
-		familiar_6 = request.POST['familiar_6']
-		familiar_7 = request.POST['familiar_7']
-		familiar_8 = request.POST['familiar_8']
-		familiar_9 = request.POST['familiar_9']
+		talent = request.POST.getlist('talent[]')
 
 		if 'domain_0' in request.POST:
 			domain_0 = request.POST['domain_0']
@@ -277,17 +211,7 @@ def student_create(request):
 				interest = Interest.objects.get(name=interest),
 				role = Role.objects.get(name=role)
 			)
-			mytalent = []
-			mytalent.append(Talent.objects.filter(name=talent_0, familiar=familiar_0).first())
-			mytalent.append(Talent.objects.filter(name=talent_1, familiar=familiar_1).first())
-			mytalent.append(Talent.objects.filter(name=talent_2, familiar=familiar_2).first())
-			mytalent.append(Talent.objects.filter(name=talent_3, familiar=familiar_3).first())
-			mytalent.append(Talent.objects.filter(name=talent_4, familiar=familiar_4).first())
-			mytalent.append(Talent.objects.filter(name=talent_5, familiar=familiar_5).first())
-			mytalent.append(Talent.objects.filter(name=talent_6, familiar=familiar_6).first())
-			mytalent.append(Talent.objects.filter(name=talent_7, familiar=familiar_7).first())
-			mytalent.append(Talent.objects.filter(name=talent_8, familiar=familiar_8).first())
-			mytalent.append(Talent.objects.filter(name=talent_9, familiar=familiar_9).first())
+			
 			mydomain = []
 			mydomain.append(Domain.objects.get(name=domain_0))
 			mydomain.append(Domain.objects.get(name=domain_1))
@@ -297,8 +221,8 @@ def student_create(request):
 			mydomain.append(Domain.objects.get(name=domain_5))
 			mydomain.append(Domain.objects.get(name=domain_6))
 			mydomain.append(Domain.objects.get(name=domain_7))
-			for item in mytalent:
-				student.talent.add(item)
+			for item in talent:
+				student.talent.add(Talent.objects.get(name=item))
 			for item2 in mydomain:
 				student.domain.add(item2)
 			student.save()
