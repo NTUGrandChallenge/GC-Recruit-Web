@@ -33,8 +33,7 @@
           <div class="form-group">
                <label for="domain">科系領域：</label>
                {% for d in domains %}
-               <input type="checkbox" value="{{d}}" name="domain" style="width: auto;">{{d}}</input>
-               <input type="checkbox" value="{{d}}" name="domain_{{forloop.counter0}}">{{d}}</input>
+                    <input type="checkbox" value="{{d}}" name="domain_{{forloop.counter0}}" style="width: auto;">{{d}}</input>
                {% endfor %}
           </div>
           </div>
@@ -52,14 +51,62 @@
           </div>
      </div>
 
-     <div class="row description">
+     <div class="row interest">
           <div class="col-xs-12">
-          <div class="form-group">
-               <label for="experience">經歷：</label>
-               <textarea id="experience" rows="10" cols="48" name="experience" class="form-control">{{experience}}</textarea>
+          <div class="row">
+               <div class="col-xs-5ths">
+                    <h4>智慧生活</h4>
+                    <div class="logo-wrapper">
+                         <img src="/static/img/five-field/smart_grey.png" class="default" />
+                         <img src="/static/img/five-field/smart_color.png" class="highlight" />
+                    </div>
+               </div>
+               <div class="col-xs-5ths">
+                    <h4>健康醫療</h4>
+                    <div class="logo-wrapper">
+                         <img src="/static/img/five-field/health_grey.png" class="default" />
+                         <img src="/static/img/five-field/health_color.png" class="highlight" />
+                    </div>
+               </div>
+               <div class="col-xs-5ths">
+                    <h4>永續環境</h4>
+                    <div class="logo-wrapper">
+                         <img src="/static/img/five-field/environment_grey.png" class="default" />
+                         <img src="/static/img/five-field/environment_color.png" class="highlight" />
+                    </div>
+               </div>
+               <div class="col-xs-5ths">
+                    <h4>社會文化</h4>
+                    <div class="logo-wrapper">
+                         <img src="/static/img/five-field/society_grey.png" class="default" />
+                         <img src="/static/img/five-field/society_color.png" class="highlight" />
+                    </div>
+               </div>
+               <div class="col-xs-5ths">
+                    <h4>食品與農業</h4>
+                    <div class="logo-wrapper">
+                         <img src="/static/img/five-field/agriculture_grey.png" class="default" />
+                         <img src="/static/img/five-field/agriculture_color.png" class="highlight" />
+                    </div>
+               </div>
           </div>
+          <div class="row">
+               <div class="col-xs-offset-2 col-xs-8 description">
+                    <p>「科技不會讓生活變得更美好，透徹的感知、細緻的洞察才會。」<br />智慧生活組的挑戰者主要需要探討的是：如何平衡技術的應用與人的需求、在商業價值與社會影響間取得平衡，重新以人為核心，具體地將概念轉化為產品、空間或服務，打造呼應真實需求的「智慧生活」。</p>
+                    <p>「健康的核心，不在於避免疾病與死亡，而在於人們彼此關懷、互助互愛，使個人與社會平衡共存。」<br />健康醫療組的挑戰者主要需要探討的是：面對未來人口老化、疾病和醫療體系的改革，如何站在醫療生態圈的角度，運用科技跟創新的力量，擴大現有醫療資源的有效運用及其影響力，打造一個更加符合《禮運大同篇》中所描述的大同社會。</p>
+                    <p>「永續共榮，使世間萬物得以交替迭代、生生不息。」<br />永續環境組的挑戰者需要探討的是：如何運用科技和創意，將「永續」的概念轉化為價值創造的重要指標，有效的避免資源浪費，以自然而然的融入生活為基礎，掀起一場可存續的全民運動。</p>
+                    <p>「西塞羅用＂cultura animi＂定義了社會文化，意思是靈魂的培養。」<br />社會文化組的挑戰者需要探討的是：如何面對技術進步與既有社會文化、制度、價值之間的衝突，運用服務、網路、結合實體的設計，讓現代生活與科技發展相輔相成，摸索適於在地發展的進步模式。</p>
+                    <p>「農業曾使得人類的文明光輝燦爛，如今卻離我們的生活越來越遠。」<br />食農組的挑戰者需要探討的是：如何在經濟發展和人文關懷間重新取得平衡，由個人開始，運用社群、科技和設計的力量，發揮洞察並具體提出食安及農業議題的解決方案。</p>
+               </div>
+               <!-- <div class="col-xs-offset-2 col-xs-8 description">
+               </div>
+               <div class="col-xs-offset-2 col-xs-8 description">
+               </div>
+               <div class="col-xs-offset-2 col-xs-8 description">
+               </div>
+               <div class="col-xs-offset-2 col-xs-8 description">
+               </div> -->
           </div>
-          <div class="col-xs-12">
           <div class="form-group">
                <label for="interest">interest：</label>
                <select  name="interest" >
@@ -67,6 +114,14 @@
                     <option value="{{ i }}"> {{ i }} </option>
                {% endfor %}
                </select>
+          </div>
+          </div>
+     </div>
+     <div class="row">
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="experience">經歷：</label>
+               <textarea id="experience" rows="10" cols="48" name="experience" class="form-control">{{experience}}</textarea>
           </div>
           </div>
           <div class="col-xs-12">
@@ -112,7 +167,6 @@
                     </select>
                </div>
                <div class="col-xs-3">
-                    <select  name="talent" class="selectpicker" data-live-search="true" data-width="fit">
                     <select name="talent_{{forloop.counter0}}" class="selectpicker" data-live-search="true" data-width="fit">
                     {% for t in talents %}
                          <option value="{{ t }}"> {{ t }} </option>

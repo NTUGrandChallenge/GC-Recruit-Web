@@ -1,3 +1,36 @@
+/*full width five column*/
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.col-xs-5ths {
+    width: 20%;
+    float: left;
+}
+@media (min-width: 768px) {
+    .col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
 @media screen and (min-width: 768px){
 	#create_student .content-wrapper{
 		width: 60vw;
@@ -5,7 +38,6 @@
 		margin-right: auto;
 	}
 }
-
 #create_student .form-group{
 	width: 100%;
 	margin-bottom: 10px;
@@ -15,7 +47,42 @@
 }
 #create_student input,
 #create_student textarea{
-	width: 70%;
+	width: 75%;
+}
+
+#create_student .interest h4{
+	text-align: center;
+	font-weight: bold;
+}
+#create_student .interest img{
+	width: 100%;
+}
+#create_student .interest .logo-wrapper{
+	position: relative;
+	cursor: pointer;
+}
+#create_student .interest .highlight{
+	position: absolute;
+	left: 0;
+	top: 0;
+	visibility: hidden;
+}
+#create_student .interest .highlight.locked{
+	visibility: visible;
+}
+#create_student .interest .description{
+	position: relative;
+	height: 150px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+#create_student .interest .description p{
+	position: absolute;
+	visibility: hidden;
+	text-align: justify;
+}
+#create_student .interest .description p.locked{
+	visibility: visible;
 }
 
 #create_student .one-talent{
