@@ -1,0 +1,68 @@
+{% extends "account/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/login.css">
+{% endblock %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+{% get_providers as socialaccount_providers %}
+
+<div class="container" id="login">
+  <div class="row" style="margin-top: 20vh; margin-bottom: 10vh;">
+    <div class="col-md-offset-2 col-md-3">
+      <div class="box">
+        {% if socialaccount_providers %}
+          <div class="socialaccount_ballot">
+            <a class="btn btn-block btn-social btn-facebook" href="{% provider_login_url "facebook" %}">
+              <span class="fa fa-facebook"></span> 使用 Facebook 登入
+            </a>
+          </div>
+          {% include "socialaccount/snippets/login_extra.html" %}
+          {% endif %}
+          <form class="" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-group">
+            <div class="center">
+                {{ form.login.errors }}
+                <label for="id_login"><i class="fa fa-user" aria-hidden="true"></i></label>
+                <input class="form-control" autofocus="autofocus" id="id_login" maxlength="30" name="login" placeholder="帳號" type="text" />
+            </div>
+            </div>
+            <div class="form-group">
+            <div class="center">
+                {{ form.password.errors }}
+                <label for="id_password"><i class="fa fa-lock" aria-hidden="true"></i></label>
+                <input class="form-control" id="id_password" name="password" placeholder="密碼" type="password" />
+            </div>
+            </div>
+            <div>
+                {{ form.remember.errors }}
+                <input id="id_remember" name="remember" type="checkbox" />
+                <label for="id_remember"> 記住我</label>
+                <div>
+                </div>
+            </div>
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <div class="form-group text-center">
+                <button class="btn btn-default" type="submit">{% trans "Sign In" %}</button>
+            </div>
+            <a href="{% url 'account_reset_password' %}" style="color: #337ab7;">{% trans "Forgot Password?" %}</a>
+          </form>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <img src="/static/img/avatar5.png" class="full-width"/>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

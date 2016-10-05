@@ -1,0 +1,33 @@
+body{
+	background-color: #b2b2b2;
+}
+
+#login .box{
+	background-color: #fff;
+	padding: 40px 20px;
+}
+#login .btn-facebook{
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+	text-align: center;
+}
+#login form .center{
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+#login form input[type="text"],
+#login form input[type="password"]{
+	display: inline-block;
+	position: relative;
+	width: 85%;
+	margin-left: 10px;
+}
+#login form input[type="checkbox"]{
+	margin-left: 5%;
+}
+#login form button[type="submit"]{
+	width: 70%;
+}
