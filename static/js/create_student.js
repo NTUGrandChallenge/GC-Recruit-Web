@@ -17,6 +17,7 @@ $('#create_student .interest .logo-wrapper').on('click', function(){
 	$('#create_student .interest .description p:nth-child(' + ($(this).parent().index() + 1) + ')').addClass('locked');
 })
 
+
 $('#create_student .one-talent .add-talent').on('click', function(){
 	$(this).parents('.one-talent').next('.one-talent').css('display', 'block');
 	$(this).css('display', 'none');

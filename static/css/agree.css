@@ -1,0 +1,19 @@
+body{
+	background-color: #b2b2b2;
+}
+#agree #consent{
+	background-color: #FFF;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	padding: 10px 20px;
+}
+#agree #consent .content{
+	text-align: justify;
+}
+#agree .action{
+	display: flex;
+}
+#agree .action form{
+	flex: 1;
+	text-align: center;
+}

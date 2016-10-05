@@ -5,11 +5,33 @@ body{
 	background-color: #ffeb32;
 	padding-top: 30px;
 }
+#search #sidebar #search{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+#search #sidebar #search input{
+	width: 80%;
+	height: 40px;
+	font-size: 24px;
+	padding: 5px;
+	border: none;
+}
+#search #sidebar #search button{
+	background-color: transparent;
+	border: none;
+}
+#search #sidebar #search button:hover{
+	color: #fff;
+}
 #search #sidebar #filter{
 	background-color: #fff;
 	margin-top: 20px;
 	margin-bottom: 50px;
+	margin-left: auto;
+	margin-right: auto;
 	padding: 10px;
+	width: 80%;
 }
 
 
