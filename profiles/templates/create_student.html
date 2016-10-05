@@ -25,7 +25,7 @@
           </div>
           <div class="col-xs-12">
           <div class="form-group">
-               <label for="school">學校：</label>
+               <label for="school">學校全名：</label>
                <input id="school" type="text" name="school" class="form-control" value="{{school}}">
           </div>
           </div>
@@ -39,7 +39,7 @@
           </div>
           <div class="col-xs-12">
           <div class="form-group">
-               <label for="department">系所：</label>
+               <label for="department">科系全名：</label>
                <input id="department" type="text" name="department" class="form-control" value="{{department}}" style="width: 50%;">
                <label for="grade" style="width: 50px;margin-left: 10px;">年級：</label>
                <select name="grade" class="selectpicker" data-width="fit">
@@ -121,12 +121,15 @@
           <div class="col-xs-12">
           <div class="form-group">
                <label for="experience">經歷：</label>
-               <textarea id="experience" rows="10" cols="48" name="experience" class="form-control">{{experience}}</textarea>
+               <textarea id="experience" rows="10" cols="48" name="experience" class="form-control" placeholder="想讓大家更了解你嗎？
+覺得自己還有才能沒有展現給別人看嗎？
+填入自己的經歷，讓大家都知道你的才華！">{{experience}}</textarea>
           </div>
           </div>
           <div class="col-xs-12">
           <div class="form-group">
                <label for="role">團隊中角色定位：</label>
+               <p>每個人在團隊裡都是不可或缺的角色，你在團隊裡又是屬於哪一種人呢？<br />可依據過去曾在團隊裡擔任過的角色選擇</p></span>
                <select  name="role" >
                {% for r in roles %}
                     <option value="{{ r }}"> {{ r }} </option>
