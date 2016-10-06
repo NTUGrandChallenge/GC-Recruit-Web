@@ -1,3 +1,4 @@
+// interest
 $('#create_student .interest .logo-wrapper').hover(function(){
 	$(this).children('.highlight').css('visibility', 'visible');
 	$('#create_student .interest .description p').css('visibility', 'hidden');
@@ -16,7 +17,21 @@ $('#create_student .interest .logo-wrapper').on('click', function(){
 	$('#create_student .interest .description p:nth-child(' + ($(this).parent().index() + 1) + ')').addClass('locked');
 })
 
+// talent cascading
+$('#create_student .one-talent select[name="category"]').change(function(){
+	$(this).parents('.one-talent').find('.group .bootstrap-select').css('display', 'none').find('select').attr('name', 'XXX');
+	$(this).parents('.one-talent').find('.bootstrap-select.son-of-c-' + ($(this).find(':selected').attr('data-id'))).css('display', 'inherit').find('select').attr('name', 'group');
+	console.log('.son-of-c-' + ($(this).find(':selected').index()+1));
+});
+$('#create_student .one-talent select[name="group"]').change(function(){
+	$(this).parents('.one-talent').find('.talent .bootstrap-select').css('display', 'none').find('select').attr('name', 'XXX');
+	$(this).parents('.one-talent').find('.bootstrap-select.son-of-g-' + ($(this).find(':selected').attr('data-id'))).css('display', 'inherit').find('select').attr('name', 'talent[]');
+});
+$('#create_student .one-talent select[name="talent[]"]').change(function(){
+	$(this).parents('.one-talent').find('.add-talent').css('display', 'initial');
+});
 
+// add talent
 $('#create_student .one-talent .add-talent').on('click', function(){
 	$(this).parents('.one-talent').next('.one-talent').css('display', 'block');
 	$(this).css('display', 'none');

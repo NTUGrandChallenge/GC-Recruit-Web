@@ -108,7 +108,6 @@
 	background-color: #eee;
 	border-radius: 50%;
 	text-align: center;
-	line-height: 100px;
 }
 #create_student .role .radio-area:first-child{
 	display: none;
@@ -125,6 +124,13 @@
 	cursor: pointer;
 }
 #create_student .one-talent:nth-child(8) .add-talent{
+	display: none;
+	visibility: hidden;
+	opacity: 0;
+}
+#create_student .one-talent .group .bootstrap-select,
+#create_student .one-talent .talent .bootstrap-select,
+#create_student .one-talent .add-talent{
 	display: none;
 }
 
