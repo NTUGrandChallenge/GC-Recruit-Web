@@ -1,14 +1,91 @@
 {% extends 'base.html' %}
 
 {% block title %} 首頁 {% endblock %}
-{% block h2 %} 台大創創挑戰賽 {% endblock %}
 
 {% block content %}
-	<p>歡迎來到NTU CHALLENGE</p>
+<div class="container-fluid" style="background-color: #b2b2b2;">
+        <div class="row">
+                <div>
+                    <img src="/static/img/tempimg/cover1.png" width="100%" />
+                    <!-- <a href="http://www.accupass.com/go/1stchallengersmeetup" target="_blank"><div class="parallelogram-button black hidden-xs"><span class="skew-fix">立即報名</span></div></a> -->
+                </div>
+            </div>
+    </div>
+    <div class="container">
+        <div class="row" style="margin-bottom:20px;">
+            <div class="col-md-4 col-md-offset-2">  
+            <h2>如何成為挑戰者？</h2>
+                <ol style="font-size:24px;">   
+                    <li>登入內站</li>
+                    <li>填寫挑戰者資料</li>
+                    <li>審核完成即成為挑戰者</li>
+                    
+                </ol>
+            </div>
+            <div class="col-md-4">  
+                <center><img src="/static/img/tempimg/single_comic1.png" width="70%" /></center>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:20px;">
+            <div class="col-md-4 col-md-offset-2">  
+                <h2>如何組隊？</h2>
+                <ol style="font-size:24px;">   
+                    <li>填寫完挑戰者資料</li>
+                    <li>點入團隊列表</li>
+                    <ol type="A" style="font-size:18px;">
+                        <li><p>點進想加入的圖隊</p></li>
+                        <li><p>按加入圖隊</p></li>
+                    </ol>
+                    <li>點入建立團隊</li>
+                    <ol type="A" style="font-size:18px;">
+                        <li><p>填寫完表格，建立後即成為隊長</p></li>
+                        <li><p>等待挑戰者加入/並且批准</p></li>
+                    </ol>
+
+
+                </ol>
+            </div>
+            <div class="col-md-4">  
+                <br />
+                <br />
+                <img src="/static/img/tempimg/team_comic1.png" width="100%">
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom:20px;">
+            <div class="col-md-4 col-md-offset-2">  
+                <h2>如何上傳提案？</h2>
+                <ol style="font-size:24px;">   
+                    <li>填寫完挑戰者資料</li>
+                    <li>點入上傳提案，必須上傳</li>
+                    <ol type="A" style="font-size:18px;">
+                        <li><p>挑戰提案簡報</p></li>
+                        <li><p>挑戰提案書</p></li>
+                    </ol>
+                </ol>
+                <p style="color: #ffeb32;">
+                注意：
+                新的檔案會將舊的檔案蓋掉，已最新上傳檔案為主
+                </p>
+            </div>
+            <div class="col-md-4">  
+                <img src="/static/img/tempimg/team_comic3.png" width="100%">
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:20px;">
+            <div class="col-md-4 col-md-offset-2">  
+                <h2>如何搜尋挑戰者？</h2>
+                <br />
+                <ol style="font-size:24px;">   
+                    <li>點選挑戰者列表</li>
+                    <li>左邊可勾選條件</li>
+                    <li>搜尋欄位可搜尋姓名</li>
+                </ol>
+            </div>
+            <div class="col-md-4">  
+                <center><img src="/static/img/tempimg/team.png" width="80%" /></center>
+            </div>
+        </div>
+        
+    </div>
 {% endblock %}
-{% block img %}
-	<img src='/static/logo1.jpg'>
-
-<!-- <img src='http://graph.facebook.com/1205951519466390/picture?type=large'>
- -->{% endblock %}
-
