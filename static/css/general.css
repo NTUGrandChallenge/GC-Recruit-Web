@@ -36,7 +36,8 @@ body{
     padding-top: 50px;
 }
 
-body > .container{
+body > .container,
+body > .container-fluid{
     min-height: 80vh;
 }
 
@@ -56,6 +57,14 @@ body > .container{
     object-position: center;
     height: 150px;
     width: 150px;
+}
+
+/*navbar*/
+@media screen and (min-width: 768px){
+    nav .dropdown-toggle:hover ~ .dropdown-menu,
+    nav .dropdown-toggle ~ .dropdown-menu:hover{
+        display: block;
+    }
 }
 
 /*footer*/
