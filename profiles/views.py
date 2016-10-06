@@ -13,8 +13,11 @@ import urllib
 def search(request):
 	first_user_list = []
 	first_user_list.append(User.objects.all())
+	category_all = Category.objects.all()
+	group_all = Group.objects.all()
 	if 'word' in request.GET:
-		user_list = []
+		word = True
+		student_list = []
 		keyword = request.GET['word']
 		if not keyword:
 			return HttpResponseRedirect('/search/')
@@ -23,38 +26,54 @@ def search(request):
 			students2 = Student.objects.filter(nickname__icontains = keyword)
 
 			for each in students:
-				user = User.objects.get(student=each)
-				user_list.append(user)
+				student_list.append(each)
 			for each in students2:
-				user = User.objects.get(student=each)
-				user_list.append(user)
-			user_list = list(set(user_list))
-			if len(user_list) == 0 :
-				return render(request,'search.html', {'user_list' : [], 'error' : True, 'len' : 0, 'word': True, 'keyword' : keyword})
-			else :
-				return render(request,'search.html', {'user_list' : user_list, 'error' : False, 'len' : len(user_list), 'search': True, 'keyword' : keyword})
+				student_list.append(each)
+			student_list = list(set(student_list))
+			slen = len(student_list)
+			return render_to_response('search.html', RequestContext(request, locals()))
 	if 'search' in request.GET:
+		search = True
 		interests = request.GET.getlist("interest[]")
 		roles = request.GET.getlist("role[]")
+		categorys = request.GET.getlist("category[]")
+		groups = request.GET.getlist("group[]")
 		interest_list = []
 		role_list = []
+		category_list = []
+		group_list = []
+		talent_list = []
 		#user_list = []
 		for interest in interests:
 			students = Student.objects.filter(interest_id=interest)
 			for each in students:
-				user = User.objects.get(student=each)
-				interest_list.append(user)
+				interest_list.append(each)
 #-------interest OR role search------
 		for role in roles:#OR search
 			students = Student.objects.filter(role_id=role)
 			for each in students:
-				user = User.objects.get(student=each)
-				role_list.append(user)
+				role_list.append(each)
 				##
+		for category in categorys:
+			mycategory = Category.objects.get(name=category)
+			for group in mycategory.group_set.all():
+				mygroup = Group.objects.get(name=group)
+				for talent in mygroup.talent_set.all():
+					students = Student.objects.filter(talent=talent)
+					talent_list = list(set(talent_list).union(set(students)))
+
+		for group in groups:
+			mygroup = Group.objects.get(name=group)
+			for talent in mygroup.talent_set.all():
+				students = Student.objects.filter(talent=talent)
+				talent_list = list(set(talent_list).union(set(students)))
 				##  AND
-		user_list = list(set(interest_list).intersection(set(role_list)))
+		# student_list = list(set(interest_list).intersection(set(role_list)))
+		# student_list = list(set(talent_list).intersection(set(student_list)))
 				##
-				##
+				##  OR
+		student_list = list(set(interest_list).union(set(role_list)))
+		student_list = list(set(talent_list).union(set(student_list)))
 		Interests = []
 		Roles = []
 		for each in interests:
@@ -66,10 +85,7 @@ def search(request):
 			for each in tmp_role:
 				Roles.append(each)
 #-------to show the keyword on html-----
-		if len(user_list) == 0:
-			return render(request, 'search.html', {'user_list': [], 'error': True, 'len': 0, 'search': True, 'interests': Interests, 'roles': Roles})
-		else :
-			return render(request, 'search.html', {'user_list': user_list, 'error' : False, 'len' : len(user_list), 'search': True, 'interests': Interests, 'roles': Roles})
+		slen = len(student_list)
 		return render_to_response('search.html', RequestContext(request, locals()))
 	else:
 		return render_to_response('search.html', RequestContext(request, locals()))

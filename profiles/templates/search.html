@@ -76,6 +76,24 @@
                         Domain Expert
                     </label>
                 </div>
+                <h4>技能列表</h4>
+                {% for c in category_all %}
+                <div class="checkbox">
+                    <input type="checkbox" name="category[]" id="category[]" value="{{c}}">
+                    <label for="category[]">
+                        {{c}}
+                    </label>
+                </div>
+                {% endfor %}
+                <h4>中技能列表</h4>
+                {% for g in group_all %}
+                <div class="checkbox">
+                    <input type="checkbox" name="group[]" id="group[]" value="{{g}}">
+                    <label for="group[]">
+                        {{g}}
+                    </label>
+                </div>
+                {% endfor %}
                 <input type="submit" name="search" class="btn" value="查詢">
             </form>
             </div>
@@ -83,30 +101,36 @@
         <div class="col-md-9" id="challenger_list">
             <div class="row">
             {%if search%}
-                {% if error %}
+                {% if slen == 0 %}
                     <h2 class="post-title">沒有人符合你的要求...</h2>
                 {% else %}
-                    <h2 class="post-title">有 {{len}} 人符合你的要求</h2>
+                    <h2 class="post-title">有 {{slen}} 人符合你的要求</h2>
                     {%for interest in interests%}
                         <p>"{{interest}}"</p>
                     {%endfor%}
                     {%for role in roles%}
                         <p>"{{role}}"</p>
                     {%endfor%}
-                    {% for user in user_list %}
+                    {%for category in categorys%}
+                        <p>"{{category}}"</p>
+                    {%endfor%}
+                    {%for group in groups%}
+                        <p>"{{group}}"</p>
+                    {%endfor%}
+                    {% for student in student_list %}
                     <div class="col-md-4">
                     <div class="one-student">
                         <div class="name">
-                            <h4>{{user.student_set.first.realname}}</h4>
+                            <h4>{{student.realname}}</h4>
                         </div>
                         <div class="info">
 
                         </div>
                         <!-- {{student.motto}} -->
-                        <img src="http://graph.facebook.com/{{user.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
-                        <p>{{user.student_set.first.department}}</p>
-                        <p>{{user.student_set.first.interest}}</p>
-                        <a href="/other_profile/?id={{ user.student_set.first.id }}">檢視</a> 
+                        <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
+                        <p>{{student.department}}</p>
+                        <p>{{student.interest}}</p>
+                        <a href="/other_profile/?id={{ student.id }}">檢視</a> 
                     </div>
                     </div>
                     {% endfor %}
