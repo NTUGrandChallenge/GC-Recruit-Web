@@ -48,6 +48,8 @@ urlpatterns = [
     url(r'^get_file/$', login_required(get_file)),
     url(r'^get_file2/$', login_required(get_file2)),
     url(r'^kick/$', login_required(kick)),
+    
+    # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'next_page': '/accounts/login'}),
 
     #lbforum
     url(r'^forum/', include('lbforum.urls')),

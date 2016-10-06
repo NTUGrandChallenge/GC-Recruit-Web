@@ -6,7 +6,7 @@
 {% block title %} Student Profile {% endblock %}
   
 {% block content %}
-<div class="container-fluid" id="search">
+<div class="container-fluid" id="list">
     <div class="row">
         <div class="col-md-3 full-height" id="sidebar">
             <div>
@@ -99,6 +99,9 @@
             </div>
         </div>
         <div class="col-md-9" id="challenger_list">
+            <div class="row">
+
+            </div>
             <div class="row">
             {%if search%}
                 {% if slen == 0 %}
