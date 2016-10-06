@@ -7,9 +7,8 @@ $('#create_student .interest .logo-wrapper').hover(function(){
 	$('#create_student .interest .description p').css('visibility', '');
 });
 $('#create_student .interest .logo-wrapper').on('click', function(){
-	console.log($(this).parent().index());
-	$('#create_student .interest select[name="interest"] option').attr('selected', false);
-	$('#create_student .interest select[name="interest"] option:nth-child(' + ($(this).parent().index() + 1) + ')').attr('selected', true);
+	// $('#create_student .interest input[name="interest"]').prop('checked', false);
+	$('#create_student .interest input[name="interest"]:nth-child(' + ($(this).parent().index() + 1) + ')').prop('checked', true);
 	
 	$('#create_student .interest .logo-wrapper .highlight').removeClass('locked');
 	$(this).children('.highlight').addClass('locked');

@@ -14,10 +14,12 @@
      {% endfor %}
      <form action="" method="post" class="form-inline" role="form">{% csrf_token %}
      <div class="row basic">
+     <fieldset>
+          <legend>基本資料</legend>
           <div class="col-xs-12">
           <div class="form-group">
                <label for="realname">真實姓名：</label>
-               <input id="realname" type="text" name="realname" class="form-control" value="{{realname}}">
+               <input id="realname" type="text" name="realname" class="form-control" value="{{realname}}" autofocus>
           </div>
           </div>
           <div class="col-xs-12">
@@ -34,9 +36,12 @@
           </div>
           <div class="col-xs-12">
           <div class="form-group">
-               <label for="domain">科系領域：</label>
+               <label>科系領域：</label>
                {% for d in domains %}
-                    <input type="checkbox" value="{{d}}" name="domain_{{forloop.counter0}}" style="width: auto;" checked>{{d}}</input>
+                    <div class="checkbox checkbox-primary">
+                         <input type="checkbox" value="{{d}}" name="domain_{{forloop.counter0}}" id="domain_{{forloop.counter0}}" style="width: auto;">
+                         <label for="domain_{{forloop.counter0}}" style="width: auto;">{{d}}</label>
+                    </div>
                {% endfor %}
           </div>
           </div>
@@ -52,9 +57,32 @@
                </select>
           </div>
           </div>
+     </fieldset>
+     </div>
+
+     <div class="row introduce">
+     <fieldset>
+          <legend>自我介紹</legend>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="experience">經歷：</label>
+               <textarea id="experience" rows="5" name="experience" class="form-control" placeholder="想讓大家更了解你嗎？
+覺得自己還有才能沒有展現給別人看嗎？
+填入自己的經歷，讓大家都知道你的才華！">{{experience}}</textarea>
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="motto">代表自己的一段話：</label>
+               <textarea id="motto" rows="2" name="motto" class="form-control" placeholder="你希望其他挑戰者如何透過一段話認識你 / 妳呢？趕快寫下來吧！">{{motto}}</textarea>
+          </div>
+          </div>
+     </fieldset>
      </div>
 
      <div class="row interest">
+     <fieldset>
+          <legend>選擇領域</legend>
           <div class="col-xs-12">
           <div class="row">
                <div class="col-xs-5ths">
@@ -94,74 +122,86 @@
                </div>
           </div>
           <div class="row">
-               <div class="col-xs-offset-2 col-xs-8 description">
+               <div class="col-xs-offset-1 col-xs-10 description">
                     <p>「科技不會讓生活變得更美好，透徹的感知、細緻的洞察才會。」<br />智慧生活組的挑戰者主要需要探討的是：如何平衡技術的應用與人的需求、在商業價值與社會影響間取得平衡，重新以人為核心，具體地將概念轉化為產品、空間或服務，打造呼應真實需求的「智慧生活」。</p>
                     <p>「健康的核心，不在於避免疾病與死亡，而在於人們彼此關懷、互助互愛，使個人與社會平衡共存。」<br />健康醫療組的挑戰者主要需要探討的是：面對未來人口老化、疾病和醫療體系的改革，如何站在醫療生態圈的角度，運用科技跟創新的力量，擴大現有醫療資源的有效運用及其影響力，打造一個更加符合《禮運大同篇》中所描述的大同社會。</p>
                     <p>「永續共榮，使世間萬物得以交替迭代、生生不息。」<br />永續環境組的挑戰者需要探討的是：如何運用科技和創意，將「永續」的概念轉化為價值創造的重要指標，有效的避免資源浪費，以自然而然的融入生活為基礎，掀起一場可存續的全民運動。</p>
                     <p>「西塞羅用＂cultura animi＂定義了社會文化，意思是靈魂的培養。」<br />社會文化組的挑戰者需要探討的是：如何面對技術進步與既有社會文化、制度、價值之間的衝突，運用服務、網路、結合實體的設計，讓現代生活與科技發展相輔相成，摸索適於在地發展的進步模式。</p>
                     <p>「農業曾使得人類的文明光輝燦爛，如今卻離我們的生活越來越遠。」<br />食農組的挑戰者需要探討的是：如何在經濟發展和人文關懷間重新取得平衡，由個人開始，運用社群、科技和設計的力量，發揮洞察並具體提出食安及農業議題的解決方案。</p>
                </div>
-               <!-- <div class="col-xs-offset-2 col-xs-8 description">
-               </div>
-               <div class="col-xs-offset-2 col-xs-8 description">
-               </div>
-               <div class="col-xs-offset-2 col-xs-8 description">
-               </div>
-               <div class="col-xs-offset-2 col-xs-8 description">
-               </div> -->
           </div>
           <div class="form-group">
-               <label for="interest">interest：</label>
                {% for i in interests %}
-                    <input type="radio" name="interest" value="{{ i }}" checked> {{ i }} </option>
+                    <input type="radio" name="interest" value="{{ i }}">{{ i }}
                {% endfor %}
           </div>
           </div>
+     </fieldset>
      </div>
-     <div class="row">
+     
+     <div class="row role">
+     <fieldset>
+          <legend>選擇角色</legend>
           <div class="col-xs-12">
           <div class="form-group">
-               <label for="experience">經歷：</label>
-               <textarea id="experience" rows="10" cols="48" name="experience" class="form-control" placeholder="想讓大家更了解你嗎？
-覺得自己還有才能沒有展現給別人看嗎？
-填入自己的經歷，讓大家都知道你的才華！">{{experience}}</textarea>
-          </div>
-          </div>
-          <div class="col-xs-12">
-          <div class="form-group">
-               <label for="role">團隊中角色定位：</label>
-               <p>每個人在團隊裡都是不可或缺的角色，你在團隊裡又是屬於哪一種人呢？<br />可依據過去曾在團隊裡擔任過的角色選擇</p></span>
-               <select  name="role" >
+               <p>在一個創新創業團隊中，每個人都是不可或缺的角色，你在團隊中屬於哪什麼角色呢？</p>
+               <div class="row">
                {% for r in roles %}
-                    <option value="{{ r }}"> {{ r }} </option>
+                    <div class="col-xs-3">
+                    <div class="radio radio-primary">
+                         <input type="radio" style="width: auto;" name="role" id="role_{{r.id}}" value="{{ r }}">
+                         <label for="role_{{r.id}}">
+                              <div class="circle">
+                                   <p>{{r}}</p>
+                              </div>
+                         </label>
+                    </div>
+                    </div>
                {% endfor %}
-               </select>
+                    <div class="col-xs-3">
+                         <p>你從不害怕學習新技術，不管軟體、硬體、製造，只要肯花點時間，什麼樣的構想都能夠實作出來</p>
+                    </div>
+                    <div class="col-xs-3">
+                         <p>你擁有獨特的商業敏銳度，知道怎麼將人的需求轉換成有效率的營運模式，也能系統性的分析出構想的商業可行性</p>
+                    </div>
+                    <div class="col-xs-3">
+                         <p>透過獨特的美感與品味，你能重新組裝既有的元素，並營造出合適的情境與狀態，使想法與精神能更有力的傳達</p>
+                    </div>
+                    <div class="col-xs-3">
+                         <p>你對於欲挑戰之議題擁有較深的專業知識，因此總能提出獨到的見解，理解問題的能力與速度也非他人所能比擬</p>
+                    </div>
+               </div>
           </div>
           </div>
-          <div class="col-xs-12">
+     </fieldset>
+     </div>
 
+     <div class="row">
+     <fieldset>
+          <legend>選擇技能</legend>
+          <div class="col-xs-12">
+          <p>針對各種實作能力進行選填，可點擊新增，至多六項。</p>
           <div class="row">
-               <div class="col-xs-3">
+               <div class="col-xs-4">
                     <h4>技能類別</h4>
                </div>
-               <div class="col-xs-3">
+               <div class="col-xs-4">
                     <h4>子類別</h4>
                </div>
-               <div class="col-xs-3">
+               <div class="col-xs-4">
                     <h4>技能名稱</h4>
                </div>
-               
           </div>
           {% for counter in counters %}
           <div class="row one-talent">
-               <div class="col-xs-3">
+               <div class="col-xs-4">
                     <select  name="category" class="selectpicker" data-width="fit">
                     {% for c in categorys %}
                          <option value="{{ c }}"> {{ c }} </option>
                     {% endfor %}
                     </select>
                </div>
-               <div class="col-xs-3">
+               <div class="col-xs-4">
                     <select  name="group" class="selectpicker" data-width="fit">
                     {% for c in categorys %}
                          {% for g in c.group_set.all %}
@@ -170,7 +210,7 @@
                     {% endfor %}
                     </select>
                </div>
-               <div class="col-xs-3">
+               <div class="col-xs-4">
                     <select name="talent[]" class="selectpicker" data-live-search="true" data-width="fit">
                     {% for c in categorys %}
                          {% for g in c.group_set.all %}
@@ -188,13 +228,9 @@
           </div>
           {% endfor %}
           </div>
-          
-          <div class="form-group">
-               <label for="motto">最能代表自己的一段話：</label>
-               <textarea id="motto" rows="3" cols="48" name="motto" class="form-control">{{motto}}</textarea>
-          </div>
+     </fieldset>
      </div>
-     <input type="submit" value="提交" class="btn btn-default">
+     <button type="submit" class="btn btn-primary">提交</button>
      </form>
 </div>
 </div>
