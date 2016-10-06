@@ -25,4 +25,5 @@ $('#create_student .one-talent .add-talent').on('click', function(){
 
 $(document).ready(function(){
 	$('#create_student .interest input[name="interest"]:nth-child(1)').prop('checked', true);
+	$('#create_student .role .radio-area:first-child input').prop('checked', true);
 })
