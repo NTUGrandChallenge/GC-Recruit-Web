@@ -110,6 +110,9 @@
 	text-align: center;
 	line-height: 100px;
 }
+#create_student .role .radio-area:first-child{
+	display: none;
+}
 
 #create_student .one-talent{
 	margin-bottom: 10px;

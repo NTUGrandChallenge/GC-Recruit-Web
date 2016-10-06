@@ -8,7 +8,7 @@ $('#create_student .interest .logo-wrapper').hover(function(){
 });
 $('#create_student .interest .logo-wrapper').on('click', function(){
 	// $('#create_student .interest input[name="interest"]').prop('checked', false);
-	$('#create_student .interest input[name="interest"]:nth-child(' + ($(this).parent().index() + 1) + ')').prop('checked', true);
+	$('#create_student .interest input[name="interest"]:nth-child(' + ($(this).parent().index() + 2) + ')').prop('checked', true);
 	
 	$('#create_student .interest .logo-wrapper .highlight').removeClass('locked');
 	$(this).children('.highlight').addClass('locked');
@@ -21,3 +21,8 @@ $('#create_student .one-talent .add-talent').on('click', function(){
 	$(this).parents('.one-talent').next('.one-talent').css('display', 'block');
 	$(this).css('display', 'none');
 });
+
+
+$(document).ready(function(){
+	$('#create_student .interest input[name="interest"]:nth-child(1)').prop('checked', true);
+})
