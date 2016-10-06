@@ -1,14 +1,49 @@
 {% extends 'base.html' %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/css/login.css">
+{% endblock %}
+
 {% block title %} 註冊 {% endblock %}
-{% block h2 %} 註冊新帳號 {% endblock %}
 
 {% block content %}
-	<form action="" method="post">{% csrf_token %}
-		{{ form.as_p }}
-		<input type="submit" value="register">
-	</form>
-{% endblock %}
-{% block img %}
+<div class="container" id="login">
+  <div class="row" style="margin-top: 20vh; margin-bottom: 10vh;">
+    <div class="col-md-offset-2 col-md-3">
+      <div class="box">
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+            <div class="center">
+                <input id="id_username" class="form-control" maxlength="30" name="username" type="text" placeholder="帳號"/>
+                <p class="helptext">只包含字母、數字和 @.+-_。</p>
+            </div>
+            </div>
+            <div class="form-group">
+            <div class="center">
+                <input id="id_password1" class="form-control" name="password1" type="password" placeholder="密碼"/>
+                <p class="helptext">請輸入8碼以上英數混合之密碼</p>
+            </div>
+            </div>
+            <div class="form-group">
+            <div class="center">
+                <input id="id_password2" class="form-control" name="password2" type="password" placeholder="確認密碼"/>
+                <p class="helptext">再輸入一次密碼</p>
+            </div>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn">註冊</button>
+            </div>
+          </form>
+      </div>
+    </div>
+    <div class="col-md-5">
+    	<div class="text-center">
+				<span class="title">註冊成為挑戰者</span>
+    	</div>
+      <img src="/static/img/avatar5.png" class="full-width"/>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
