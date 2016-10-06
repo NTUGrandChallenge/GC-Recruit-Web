@@ -31,12 +31,26 @@
     }
 }
 
+#create_student{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
 @media screen and (min-width: 768px){
 	#create_student .content-wrapper{
 		width: 60vw;
 		margin-left: auto;
 		margin-right: auto;
 	}
+}
+#create_student fieldset{
+	border: 2px solid #ddd;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+#create_student legend{
+	width: auto;
+	border-bottom: none;
+	padding: 0px 10px;
 }
 #create_student .form-group{
 	width: 100%;
@@ -84,18 +98,37 @@
 #create_student .interest .description p.locked{
 	visibility: visible;
 }
+#create_student .interest .form-group{
+	display: none;
+}
+
+#create_student .role .circle{
+	width: 100px;
+	height: 100px;
+	background-color: #eee;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 100px;
+}
 
 #create_student .one-talent{
 	margin-bottom: 10px;
 	display: none;
 }
-#create_student .one-talent:nth-child(2){
+#create_student .one-talent:nth-child(3){
 	display: block;
 }
 #create_student .one-talent .add-talent{
 	cursor: pointer;
 }
-#create_student .one-talent:nth-child(11) .add-talent{
+#create_student .one-talent:nth-child(8) .add-talent{
 	display: none;
 }
 
+#create_student button[type="submit"]{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 30%;
+	text-align: center;
+}
