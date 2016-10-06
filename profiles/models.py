@@ -69,6 +69,7 @@ class Student(models.Model):
 	grade = models.ForeignKey(Grade, null=True)
 	motto = models.CharField(max_length=50, blank=True)
 	experience = models.CharField(max_length=350, blank=True)
+	email = models.CharField(max_length=50, blank=True)
 	interest = models.ForeignKey(Interest, null=True)
 	talent = models.ManyToManyField(Talent, blank=True)
 	#talent = models.ManyToManyField(Talent, default=1 )#one student can have many badges, one badge can have many students

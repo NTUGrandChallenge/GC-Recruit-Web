@@ -50,7 +50,7 @@
 				            <li><a href="/create_team/">創建團隊</a></li>
 		                </ul>
 					</li>
-		            <li><a href="/other_profile/?id=1">與大賽聊天</a></li>
+		            <li><a href="/chatroom/{{request.user.student_set.first.id}}/1/">與大賽聊天</a></li>
 		            {% if request.user.is_authenticated %}
 					<li>
 						<a href="#" id="navbar-myself" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">{{ request.user }}<span class="caret"></span></a>

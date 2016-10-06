@@ -21,6 +21,11 @@
                <label for="nickname">暱稱：</label>
                <input id="nickname" type="text" name="nickname" class="form-control" value="{{nickname}}">
           </div>
+          <div class="col-xs-12">
+          <div class="form-group">
+               <label for="email">信箱：</label>
+               <input id="email" type="text" name="email" class="form-control" value="{{email}}">
+          </div>
           </div>
           <div class="col-xs-12">
           <div class="form-group">
@@ -32,7 +37,7 @@
           <div class="form-group">
                <label for="domain">科系領域：</label>
                {% for d in domains %}
-                    <input type="checkbox" value="{{d}}" name="domain_{{forloop.counter0}}" style="width: auto;" checked>{{d}}</input>
+                    <input type="checkbox" value="{{d}}" name="domain[]" style="width: auto;" checked>{{d}}</input>
                {% endfor %}
           </div>
           </div>

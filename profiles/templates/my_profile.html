@@ -15,7 +15,11 @@
 			{% endif %}
 			<h1>{{student.realname}}({{student.nickname}})</h1>
 			<p>{{student.school}}</p>
-			<p>{{student.domain}}</p>
+			<p>
+				{% for d in student.domain.all %}
+				{{d}}
+				{% endfor %}
+			</p>
 			<p>{{student.department}} {{student.grade}}</p>
 			<p>{{student.motto}}</p>
 		</div>
@@ -28,7 +32,10 @@
 		<p>領域:{{student.interest}}</p>
 		<p>角色:{{student.role}}</p>
 		<div>
-			<p>{{student.talent.all}}</p>
+			<p>{% for t in student.talent.all %}
+				{{t}}
+				{% endfor %}
+			</p>
 		</div>
 		<div>
 			<p>{{student.experience}}</p>
