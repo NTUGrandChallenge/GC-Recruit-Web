@@ -15,6 +15,8 @@ def search(request):
 	first_user_list.append(User.objects.all())
 	category_all = Category.objects.all()
 	group_all = Group.objects.all()
+	word = False
+	search = False
 	if 'word' in request.GET:
 		word = True
 		student_list = []
