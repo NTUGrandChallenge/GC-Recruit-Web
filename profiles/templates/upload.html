@@ -4,17 +4,18 @@
 {% block h2 %} {{ s1.nickname }}的上傳空間 {% endblock %}
 
 {% block content %}
+	請注意每次上傳後均會蓋掉之前所有檔案，
+	因此每次更新文件時請記得一次選取多個文件
 	<form action="" method="post"  enctype="multipart/form-data">{%csrf_token%}
 						<table>
-  							<tr> <td name="date">上傳日期：</td> <td>{% now "Y-m-d" %}</td> </tr>
-							<tr> <td>上傳檔案：</td> <td><input type="file" name="file"></td> </tr>
-<!-- 							<tr> <td> <input id="post" type="button" value="送出" /> </td> </tr>
+  							<tr> <td name="date1">上傳日期：</td> <td>{% now "Y-m-d" %}</td> </tr>
+							<tr> <td>上傳提案簡報及提案書：</td> <td><input type="file" name="file" multiple=""></td> </tr>
+<!-- 							<tr> <td>上傳檔案：</td> <td><input type="file" name="file"></td> </tr>
  -->						</table>
 						<input type="submit" value="送出" /> 
 					</form>
-	<a href="/get_file/">挑戰提案簡報</a>
-	<a href="/get_file2/">挑戰提案書</a>
-
+	
+{{counter}}
 {% endblock %}
 {% block img %}
 	

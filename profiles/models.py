@@ -101,6 +101,11 @@ class Chatroom(models.Model):
 class up_file(models.Model):
 	upload_datetime = models.DateTimeField()
 	student = models.ForeignKey(Student, null=True)
+	class Meta:
+		permissions = (
+			("can_upload", "Can upload"),
+			
+	)
 	def __str__(self):
 		return self.student.realname
 
