@@ -80,7 +80,7 @@
                 <div class="col-xs-3">
                     <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large' class="square-img">
                 </div>
-                <div class="col-xs-6">
+                <div class="col-xs-7">
                         <h4>姓名：{{student.realname}}</h4>
                         <p>學院：{{student.department}}</p>
                         <p><span style="font-family: 'Noto Sans TC'">"</span>{{student.motto}}<span style="font-family: 'Noto Sans TC'">"</span></p>
@@ -93,9 +93,10 @@
                             {%endif%}
                         {%endif%}
                 </div>
-                <div class="col-xs-3">
-
-                        <p>團隊角色：{{student.role}}</p>
+                <div class="col-xs-2">
+                    <div class="circle flexbox-center">
+                        <div><p>{{student.role}}</p></div>
+                    </div>
                 </div>
             </div>
             </a>

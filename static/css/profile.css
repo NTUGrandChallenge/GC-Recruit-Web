@@ -1,0 +1,38 @@
+body{
+	background-color: #b2b2b2;
+}
+
+@media screen and (min-width: 768px){
+	#profile .padding-wrapper{
+		padding: 100px;
+	}
+}
+#profile .top{
+	padding-bottom: 20px;
+	border-bottom: #ffeb32 3px solid;
+}
+#profile .basic{
+	display: flex;
+	position: relative;
+}
+#profile .basic .title{
+	flex: 1;
+	text-align: center;
+	background-color: #ffeb32;
+}
+#profile .basic .content{
+	flex: 4;
+	background-color: #fff;
+}
+#profile .basic p{
+	margin: 0;
+	padding: 5px 10px;
+}
+#profile .basic .edit{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+#profile .basic .edit:hover{
+	color: #50cfc7;
+}

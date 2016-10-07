@@ -1,36 +1,53 @@
 {% extends 'base.html' %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/css/my_profile.css">
+<link rel="stylesheet" href="/static/css/profile.css">
 {% endblock %}
 
-{% block title %} {{student.nickname}} {% endblock %}
+{% block title %} {{student.realname}} {% endblock %}
 
 {% block content %}
-<div class="container">
-	<div class="row">
+<div class="container" id="profile">
+<div class="padding-wrapper">
+	<div class="row top">
 		<div class="col-md-3">
 			<img src="http://graph.facebook.com/{{facebook_id}}/picture?type=large" class="circular-img">
 		</div>
 		<div class="col-md-9">
-			
-			{% if student.team.name == 'none' %}
-			<h2>您尚未加入任何團隊</h2>
+		<div class="basic">
+			{% if perms.profiles.can_edit_base_profile %}
+				<a href="/edit_profile/" class="edit"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
 			{% endif %}
-			<h1>{{student.realname}}({{student.nickname}})</h1>
-			<p>{{student.school}}</p>
+			<div class="title">
+				<p>姓名</p>
+				<p>暱稱</p>
+				<p>學校</p>
+				<p>系級</p>
+				<p>Email</p>
+			</div>
+			<div class="content">
+				<p>{{student.realname}}</p>
+				<p>{{student.nickname}}</p>
+				<p>{{student.school}}</p>
+				<p>{{student.department}} {{student.grade}}</p>
+				<p>{{student.email}}</p>
+			</div>
+
+		</div>
+		</div>
+	</div>
+	<div class="row">
+			{% if student.team.name == 'none' %}
+			<h2>未加入團隊</h2>
+			{% endif %}
 			<p>
 				{% for d in student.domain.all %}
 				{{d}}
 				{% endfor %}
 			</p>
-			<p>{{student.department}} {{student.grade}}</p>
 			<p>{{student.motto}}</p>
-		</div>
 	</div>
-	{% if perms.profiles.can_edit_base_profile %}
-		<a href="/edit_profile/"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
-	{% endif %}
+	
 	<div class="row">
 		<p>所屬隊伍: <a href="/team_profile/{{student.team.id}}/">{{student.team}}</a></p>
 		<p>領域:{{student.interest}}</p>
@@ -45,5 +62,6 @@
 			<p>{{student.experience}}</p>
 		</div>
 	</div>
+</div>
 </div>
 {% endblock %}

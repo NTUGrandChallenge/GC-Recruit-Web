@@ -104,3 +104,9 @@ body{
 #team_profile .one-teammate img{
 	margin: 10px;
 }
+#team_profile .one-teammate .circle{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; 
+    background-color: #eee;
+}
