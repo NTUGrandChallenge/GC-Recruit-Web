@@ -37,13 +37,13 @@ body{
 #list #challenger_list{
 	padding-top: 30px;
 }
-#challenger_list .list_top .left{
+.list_top .left{
 	position: absolute;
 	left: -5px;
 	top: -5px;
 	width: 15%;
 }
-#challenger_list .list_top .right{
+.list_top .right{
 	position: fixed;
 	right: 0;
 	top: 0;
@@ -54,8 +54,8 @@ body{
 	display: flex;
 	margin-bottom: 15px;
 }
-#list .one-student:hover{
-	outline: 5px solid #142598;
+#list .one-student:hover .info{
+	background-color: #ffeb32;
 }
 #list .one-student .name{
 	flex: 1;
@@ -71,12 +71,30 @@ body{
 	display: flex;
 	margin-bottom: 15px;
 }
-#list .one-team:hover{
-	outline: 5px solid #142598;
+#list .one-team:hover .info{
+	background-color: #ffeb32;
 }
 #list .one-team .field{
 	flex: 1;
 	background-color: #EEE;
+}
+#list .one-team .field.interest-1{
+	background-color: #EEE;
+}
+#list .one-team .field.interest-2{
+	background-color: #FFA3B5;
+}
+#list .one-team .field.interest-3{
+	background-color: #EE2737;
+}
+#list .one-team .field.interest-4{
+	background-color: #00B140;
+}
+#list .one-team .field.interest-5{
+	background-color: #005EB8;
+}
+#list .one-team .field.interest-6{
+	background-color: #B77729;
 }
 #list .one-team .info{
 	flex: 4;
