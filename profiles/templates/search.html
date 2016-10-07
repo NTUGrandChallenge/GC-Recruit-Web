@@ -3,14 +3,14 @@
 {% block css %}
 <link rel="stylesheet" href="/static/css/search.css">
 {% endblock %}
-{% block title %} Student Profile {% endblock %}
+{% block title %}挑戰者列表{% endblock %}
   
 {% block content %}
 <div class="container-fluid" id="list">
     <div class="row">
         <div class="col-md-3 full-height" id="sidebar">
-            <div>
-                <h1>挑戰者列表</h1>
+            <div style="margin-bottom: 20px;">
+                <img src="/static/img/student_list_header.png" class="full-width" />
             </div>
             <div id="search">
             <form action="/search/" method="get">
@@ -99,10 +99,11 @@
             </div>
         </div>
         <div class="col-md-9" id="challenger_list">
-            <div class="row">
-
+            <div class="list_top">
+                <img src="/static/img/triangle.png" class="left" />
+                <img src="/static/img/list_top.png" class="right" />
             </div>
-            <div class="row">
+            <div class="row" style="margin: 50px;">
             {%if search%}
                 {% if slen == 0 %}
                     <h2 class="post-title">沒有人符合你的要求...</h2>
@@ -144,32 +145,32 @@
                 {% else %}
                     <h2 class="post-title">有 {{slen}} 人符合你的要求</h2>
                     {%for interest in interests%}
-                        <p>"{{interest}}"</p>
+                        <p>{{interest}}</p>
                     {%endfor%}
                     {%for role in roles%}
-                        <p>"{{role}}"</p>
+                        <p>{{role}}</p>
                     {%endfor%}
                     {%for category in categorys%}
-                        <p>"{{category}}"</p>
+                        <p>{{category}}</p>
                     {%endfor%}
                     {%for group in groups%}
-                        <p>"{{group}}"</p>
+                        <p>{{group}}</p>
                     {%endfor%}
                     {% for student in student_list %}
                     <div class="col-md-4">
-                    <div class="one-student">
+                    <a href="/other_profile/?id={{ student.id }}">
+                    <div class="one-student text-center">
                         <div class="name">
                             <h4>{{student.realname}}</h4>
                         </div>
-                        <div class="info">
-
-                        </div>
                         <!-- {{student.motto}} -->
-                        <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
-                        <p>{{student.department}}</p>
-                        <p>{{student.interest}}</p>
-                        <a href="/other_profile/?id={{ student.id }}">檢視</a> 
+                        <div class="info">
+                            <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
+                            <p>{{student.department}}</p>
+                            <p>{{student.interest}}</p>
+                        </div>
                     </div>
+                    </a>
                     </div>
                     {% endfor %}
                 {% endif %}

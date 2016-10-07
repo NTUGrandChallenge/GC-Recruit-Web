@@ -9,12 +9,12 @@
 <div class="container-fluid" id="list">
 	<div class="row">
 		<div class="col-md-3 full-height" id="sidebar">
-			<div>
-                <h1>團隊列表</h1>
+			<div style="margin-bottom: 20px;">
+                <img src="/static/img/team_list_header.png" class="full-width" />
             </div>
             <div id="search">
             <form action="/search/" method="get">
-                <input class="" type="text" name="word" placeholder="搜尋">
+                <input class="" type="text" name="word" placeholder="搜尋隊名">
                 <button type="submit"><i class="fa fa-search fa-lg" aria-hidden="true"></i></button>
             </form>
             </div>
@@ -56,16 +56,20 @@
             </div>
 		</div>
 		<div class="col-md-9">
+            <div class="list_top">
+                    <img src="/static/img/triangle.png" class="left" />
+                    <img src="/static/img/list_top.png" class="right" />
+                </div>
 			<div class="row text-right">
-				<a href="/create_team/" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>創建團隊</a>
+				<a href="/create_team/" class="btn btn-primary btn-create"><i class="fa fa-plus" aria-hidden="true"></i>創建團隊</a>
 			</div>
-			<div class="row">
+			<div class="row" style="margin: 50px;">
 				{% for i in teams %}
 					{% if i.name != 'none' %}
-					<div class="col-md-4">
+					<div class="col-md-6">
 					<a href="/team_profile/{{ i.id }}/">
 					<div class="one-team">
-						<div class="field"></div>
+						<div class="field interest-{{i.interest.id}}"></div>
 						<div class="info">
 							<h2>{{i.name}}</h2>
 							<p>團隊人數：{{ i.student_set.all | length }} / 6 </p>
