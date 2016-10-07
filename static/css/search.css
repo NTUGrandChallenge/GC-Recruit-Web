@@ -42,12 +42,14 @@ body{
 	left: -5px;
 	top: -5px;
 	width: 15%;
+	z-index: -1;
 }
 .list_top .right{
 	position: fixed;
 	right: 0;
 	top: 0;
 	width: 30%;
+	z-index: -1;
 }
 #list .one-student{
 	background-color: #FFF;
@@ -66,6 +68,11 @@ body{
 	flex: 3;
 }
 
+
+#list .btn-create{
+	margin-right: 30px;
+	margin-top: 30px;
+}
 #list .one-team{
 	background-color: #FFF;
 	display: flex;

@@ -1,3 +1,11 @@
+body{
+    background-color: #b2b2b2;
+}
+
+#team_profile #sidebar{
+    background-color: #ffeb32;
+}
+
 #team_profile .functions input,
 #team_profile .functions button{
 	width: 80%;
