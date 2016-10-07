@@ -201,31 +201,31 @@
           {% for counter in counters %}
           <div class="row one-talent">
                <div class="col-xs-4 category">
-                    <select  name="category" class="selectpicker" data-width="fit">
+                    <select  name="category" class="" data-width="fit">
                     {% for c in categorys %}
                          <option value="{{ c }}" data-id="{{c.id}}"> {{ c }} </option>
                     {% endfor %}
                     </select>
                </div>
                <div class="col-xs-4 group">
+                    <select name="group" data-width="fit">
                     {% for c in categorys %}
-                    <select name="group" class="selectpicker son-of-c-{{c.id}}" data-width="fit">
                          {% for g in c.group_set.all %}
-                         <option value="{{ g }}" data-id="{{g.id}}"> {{ g }} </option>
+                         <option value="{{ g }}" data-id="{{g.id}}"  class="son-of-c-{{c.id}}"> {{ g }} </option>
                          {% endfor %}
-                    </select>
                     {% endfor %}
+                    </select>
                </div>
                <div class="col-xs-4 talent">
+                    <select name="talent[]" data-live-search="true" data-width="fit">
                     {% for c in categorys %}
                          {% for g in c.group_set.all %}
-                         <select name="talent[]" class="selectpicker son-of-g-{{g.id}}" data-live-search="true" data-width="fit">
                               {% for t in g.talent_set.all %}
-                              <option value="{{ t }}"> {{ t }} </option>
+                              <option value="{{ t }}" class="son-of-g-{{g.id}}"> {{ t }} </option>
                               {% endfor %}
-                         </select>
                          {% endfor %}
                     {% endfor %}
+                    </select>
                </div>
                
                <div class="col-xs-4" style="margin-top: 5px;">
