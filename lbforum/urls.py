@@ -54,7 +54,6 @@ urlpatterns = [
     url(r'^topic/', include(topic_patterns)),
     url(r'^profile/', include(profile_patterns)),
     url(r'^api/', include(router.urls)),
-
     url('^reply/new/(?P<topic_id>\d+)/$', views.new_post,
         name='lbforum_new_replay'),
     url(r'^post/', include(post_patterns)),

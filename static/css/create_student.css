@@ -108,7 +108,9 @@
 	background-color: #eee;
 	border-radius: 50%;
 	text-align: center;
-	line-height: 100px;
+}
+#create_student .role .radio-area:first-child{
+	display: none;
 }
 
 #create_student .one-talent{
@@ -123,6 +125,18 @@
 }
 #create_student .one-talent:nth-child(8) .add-talent{
 	display: none;
+	visibility: hidden;
+	opacity: 0;
+}
+#create_student .one-talent .group select option,
+#create_student .one-talent .talent select option{
+	display: none;
+}
+/*debug*/
+.bootstrap-select>select{
+	width: auto !important;
+	height: auto !important;
+	opacity: 1 !important;
 }
 
 #create_student button[type="submit"]{

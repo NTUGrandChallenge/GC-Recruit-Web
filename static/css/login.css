@@ -31,3 +31,16 @@ body{
 #login form button[type="submit"]{
 	width: 70%;
 }
+
+#login .helptext{
+	color: #666;
+	font-size: 12px;
+	padding-left: 10px;
+}
+
+#login .title{
+	background-color: #ffeb32;
+	padding: 10px;
+	font-size: 28px;
+	font-weight: bold;
+}

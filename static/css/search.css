@@ -1,30 +1,30 @@
 body{
 	background-color: #b2b2b2;
 }
-#search #sidebar{
+#list #sidebar{
 	background-color: #ffeb32;
 	padding-top: 30px;
 }
-#search #sidebar #search{
+#list #sidebar #search{
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 }
-#search #sidebar #search input{
+#list #sidebar #search input{
 	width: 80%;
 	height: 40px;
 	font-size: 24px;
 	padding: 5px;
 	border: none;
 }
-#search #sidebar #search button{
+#list #sidebar #search button{
 	background-color: transparent;
 	border: none;
 }
-#search #sidebar #search button:hover{
+#list #sidebar #search button:hover{
 	color: #fff;
 }
-#search #sidebar #filter{
+#list #sidebar #filter{
 	background-color: #fff;
 	margin-top: 20px;
 	margin-bottom: 50px;
@@ -34,22 +34,39 @@ body{
 	width: 80%;
 }
 
-
-#search #challenger_list{
+#list #challenger_list{
 	padding-top: 30px;
 }
-#search .one-student{
+#list .one-student{
 	background-color: #FFF;
 	display: flex;
+	margin-bottom: 15px;
 }
-#search .one-student:hover{
+#list .one-student:hover{
 	outline: 5px solid #142598;
 }
-#search .one-student .name{
+#list .one-student .name{
 	flex: 1;
 	background-color: #ffeb32;
 	writing-mode: vertical-lr;
 }
-#search .one-student .info{
+#list .one-student .info{
 	flex: 3;
+}
+
+#list .one-team{
+	background-color: #FFF;
+	display: flex;
+	margin-bottom: 15px;
+}
+#list .one-team:hover{
+	outline: 5px solid #142598;
+}
+#list .one-team .field{
+	flex: 1;
+	background-color: #EEE;
+}
+#list .one-team .info{
+	flex: 4;
+	padding-left: 10px;
 }

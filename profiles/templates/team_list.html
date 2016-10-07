@@ -1,15 +1,59 @@
 {% extends 'base.html' %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/css/team_list.css">
+<link rel="stylesheet" href="/static/css/search.css">
 {% endblock %}
 {% block title %} 團隊列表 {% endblock %}
 
 {% block content %}
-<div class="container-fluid" id="team_list">
+<div class="container-fluid" id="list">
 	<div class="row">
 		<div class="col-md-3 full-height" id="sidebar">
-			
+			<div>
+                <h1>團隊列表</h1>
+            </div>
+            <div id="search">
+            <form action="/search/" method="get">
+                <input class="" type="text" name="word" placeholder="搜尋">
+                <button type="submit"><i class="fa fa-search fa-lg" aria-hidden="true"></i></button>
+            </form>
+            </div>
+            <div id="filter">
+            	<!-- not work now!! -->
+            	<form name="check_form" method="get">
+                <h4>領域分類</h4>
+                <div class="checkbox">
+                    <input type="checkbox" name="interest[]" id="interest_2" value="2">
+                    <label for="interest_2">
+                        智慧生活
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="interest[]" id="interest_3" value="3">
+                    <label for="interest_3">
+                        健康醫療
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="interest[]" id="interest_4" value="4">
+                    <label for="interest_4">
+                        永續環境
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="interest[]" id="interest_5" value="5">
+                    <label for="interest_5">
+                        社會文化
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="interest[]" id="interest_6" value="6">
+                    <label for="interest_6">
+                        食品與農業
+                    </label>
+                </div>
+                </form>
+            </div>
 		</div>
 		<div class="col-md-9">
 			<div class="row text-right">
@@ -21,8 +65,11 @@
 					<div class="col-md-4">
 					<a href="/team_profile/{{ i.id }}/">
 					<div class="one-team">
-						<h2>{{i.name}}</h2>
-						<p>團隊人數：{{ i.student_set.all | length }} / 6 </p>
+						<div class="field"></div>
+						<div class="info">
+							<h2>{{i.name}}</h2>
+							<p>團隊人數：{{ i.student_set.all | length }} / 6 </p>
+						</div>
 					</div>
 					</a>
 					</div>
