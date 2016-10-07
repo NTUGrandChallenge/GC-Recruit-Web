@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/agree.css">
+{% endblock %}
+{% block title %} 蒐集個人資料同意書 {% endblock %}
+
+{% block content %}
+<div class="container" id="agree">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+		<div id="consent">
+			<div class="content">
+				<h1 class="text-center">蒐集個人資料同意書</h1>
+				<br />
+				<h4>一、蒐集參賽團隊及參賽者個人資料告知事項</h4>
+				
+				<h4>二、其他</h4>
+				<ol>
+					<li>
+						<p>如遇不可抗拒之因素而更改相關內容及辦法或有未盡事宜，除依法律相關規定外，主辦單位與承辦單位保留修改活動辦法與獎項細節之權利，無須事前通知，並有權對本活動所有事宜作出解釋或裁決。修改項目（包括活動與獎項之任何異動、更新、補充）以本活動網頁公告為依據。</p>
+					</li>
+					<li>
+						<p>此份同意書之準據法為中華民國法律。因本同意書所生之任何爭議，以台灣台北地方法院或智慧財產法院（依所得管轄者）為第一審管轄法院。</p>
+					</li>
+				</ol>
+			</div>
+			<div class="action">
+				<form action="" method="post" class="form-inline" role="form">{% csrf_token %}
+				    <input name="agree" type="submit" value="同意" class="btn btn-default" />
+				</form>
+				<form action="" method="post" class="form-inline" role="form">{% csrf_token %}
+				    <input name="no" type="submit" value="不同意" class="btn btn-default" />
+				</form>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+                
+               
+{% endblock %}
+{% block img %}
+    
+{% endblock %}
+
