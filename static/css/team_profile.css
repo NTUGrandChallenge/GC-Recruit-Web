@@ -2,18 +2,80 @@ body{
     background-color: #b2b2b2;
 }
 
+
 #team_profile #sidebar{
     background-color: #ffeb32;
+    padding-top: 30px;
 }
 
+
+#team_profile .functions{
+    border-left: 3px #e50045 solid;
+    border-bottom: 3px #e50045 solid;
+    padding: 20px;
+    text-align: center;
+}
 #team_profile .functions input,
 #team_profile .functions button{
 	width: 80%;
 	margin-bottom: 5px;
 }
 
+@media screen and (min-width: 768px){
+    #team_profile .padding-wrapper{
+        padding: 50px;
+    }
+}
+
+
+#team_profile .interest{
+    width: 150px;
+    height: 150px;
+}
+#team_profile .interest.field-1{
+    background: url("/static/img/five-field/no_color.png");
+    background-size: cover;
+}
+#team_profile .interest.field-2{
+    background: url("/static/img/five-field/smart_color.png");
+    background-size: cover;
+}
+#team_profile .interest.field-3{
+    background: url("/static/img/five-field/health_color.png");
+    background-size: cover;
+}
+#team_profile .interest.field-4{
+    background: url("/static/img/five-field/environment_color.png");
+    background-size: cover;
+}
+#team_profile .interest.field-5{
+    background: url("/static/img/five-field/society_color.png");
+    background-size: cover;
+}
+#team_profile .interest.field-6{
+    background: url("/static/img/five-field/agriculture_color.png");
+    background-size: cover;
+}
+#team_profile .team-name{
+    -webkit-transform: skew(-10deg);
+            transform: skew(-10deg);
+    padding: 3px 10px;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    background-color: #ffeb32;
+    width: 50%;
+    margin-bottom: 10px;
+}
+#team_profile .team-name .skew-fix{
+    display:inline-block;
+    -webkit-transform: skew(10deg);
+            transform: skew(10deg);
+}
+
 #team_profile .one-teammate{
-	background-color: #EEE;
+	background-color: #FFF;
 	position: relative;
 	padding: 10px;
 }
