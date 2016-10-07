@@ -3,14 +3,14 @@
 {% block css %}
 <link rel="stylesheet" href="/static/css/search.css">
 {% endblock %}
-{% block title %} Student Profile {% endblock %}
+{% block title %}挑戰者列表{% endblock %}
   
 {% block content %}
 <div class="container-fluid" id="list">
     <div class="row">
         <div class="col-md-3 full-height" id="sidebar">
-            <div>
-                <h1>挑戰者列表</h1>
+            <div style="margin-bottom: 20px;">
+                <img src="/static/img/student_list_header.png" class="full-width" />
             </div>
             <div id="search">
             <form action="/search/" method="get">
@@ -99,10 +99,11 @@
             </div>
         </div>
         <div class="col-md-9" id="challenger_list">
-            <div class="row">
-
+            <div class="list_top">
+                <img src="/static/img/triangle.png" class="left" />
+                <img src="/static/img/list_top.png" class="right" />
             </div>
-            <div class="row">
+            <div class="row" style="margin: 50px;">
             {%if search%}
                 {% if slen == 0 %}
                     <h2 class="post-title">沒有人符合你的要求...</h2>

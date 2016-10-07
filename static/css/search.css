@@ -37,6 +37,18 @@ body{
 #list #challenger_list{
 	padding-top: 30px;
 }
+#challenger_list .list_top .left{
+	position: absolute;
+	left: -5px;
+	top: -5px;
+	width: 15%;
+}
+#challenger_list .list_top .right{
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 30%;
+}
 #list .one-student{
 	background-color: #FFF;
 	display: flex;
