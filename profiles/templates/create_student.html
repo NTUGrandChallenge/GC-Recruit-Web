@@ -58,7 +58,7 @@
                <label for="department">科系全名：</label>
                <input id="department" type="text" name="department" class="form-control" value="{{department}}" style="width: 50%;" required>
                <label for="grade" style="width: 50px;margin-left: 10px;">年級：</label>
-               <select name="grade" class="selectpicker" data-width="fit">
+               <select name="grade" data-width="fit">
                {% for g in grades %}
                <option value="{{ g }}"> {{ g }} </option>
                {% endfor %}
@@ -82,7 +82,7 @@
           <div class="col-xs-12">
           <div class="form-group">
                <label for="motto">代表自己的一段話：</label>
-               <textarea id="motto" rows="2" name="motto" class="form-control" placeholder="你希望其他挑戰者如何透過一段話認識你 / 妳呢？趕快寫下來吧！">{{motto}}</textarea>
+               <input type="text" id="motto" name="motto" class="form-control" placeholder="你希望其他挑戰者如何透過一段話認識你 / 妳呢？趕快寫下來吧！">{{motto}}</textarea>
           </div>
           </div>
      </fieldset>
