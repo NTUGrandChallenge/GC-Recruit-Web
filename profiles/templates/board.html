@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %} Chat Room {% endblock %}
+{% block title %} 公佈欄 {% endblock %}
 
 {% block content %}
 <div id="chatroom">
 <div class="container">
-{% if teamroom %}
-	<div class="col-md-4">
-		
+	<h1>{{team.name}}</h1>
+	<div class="col-md-8">
+		{{team.content}}
 	</div>
+{% if teamroom %}
+
 	<div class="col-md-8">
 	<div id="dialogue">
 		{% for c in teamroom %}
@@ -33,7 +35,7 @@
 			{% endif %}
 		{% endfor %}
 	{% else %}
-		<h2>開始你們的對話吧！</h2>
+		<h3>成為第一個回覆者！</h3>
 	{% endif %}
 	</div>
 	{% if member %}

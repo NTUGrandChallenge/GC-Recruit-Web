@@ -566,6 +566,7 @@ def kick(request):
 		return HttpResponseRedirect('/my_profile/')
 	return render_to_response('kick.html', RequestContext(request, locals()))
 
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def agree2(request):
 	if request.user.has_perm('profiles.can_upload'):
 		return HttpResponseRedirect('/upload/')
@@ -576,3 +577,22 @@ def agree2(request):
 	if 'no' in request.POST:
 		return HttpResponseRedirect('/index/')
 	return render_to_response('agree2.html', RequestContext(request, locals()))
+
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
+def board(request,teamid):
+	me = Student.objects.get(name=request.user)
+	team = Team.objects.get(id=teamid)
+	#board = team.teamroom_set.first()
+	teamroom = team.teamroom_set.order_by('date_time')
+	#teamroom = list(set(teamrooma).difference(set(board)))
+	member = True
+	if request.POST:
+		content = request.POST['content']
+		date_time = timezone.localtime(timezone.now())
+		Teamroom.objects.create(
+			team=team,
+			speaker=me,
+			content=content,
+			date_time=date_time
+		)
+	return render_to_response('board.html', RequestContext(request, locals()))

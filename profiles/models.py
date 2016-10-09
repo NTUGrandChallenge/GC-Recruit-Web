@@ -22,7 +22,7 @@ class Team(models.Model):
 	name = models.CharField(max_length=50, blank=True)
 	captain_name = models.CharField(max_length=50, blank=True)
 	interest = models.ForeignKey(Interest, null=True)
-	content = models.CharField(max_length=50, blank=True)
+	content = models.CharField(max_length=1500, blank=True)
 	class Meta:
 		permissions = (
 			("can_create_team_profile", "Can create team profile"),
@@ -93,7 +93,7 @@ class Student(models.Model):
 class Chatroom(models.Model):
 	student1 = models.ForeignKey(Student, null=True, related_name='student1')
 	student2 = models.ForeignKey(Student, null=True, related_name='student2')
-	content = models.CharField(max_length=50, blank=True)
+	content = models.CharField(max_length=300, blank=True)
 	date_time = models.DateTimeField()
 	def __str__(self):
 		return self.content
@@ -119,7 +119,7 @@ class file_info(models.Model):
 class Teamroom(models.Model):
 	team = models.ForeignKey(Team, null=True)
 	speaker = models.ForeignKey(Student, null=True)
-	content = models.CharField(max_length=50, blank=True)
+	content = models.CharField(max_length=300, blank=True)
 	date_time = models.DateTimeField()
 	def __str__(self):
 		return self.content
