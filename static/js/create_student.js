@@ -8,9 +8,7 @@ $('#create_student .interest .logo-wrapper').hover(function(){
 	$('#create_student .interest .description p').css('visibility', '');
 });
 $('#create_student .interest .logo-wrapper').on('click', function(){
-	// $('#create_student .interest input[name="interest"]').prop('checked', false);
 	$('#create_student .interest input[name="interest"]:nth-child(' + ($(this).parent().index() + 2) + ')').prop('checked', true);
-	
 	$('#create_student .interest .logo-wrapper .highlight').removeClass('locked');
 	$(this).children('.highlight').addClass('locked');
 	$('#create_student .interest .description p').removeClass('locked');
@@ -47,6 +45,6 @@ $('#create_student .one-talent .add-talent').on('click', function(){
 
 
 $(document).ready(function(){
-	$('#create_student .interest input[name="interest"]:nth-child(1)').prop('checked', true);
-	$('#create_student .role .radio-area:first-child input').prop('checked', true);
+	$('#create_student .interest .col-xs-5ths:nth-child(' + $('#create_student .interest input[name="interest"]:checked').index() + ') .highlight').addClass('locked');
+	$('#create_student .interest .description p:nth-child(' + $('#create_student .interest input[name="interest"]:checked').index() + ')').addClass('locked');
 })

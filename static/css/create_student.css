@@ -105,7 +105,7 @@
 	visibility: visible;
 }
 #create_student .interest .form-group{
-	display: none;
+	/*display: none;*/
 }
 
 #create_student .role .circle{
