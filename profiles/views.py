@@ -69,12 +69,12 @@ def search(request):
 				students = Student.objects.filter(talent=talent)
 				talent_list = list(set(talent_list).union(set(students)))
 				##  AND
-		# student_list = list(set(interest_list).intersection(set(role_list)))
-		# student_list = list(set(talent_list).intersection(set(student_list)))
+		student_list = list(set(interest_list).intersection(set(role_list)))
+		student_list = list(set(talent_list).intersection(set(student_list)))
 				##
 				##  OR
-		student_list = list(set(interest_list).union(set(role_list)))
-		student_list = list(set(talent_list).union(set(student_list)))
+		#student_list = list(set(interest_list).union(set(role_list)))
+		#student_list = list(set(talent_list).union(set(student_list)))
 		Interests = []
 		Roles = []
 		for each in interests:
