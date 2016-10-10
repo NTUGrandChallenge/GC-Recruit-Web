@@ -184,7 +184,7 @@ def student_create(request):
 
 		talent = request.POST.getlist('talent[]')
 		domain = request.POST.getlist('domain[]')
-
+		talent = list(set(talent))
 		
 #		if any(not request.POST[k] for k in request.POST):
 #			errors.append('* 有空白欄位！請不要留空！')

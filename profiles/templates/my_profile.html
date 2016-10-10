@@ -56,7 +56,7 @@
 		<p>角色:{{student.role}}</p>
 		<div>
 			<p>{% for t in student.talent.all %}
-				{{t}}
+				{{t.name}}
 				{% endfor %}
 			</p>
 		</div>
