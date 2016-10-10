@@ -110,7 +110,7 @@ def profile(request):
 	return render_to_response('my_profile.html', RequestContext(request, locals()))
 
 #@permission_required('profiles.can_edit_base_profile', login_url='/permission_error/')
-@permission_required('profiles.wait', login_url='/permission_error/')
+@permission_required('profiles.wait', login_url='/wait/')
 def edit(request):
 	student = Student.objects.get(name=request.user)
 	interest = Interest.objects.all()
