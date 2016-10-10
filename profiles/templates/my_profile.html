@@ -49,7 +49,9 @@
 	</div>
 	
 	<div class="row">
+		{% if student.team.name != 'none' %}
 		<p>所屬隊伍: <a href="/team_profile/{{student.team.id}}/">{{student.team}}</a></p>
+		{% endif %}
 		<p>領域:{{student.interest}}</p>
 		<p>角色:{{student.role}}</p>
 		<div>

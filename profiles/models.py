@@ -15,6 +15,7 @@ class Domain(models.Model):
 
 class Badge(models.Model):
 	name = models.CharField(max_length=50)
+	content = models.CharField(max_length=1500, blank=True)
 	def __str__(self):
 		return self.name
 

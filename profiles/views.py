@@ -495,7 +495,7 @@ def team_profile(request, teamid):
 			request.user.user_permissions.add(perm)
 			return HttpResponseRedirect('/team_list/')
 	if request.POST.get('dismiss'):
-		if me.name == team.captain_name :
+		if me.name.username == team.captain_name :
 			if len(team.student_set.all()) == 1:
 				me.team = none_team	
 				me.save()
@@ -511,7 +511,7 @@ def team_profile(request, teamid):
 			me.applied.remove(team)	
 			me.save()
 			return render_to_response('team_profile.html', RequestContext(request, locals()))
-	if request.POST.get('kick') and me.name == team.captain_name :
+	if request.POST.get('kick') and me.name.username == team.captain_name :
 		student = Student.objects.get(id=request.POST['kick'])
 		if student.team == team:
 			student.team = none_team	
@@ -596,3 +596,20 @@ def board(request,teamid):
 			date_time=date_time
 		)
 	return render_to_response('board.html', RequestContext(request, locals()))
+
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
+def activity(request, badgeid):
+	me = Student.objects.get(name=request.user)
+	badge = Badge.objects.get(id=badgeid)
+	if request.POST.get('id'):
+		return render_to_response('activity.html', RequestContext(request, locals()))
+	if request.POST.get('applied'):
+		me.badge.add(badge)	
+		me.save()
+		return render_to_response('activity.html', RequestContext(request, locals()))	
+	if request.POST.get('cancel'):
+		me.badge.remove(badge)	
+		me.save()
+		return render_to_response('activity.html', RequestContext(request, locals()))	
+	return render_to_response('activity.html', RequestContext(request, locals()))
+

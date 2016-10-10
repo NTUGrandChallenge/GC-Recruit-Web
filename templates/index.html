@@ -7,10 +7,17 @@
 
 {% block content %}
 <div>
-    <h1>最新消息</h2>
+    <h1>最新消息</h1>
     {% for t in teams %}
-    <h3>{{ t.name }}</h1>
+    <h3>{{ t.name }}</h3>
     <a href="/board/{{ t.id }}/">檢視詳細消息</a>
+    {% endfor %}
+</div>
+<div>
+    <h1>活動報名</h1>
+    {% for b in badges %}
+    <h3>{{ b.name }}</h3>
+    <a href="/activity/{{ b.id }}/">報名相關消息</a>
     {% endfor %}
 </div>
 <div class="container-fluid">

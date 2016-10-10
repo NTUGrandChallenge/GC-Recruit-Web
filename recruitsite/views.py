@@ -7,7 +7,7 @@ from django.contrib.sessions.models import Session
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Permission, User
 from django.contrib.auth.decorators import login_required, permission_required
-from profiles.models import Student, Team, Teamroom
+from profiles.models import Student, Team, Badge
 from django.contrib.auth.models import Permission, User
 from django.utils import timezone
 
@@ -35,6 +35,7 @@ def login(request):
 
 def index(request):
 	teams = Team.objects.filter(captain_name='handsome')
+	badges = Badge.objects.all()
 	return render_to_response('index.html', RequestContext(request, locals()))
 
 def logout(request):

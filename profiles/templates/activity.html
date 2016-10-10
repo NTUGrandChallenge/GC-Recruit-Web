@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/team_profile.css">
+{% endblock %}
+
+{% block title %} 團隊 {% endblock %}
+
+{% block content %}
+{% if badge.name != 'none' %}
+<div class="container-fluid" id="team_profile">
+    
+    <div class="row">
+        <div class="col-md-3 full-height" id="sidebar">
+            <div style="margin-bottom: 30px">
+                <img src="/static/img/team_profile_header.png" class="full-width" />
+            </div>
+            <div class="functions full-width">
+            	<form action="" method="post">{% csrf_token %}
+                    {% if badge in me.badge.all %}
+                        <p>申請已經發送</p>
+                        <input type="hidden"  name="cancel" value="{{badge.id}}">
+                        <input type="submit" class="btn btn-success" value="取消報名">
+                    {%else%}
+                        <input type="hidden"  name="applied" value="{{badge.id}}">
+                        <input type="submit" class="btn btn-success" value="報名活動">                      
+                    {%endif%}
+            	</form>
+            </div>
+        </div>
+        <div class="col-md-9">
+        <div class="padding-wrapper">
+            <div class="team-name">
+                <div class="skew-fix">
+                    {{ badge.name }}
+                </div>
+            </div>
+            <div class="row" style="height: 150px;">
+                <div class="col-xs-3">
+                    <div class="interest field-{{ team.interest.id }}">
+                    </div>
+                </div>
+                <div class="col-xs-9 full-height flexbox-center">
+                    <p>{{ badge.content }}</p>
+                </div>
+            </div>
+
+            {% if me.realname == 'handsome' %}
+            {% for student in badge.student_set.all %}
+            <a href="/other_profile/?id={{ student.id }}">
+            <div class="row one-teammate">
+                <div class="col-xs-3">
+                    <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large' class="square-img">
+                </div>
+                <div class="col-xs-7">
+                        <h4>姓名：{{student.realname}}</h4>
+                        <p>學院：{{student.department}}</p>
+                        <p><span style="font-family: 'Noto Sans TC'">"</span>{{student.motto}}<span style="font-family: 'Noto Sans TC'">"</span></p>
+                </div>
+                <div class="col-xs-2">
+                    <div class="circle flexbox-center">
+                        <div><p>{{student.role}}</p></div>
+                    </div>
+                </div>
+            </div>
+            </a>
+            {% endfor %}
+            {% endif %}
+        </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
