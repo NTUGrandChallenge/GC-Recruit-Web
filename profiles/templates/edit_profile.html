@@ -92,7 +92,7 @@
                     <p>「農業曾使得人類的文明光輝燦爛，如今卻離我們的生活越來越遠。」<br />食農組的挑戰者需要探討的是：如何在經濟發展和人文關懷間重新取得平衡，由個人開始，運用社群、科技和設計的力量，發揮洞察並具體提出食安及農業議題的解決方案。</p>
                </div>
           </div>
-          <div class="">
+          <div class="form-group">
                {% for i in interest %}
                     <input type="radio" name="interest" value="{{ i }}" {% if i == student.interest %}checked{% endif %}>{{ i }}
                {% endfor %}
