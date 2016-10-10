@@ -185,14 +185,14 @@
                </div>
                
                <div class="col-xs-4" style="margin-top: 5px;">
-                    <div class="add-talent btn btn-default"><i class="fa fa-plus fa-lg" aria-hidden="true"></i>新增技能</div>
+                    <div class="add-talent btn btn-default {% if forloop.counter != mytalents|length %} hide {% endif %}"><i class="fa fa-plus fa-lg" aria-hidden="true"></i>新增技能</div>
                </div>
           </div>
           {% endfor %}
 
 
           {% for counter in counters %}
-          <div class="row one-talent">
+          <div class="row one-talent {% if counters|length != 6 %} hide {% elif forloop.counter != 1 %} hide {% endif %}">
                <div class="col-xs-4 category">
                     <select  name="category" class="" data-width="fit">
                     {% for c in categorys %}

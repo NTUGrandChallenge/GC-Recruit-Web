@@ -201,7 +201,7 @@
                </div>
           </div>
           {% for counter in counters %}
-          <div class="row one-talent">
+          <div class="row one-talent {% if forloop.counter != 1 %} hide {% endif %}">
                <div class="col-xs-4 category">
                     <select  name="category" class="" data-width="fit">
                     {% for c in categorys %}

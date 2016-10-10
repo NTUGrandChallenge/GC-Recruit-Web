@@ -105,7 +105,7 @@
 	visibility: visible;
 }
 #create_student .interest .form-group{
-	/*display: none;*/
+	display: none;
 }
 
 #create_student .role .circle{
@@ -121,13 +121,18 @@
 
 #create_student .one-talent{
 	margin-bottom: 10px;
+}
+#create_student .one-talent.hide{
 	display: none;
 }
-#create_student .one-talent:nth-child(3){
+/*#create_student .one-talent:nth-child(3){
 	display: block;
-}
+}*/
 #create_student .one-talent .add-talent{
 	cursor: pointer;
+}
+#create_student .one-talent .add-talent.hide{
+	display: none;
 }
 #create_student .one-talent:nth-child(8) .add-talent{
 	display: none;
