@@ -13,23 +13,23 @@
           <p style="color:red;">{{ e }}</p>
      {% endfor %}
      <form action="" method="post" class="form-inline" role="form">{% csrf_token %}
-     <div class="row">
+     <div class="row insurance">
      <fieldset>
           <legend>保險資料</legend>
           <div class="col-xs-12">
           <div class="form-group">
                <label for="birthday_y">生日：</label>
-               <select  name="birthday_y" class="selectpicker" data-width="fit">
+               <select  name="birthday_y" data-width="fit">
                {% for y in year %}
                     <option value="{{ y }}"> {{ y }} </option>
                {% endfor %}
                </select>
-               <select  name="birthday_m" class="selectpicker" data-width="fit">
+               <select  name="birthday_m" data-width="fit">
                {% for m in month %}
                     <option value="{{ m }}"> {{ m }} </option>
                {% endfor %}
                </select>
-               <select  name="birthday_d" class="selectpicker" data-width="fit">
+               <select  name="birthday_d" data-width="fit">
                {% for d in day %}
                     <option value="{{ d }}"> {{ d }} </option>
                {% endfor %}
@@ -39,31 +39,31 @@
           <div class="col-xs-12">
           <div class="form-group">
                <label for="security_id">身分證字號：</label>
-               <input id="security_id" type="text" name="security_id" class="form-control" value="{{security_id}}">
+               <input id="security_id" type="text" name="security_id" class="form-control" value="{{security_id}}" required>
           </div>
           </div>
           <div class="col-xs-12">
           <div class="form-group">
                <label for="phone">手機：</label>
-               <input id="phone" type="text" name="phone" class="form-control" value="{{phone}}">
+               <input id="phone" type="text" name="phone" class="form-control" value="{{phone}}" required>
           </div>
           </div>
           <div class="col-xs-12">
           <div class="form-group">
                <label for="emergency">緊急聯絡人姓名：</label>
-               <input id="emergency" type="text" name="emergency" class="form-control">{{emergency}}</input>
+               <input id="emergency" type="text" name="emergency" class="form-control" required>{{emergency}}
           </div>
           </div>
           <div class="col-xs-12">
           <div class="form-group">
                <label for="emergency_relationship">緊急聯絡人關係：</label>
-               <input id="emergency_relationship" type="text" name="emergency_relationship" class="form-control">{{emergency_relationship}}</input>
+               <input id="emergency_relationship" type="text" name="emergency_relationship" class="form-control" required>{{emergency_relationship}}
           </div>
           </div>
           <div class="col-xs-12">
           <div class="form-group">
                <label for="emergency_phone">緊急聯絡人手機：</label>
-               <input id="emergency_phone" type="text" name="emergency_phone" class="form-control" value="{{emergency_phone}}">
+               <input id="emergency_phone" type="text" name="emergency_phone" class="form-control" value="{{emergency_phone}}" required>
           </div>
           </div>
      </fieldset>
