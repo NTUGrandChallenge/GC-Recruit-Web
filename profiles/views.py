@@ -132,7 +132,8 @@ def edit(request):
 		student.experience = experience
 		student.interest = Interest.objects.get(name=myinterest)
 		student.role = Role.objects.get(name=myrole)
-		student.talent.remove()
+		for clean in mytalents:
+			student.talent.remove(clean)
 		for item in talent:
 			student.talent.add(Talent.objects.get(name=item))
 		student.save()
