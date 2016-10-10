@@ -11,8 +11,7 @@ import urllib
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def search(request):
-	first_user_list = []
-	first_user_list.append(User.objects.all())
+	first_user_list = Student.objects.all()
 	category_all = Category.objects.all()
 	group_all = Group.objects.all()
 	word = False
