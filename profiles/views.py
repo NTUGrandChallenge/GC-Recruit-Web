@@ -120,7 +120,7 @@ def edit(request):
 	talents = Talent.objects.all()
 	mytalents = Talent.objects.filter(student=student)
 	number = len(mytalents)
-	counters = list(range(number,10))
+	counters = list(range(number,6))
 	if request.POST:
 		motto = request.POST['motto']
 		experience = request.POST['experience']
@@ -161,7 +161,7 @@ def student_create(request):
 	categorys = Category.objects.all()
 	groups = Group.objects.all()
 	talents = Talent.objects.all()
-	counters = list(range(1,11))
+	counters = list(range(1,7))
 
 
 	if request.user.has_perm('profiles.can_insurance'):

@@ -177,7 +177,7 @@
                     {% for c in categorys %}
                          {% for g in c.group_set.all %}
                               {% for t in g.talent_set.all %}
-                              <option value="{{ t }}" class="son-of-g-{{g.id}}"> {{ t }} </option>
+                              <option value="{{ t }}" class="son-of-g-{{g.id}}"> {{ t }} {% if t == m %}selected{% endif %}</option>
                               {% endfor %}
                          {% endfor %}
                     {% endfor %}
