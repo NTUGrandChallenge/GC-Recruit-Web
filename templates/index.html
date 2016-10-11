@@ -9,7 +9,9 @@
 <div>
     <h1>前一百位挑戰者</h1>
     {% for s in students %}
-    <h3>{{ s.realname }}</h3>
+    {% if forloop.counter < 101 %}
+    <h3>{{forloop.counter}} {{ s.realname }}</h3>
+    {%endif%}
     {% endfor %}
 </div>
 <div>
