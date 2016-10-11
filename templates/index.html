@@ -7,6 +7,12 @@
 
 {% block content %}
 <div>
+    <h1>前一百位挑戰者</h1>
+    {% for s in students %}
+    <h3>{{ s.realname }}</h3>
+    {% endfor %}
+</div>
+<div>
     <h1>最新消息</h1>
     {% for t in teams %}
     <h3>{{ t.name }}</h3>

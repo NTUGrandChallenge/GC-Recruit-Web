@@ -34,6 +34,7 @@ def login(request):
 		return render_to_response('login.html', RequestContext(request, locals()))
 
 def index(request):
+	students = Student.objects.all()
 	teams = Team.objects.filter(captain_name='handsome')
 	badges = Badge.objects.all()
 	return render_to_response('index.html', RequestContext(request, locals()))

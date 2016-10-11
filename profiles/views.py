@@ -440,7 +440,7 @@ def create_team(request):
 					name=teamname,
 					captain_name=captain_name,
 					interest = Interest.objects.get(name=team_interest),
-					content = content,
+					content = content
 				)
 			student.team = t
 			perm = Permission.objects.get(codename='can_create_team_profile')
