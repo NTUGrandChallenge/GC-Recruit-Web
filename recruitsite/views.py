@@ -35,7 +35,7 @@ def login(request):
 
 def index(request):
 	students = Student.objects.all()
-	teams = Team.objects.filter(captain_name='handsome')
+	teams = Team.objects.filter(captain_name='postgres')
 	badges = Badge.objects.all()
 	return render_to_response('index.html', RequestContext(request, locals()))
 
