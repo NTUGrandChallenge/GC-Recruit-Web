@@ -76,7 +76,7 @@
                         Domain Expert
                     </label>
                 </div>
-                <h4>技能列表</h4>
+                <h4>技能分類</h4>
                 {% for c in category_all %}
                 <div class="checkbox">
                     <input type="checkbox" name="category[]" id="category[]" value="{{c}}">
@@ -85,7 +85,7 @@
                     </label>
                 </div>
                 {% endfor %}
-                <h4>中技能列表</h4>
+                <!-- <h4>中技能列表</h4>
                 {% for g in group_all %}
                 <div class="checkbox">
                     <input type="checkbox" name="group[]" id="group[]" value="{{g}}">
@@ -93,7 +93,7 @@
                         {{g}}
                     </label>
                 </div>
-                {% endfor %}
+                {% endfor %} -->
                 <input type="submit" name="search" class="btn" value="查詢">
             </form>
             </div>

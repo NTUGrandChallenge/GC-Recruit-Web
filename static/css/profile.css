@@ -4,9 +4,15 @@ body{
 
 @media screen and (min-width: 768px){
 	#profile .padding-wrapper{
-		padding: 100px;
+		padding: 20px;
 	}
 }
+#profile #sidebar{
+	background-color: #ffeb32;
+	padding-top: 30px;
+	min-height: 100vh;
+}
+
 #profile .top{
 	padding-bottom: 20px;
 	margin-bottom: 20px;

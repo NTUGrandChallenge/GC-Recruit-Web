@@ -4,6 +4,7 @@ body{
 #list #sidebar{
 	background-color: #ffeb32;
 	padding-top: 30px;
+	min-height: 70vh;
 }
 #list #sidebar #search{
 	width: 80%;
