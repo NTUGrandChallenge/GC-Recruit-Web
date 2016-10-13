@@ -421,6 +421,8 @@ def follow_complete(request):
 def list_team(request):
 	students = Student.objects.all()
 	teams = Team.objects.all()
+	news = Team.objects.filter(captain_name='postgres')
+	teams = list(set(teams).difference(set(news)))
 	return render_to_response('team_list.html', locals())
 
 @permission_required('profiles.can_create_team_profile', login_url='/permission_error/')
