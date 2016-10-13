@@ -7,6 +7,10 @@
 
 {% block content %}
 <div>
+    <h3>點進內站人數：</h3>{{all_number}}
+    <h3>報名人數：</h3>{{wait_number}}
+</div>
+<div>
     <h1>最新消息</h1>
     {% for t in teams %}
     <h3>{{ t.name }}</h3>
