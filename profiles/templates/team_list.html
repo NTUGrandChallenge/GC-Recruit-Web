@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/css/search.css">
+<link rel="stylesheet" href="/static/css/list.css">
 {% endblock %}
 {% block title %} 團隊列表 {% endblock %}
 
@@ -55,13 +55,13 @@
                 </form>
             </div>
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-9" id="team_list">
             <div class="list_top">
                     <img src="/static/img/triangle.png" class="left" />
                     <img src="/static/img/list_top.png" class="right" />
                 </div>
 			<div class="row text-right">
-				<a href="/create_team/" class="btn btn-primary btn-create"><i class="fa fa-plus" aria-hidden="true"></i>創建團隊</a>
+				<a href="/create_team/" class="btn-create"><i class="fa fa-plus" aria-hidden="true"></i> 創建團隊</a>
 			</div>
 			<div class="row" style="margin: 50px;">
 				{% for i in teams %}
@@ -87,4 +87,8 @@
 		</div> -->
 	</div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/list.js"></script>
 {% endblock %}
