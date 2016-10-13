@@ -12,12 +12,27 @@ body{
 	padding-top: 30px;
 	min-height: 100vh;
 }
+#profile #sidebar a:hover{
+	color: #50cfc7;
+}
 
 #profile .top{
 	padding-bottom: 20px;
 	margin-bottom: 20px;
 	border-bottom: #ffeb32 3px solid;
 }
+#profile .top .profile-image{
+	height: 200px;
+	width: 200px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+#profile .top .profile-image img{
+	display: inline;
+	width: 100%;
+	height: auto;
+}
+
 #profile .basic{
 	display: flex;
 	position: relative;

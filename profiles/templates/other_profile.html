@@ -1,50 +1,130 @@
 {% extends 'base.html' %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/css/profile.css">
+{% endblock %}
+
 {% block title %} {{student.nickname}} {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid" id="profile">
 	<div class="row">
-		<div class="col-md-3">
-			<img src="http://graph.facebook.com/{{facebook_id}}/picture?type=large" class="circular-img">
+		<div class="col-md-3 full-height" id="sidebar">
+			<div style="margin-bottom: 100px;">
+                <img src="/static/img/student_profile_header.png" class="full-width" />
+            </div>
+            <div class="text-center">
+                <!-- <form action="" method="GET">
+				<input type="hidden"  name="follow" value="{{student.id}}">
+					{%if student.id != myid%}
+						{%if student in me.follow.all %}
+							<input type="hidden">
+						{%else%}
+							<input type="submit" value="追蹤">
+						{%endif%}
+					{%endif%}
+				</form> -->
+				<!-- <a href="/chatroom/{{ myid }}/{{ student.id }}/">
+					<i class="fa fa-comments fa-4x" aria-hidden="true"></i>
+				</a> -->
+            </div>
 		</div>
-		<div class="col-md-9">
-			<h1>{{student.nickname}}({{student.team}})</h1>
-			<p>{{student.realname}}</p>
-			<p>{{student.school}}</p>
-			<p>{{student.domain}}</p>
-			<p>{{student.department}}</p>
-			<p>{{student.grade}}</p>
-			<p>{{student.motto}}</p>
+		<div class="col-md-9" id="challenger_profile">
+		<div class="padding-wrapper">
+			<div class="row top">
+				<div class="col-md-3">
+					<div class="profile-image">
+						{% if facebook_id %}
+							<img src="http://graph.facebook.com/{{facebook_id}}/picture?type=large">
+						{% else %}
+							<img src="/static/img/profile_image.png" />
+						{% endif %}
+					</div>
+				</div>
+				<div class="col-md-9">
+				<div class="basic">
+					<div class="title">
+						<p>姓名</p>
+						<p>暱稱</p>
+						<p>學校</p>
+						<p>系所</p>
+						<p>年級</p>
+						<p>Email</p>
+					</div>
+					<div class="content">
+						<p>{{student.realname}}</p>
+						<p>{{student.nickname}}</p>
+						<p>{{student.school}}</p>
+						<p>{{student.department}}</p>
+						<p>{{student.grade}}</p>
+						<p>{{student.email}}</p>
+					</div>
+				</div>
+				</div>
+			</div>
+			<p class="text-center" style="font-size: 24px;">{{student.motto}}</p>
+			<div class="row">
+			<div class="col-xs-12 exp">
+				<div class="title full-height">
+					<h4 class="text-center">經歷</h4>
+				</div>
+				<div class="content full-height">
+					<p>{{student.experience}}</p>
+				</div>
+			</div>
+			</div>
+			
+			<!-- <p>
+				{% for d in student.domain.all %}
+				{{d}}
+				{% endfor %}
+			</p> -->
+			<div class="row other">
+				<div class="col-xs-4 team">
+					<h4 class="title">所屬隊伍</h4>
+					<div class="content">
+					{% if student.team.name != 'none' %}
+						<p><a href="/team_profile/{{student.team.id}}/">{{student.team}}</a></p>	
+					{% else %}
+						<p>未加入團隊</p>
+					{% endif %}
+					</div>
+				</div>
+				<div class="col-xs-4 interest">
+					<h4 class="title">領域</h4>
+					<div class="content interest-{{student.interest.id}}">
+
+					</div>
+				</div>
+				<div class="col-xs-4 role">
+					<h4 class="title">團隊角色</h4>
+					<div class="content">
+						<p>{{student.role}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="row talent">
+				{% for t in student.talent.all %}
+				{% if t.group.category.id != 1 %}
+					<div class="col-md-4 col-xs-6">
+					<div class="one-talent">
+					{% if t.group.category.id == 2 %}
+						<i class="fa fa-book fa-2x" aria-hidden="true"></i>
+					{% elif t.group.category.id == 3 %}
+						<i class="fa fa-paint-brush fa-2x" aria-hidden="true"></i>
+					{% elif t.group.category.id == 4 %}
+						<i class="fa fa-laptop fa-2x" aria-hidden="true"></i>
+					{% elif t.group.category.id == 5 %}
+						<i class="fa fa-wrench fa-2x" aria-hidden="true"></i>
+					{% endif %}
+						<span style="font-size: 18px;">　{{ t.name }}</span>
+					</div>
+					</div>
+				{% endif %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
-	<form action="" method="GET">
-		<input type="hidden"  name="follow" value="{{student.id}}">
-		{%if student.id != myid%}
-			{%if student in me.follow.all%}
-				<td><input type="hidden"></td>
-			{%else%}
-				<td><input type="submit" value="追蹤"></td>
-			{%endif%}
-		{%endif%}
-	</form>
-	<a href="/chatroom/{{ myid }}/{{ student.id }}/">聊天</a>
-</div>
-<div class="container">
-	<div class="row">
-		所屬隊伍: <a href="/team_profile/{{student.team.id}}/">{{student.team}}</a>
-	</div>
-	<div>
-		{{student.interest}}
-	</div>
-	<div class="row">
-		{{student.role}}
-	</div>
-	<div class="row">
-		{{student.talent.all}}
-	</div>
-	<div>
-		{{student.experience}}
 	</div>
 </div>
 {% endblock %}
