@@ -9,6 +9,7 @@ body{
 }
 #profile .top{
 	padding-bottom: 20px;
+	margin-bottom: 20px;
 	border-bottom: #ffeb32 3px solid;
 }
 #profile .basic{
@@ -35,4 +36,100 @@ body{
 }
 #profile .basic .edit:hover{
 	color: #50cfc7;
+}
+
+#profile .exp{
+	display: flex;
+	height: 120px;
+	min-height: 100px;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: #ffeb32 3px solid;
+}
+#profile .exp .title{
+	flex: 1;
+	background-color: #ffeb32;
+	writing-mode: vertical-lr;
+}
+#profile .exp .content{
+	flex: 12;
+	padding: 10px;
+	background-color: #fff;
+}
+
+#profile .other{
+	height: 220px;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: #ffeb32 3px solid;
+}
+#profile .other .title{
+	background-color: #ffeb32;
+	width: 100px;
+	padding: 5px;
+	text-align: center;
+}
+#profile .other .content{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+	height: 150px;
+}
+#profile .other .team .content a{
+	text-decoration: underline;
+	font-size: 22px;
+}
+#profile .other .team .content a:hover{
+	color: #50cfc7;
+}
+#profile .other .interest .content{
+	width: 150px;
+	background-color: #fff;
+	border-radius: 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 90%;
+}
+#profile .other .interest .content.interest-1{
+	background-image: url("/static/img/five-field/no_color.png");
+	background-size: cover;
+}
+#profile .other .interest .content.interest-2{
+	background-image: url("/static/img/five-field/smart_color.png");
+}
+#profile .other .interest .content.interest-3{
+	background-image: url("/static/img/five-field/health_color.png");
+}
+#profile .other .interest .content.interest-4{
+	background-image: url("/static/img/five-field/environment_color.png");
+}
+#profile .other .interest .content.interest-5{
+	background-image: url("/static/img/five-field/society_color.png");
+}
+#profile .other .interest .content.interest-6{
+	background-image: url("/static/img/five-field/agriculture_color.png");
+}
+#profile .other .role .content{
+	width: 150px;
+	background-color: #50cfc7;
+	color: #fff;
+	border-radius: 50%;
+}
+
+#profile .talent{
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+#profile .talent .one-talent{
+	background-color: #ffeb32;
+	padding: 5px 10px;
 }

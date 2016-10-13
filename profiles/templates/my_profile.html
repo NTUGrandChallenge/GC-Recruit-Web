@@ -22,47 +22,81 @@
 				<p>姓名</p>
 				<p>暱稱</p>
 				<p>學校</p>
-				<p>系級</p>
+				<p>系所</p>
+				<p>年級</p>
 				<p>Email</p>
 			</div>
 			<div class="content">
 				<p>{{student.realname}}</p>
 				<p>{{student.nickname}}</p>
 				<p>{{student.school}}</p>
-				<p>{{student.department}} {{student.grade}}</p>
+				<p>{{student.department}}</p>
+				<p>{{student.grade}}</p>
 				<p>{{student.email}}</p>
 			</div>
-
 		</div>
 		</div>
 	</div>
+	<p class="text-center" style="font-size: 24px;">{{student.motto}}</p>
 	<div class="row">
-			{% if student.team.name == 'none' %}
-			<h2>未加入團隊</h2>
-			{% endif %}
-			<p>
-				{% for d in student.domain.all %}
-				{{d}}
-				{% endfor %}
-			</p>
-			<p>{{student.motto}}</p>
-	</div>
-	
-	<div class="row">
-		{% if student.team.name != 'none' %}
-		<p>所屬隊伍: <a href="/team_profile/{{student.team.id}}/">{{student.team}}</a></p>
-		{% endif %}
-		<p>領域:{{student.interest}}</p>
-		<p>角色:{{student.role}}</p>
-		<div>
-			<p>{% for t in student.talent.all %}
-				{{t.name}}
-				{% endfor %}
-			</p>
+	<div class="col-xs-12 exp">
+		<div class="title full-height">
+			<h4 class="text-center">經歷</h4>
 		</div>
-		<div>
+		<div class="content full-height">
 			<p>{{student.experience}}</p>
 		</div>
+	</div>
+	</div>
+	
+	<!-- <p>
+		{% for d in student.domain.all %}
+		{{d}}
+		{% endfor %}
+	</p> -->
+	<div class="row other">
+		<div class="col-xs-4 team">
+			<h4 class="title">所屬隊伍</h4>
+			<div class="content">
+			{% if student.team.name != 'none' %}
+				<p><a href="/team_profile/{{student.team.id}}/">{{student.team}}</a></p>	
+			{% else %}
+				<p>未加入團隊</p>
+			{% endif %}
+			</div>
+		</div>
+		<div class="col-xs-4 interest">
+			<h4 class="title">領域</h4>
+			<div class="content interest-{{student.interest.id}}">
+
+			</div>
+		</div>
+		<div class="col-xs-4 role">
+			<h4 class="title">團隊角色</h4>
+			<div class="content">
+				<p>{{student.role}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="row talent">
+		{% for t in student.talent.all %}
+		{% if t.group.category.id != 1 %}
+			<div class="col-md-4 col-xs-6">
+			<div class="one-talent">
+			{% if t.group.category.id == 2 %}
+				<i class="fa fa-book fa-2x" aria-hidden="true"></i>
+			{% elif t.group.category.id == 3 %}
+				<i class="fa fa-paint-brush fa-2x" aria-hidden="true"></i>
+			{% elif t.group.category.id == 4 %}
+				<i class="fa fa-laptop fa-2x" aria-hidden="true"></i>
+			{% elif t.group.category.id == 5 %}
+				<i class="fa fa-wrench fa-2x" aria-hidden="true"></i>
+			{% endif %}
+				<span style="font-size: 18px;">　{{ t.name }}</span>
+			</div>
+			</div>
+		{% endif %}
+		{% endfor %}
 	</div>
 </div>
 </div>
