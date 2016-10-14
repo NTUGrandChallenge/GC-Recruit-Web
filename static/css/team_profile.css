@@ -6,6 +6,7 @@ body{
 #team_profile #sidebar{
     background-color: #ffeb32;
     padding-top: 30px;
+    min-height: 100vh;
 }
 
 
