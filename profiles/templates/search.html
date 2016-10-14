@@ -81,8 +81,8 @@
                 <h4>技能分類</h4>
                 {% for c in category_all %}
                 <div class="checkbox">
-                    <input type="checkbox" name="category[]" id="category[]" value="{{c}}">
-                    <label for="category[]">
+                    <input type="checkbox" name="category[]" id="category_{{c.id}}" value="{{c}}">
+                    <label for="category_{{c.id}}">
                         {{c}}
                     </label>
                 </div>

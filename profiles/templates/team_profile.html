@@ -53,7 +53,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9" id="team_info">
         <div class="padding-wrapper">
             <div class="team-name">
                 <div class="skew-fix">
@@ -78,7 +78,11 @@
                     <div class="ribbon-wrapper"><div class="ribbon">隊長</div></div>
                 {%endif%}
                 <div class="col-xs-3">
-                    <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large' class="square-img">
+                    {% if student.name.socialaccount_set.first.uid %}
+                        <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large' class="square-img">
+                    {% else %}
+                        <img src="/static/img/profile_image.png" class="square-img">
+                    {% endif %}
                 </div>
                 <div class="col-xs-7">
                         <h4>姓名：{{student.realname}}</h4>
@@ -106,4 +110,8 @@
     </div>
 </div>
 {% endif %}
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/team_profile.js"></script>
 {% endblock %}
