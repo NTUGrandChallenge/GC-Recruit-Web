@@ -20,7 +20,7 @@
 					<div class="row one-message">
 						<div class="col-xs-2">
 							{% if c.student1.name.socialaccount_set.first.uid %}
-								<img src='https://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small' class="profile-photo">
+								<img src='https://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=square' class="profile-photo">
 							{% else %}
 								<img src='/static/img/profile_image.png' class="profile-photo">
 							{% endif %}
@@ -36,7 +36,7 @@
 						</div>
 						<div class="col-xs-2">
 							{% if c.student1.name.socialaccount_set.first.uid %}
-								<img src='https://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=small' class="profile-photo">
+								<img src='https://graph.facebook.com/{{c.student1.name.socialaccount_set.first.uid}}/picture?type=square' class="profile-photo">
 							{% else %}
 								<img src='/static/img/profile_image.png' class="profile-photo">
 							{% endif %}
