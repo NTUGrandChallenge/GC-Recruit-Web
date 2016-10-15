@@ -105,22 +105,20 @@
 			</div>
 			<div class="row talent">
 				{% for t in student.talent.all %}
-				{% if t.group.category.id != 1 %}
 					<div class="col-md-4 col-xs-6">
 					<div class="one-talent">
-					{% if t.group.category.id == 2 %}
+					{% if t.group.category.id == 1 %}
 						<i class="fa fa-book fa-2x" aria-hidden="true"></i>
-					{% elif t.group.category.id == 3 %}
+					{% elif t.group.category.id == 2 %}
 						<i class="fa fa-paint-brush fa-2x" aria-hidden="true"></i>
-					{% elif t.group.category.id == 4 %}
+					{% elif t.group.category.id == 3 %}
 						<i class="fa fa-laptop fa-2x" aria-hidden="true"></i>
-					{% elif t.group.category.id == 5 %}
+					{% elif t.group.category.id == 4 %}
 						<i class="fa fa-wrench fa-2x" aria-hidden="true"></i>
 					{% endif %}
 						<span style="font-size: 18px;">　{{ t.name }}</span>
 					</div>
 					</div>
-				{% endif %}
 				{% endfor %}
 			</div>
 		</div>
