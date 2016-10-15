@@ -1,24 +1,32 @@
 {% extends 'base.html' %}
 
-{% block title %} Student Profile {% endblock %}
-{% block h2 %} 台大創創挑戰賽 {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/static/css/chatroom_list.css">
+{% endblock %}
+
+{% block title %}聊天列表{% endblock %}
 
 {% block content %}
-	<p>
-					{% for i in chatrooms %}
-					<h2>我的聊天列表</h2>
-						<table class="table">
-							<tr>
-								<td> {{i.student1.realname}} </td>
-								
-<!-- 								<td> <a href="/other_profile/?id={{ i.student1.id }}">檢視</a> </td>
- --> 								<td> <a href="/chatroom/{{ me.id }}/{{ i.student1.id }}/">聊天</a> </td>
-							</tr>
-						</table>
-				</p>
-					{% endfor %}
-{% endblock %}
-{% block img %}
-	
+<div class="container" id="chatroom_list">
+<div class="content-wrapper">
+	{% for i in chatrooms %}
+	<a href="/chatroom/{{ me.id }}/{{ i.student1.id }}/">
+	<div class="row one-chat">
+		<div class="col-xs-2" style="padding-top: 5px; padding-bottom: 5px;">
+			{% if i.student1.name.socialaccount_set.first.uid %}
+				<img src="http://graph.facebook.com/{{i.student1.name.socialaccount_set.first.uid}}/picture?type=large" style="width: 100%;">
+			{% else %}
+				<img src="/static/img/profile_image.png" style="width: 100%;">
+			{% endif %}
+		</div>
+		<div class="col-xs-10">
+			<h3>{{i.student1.realname}}</h3>
+		</div>
+	</div>
+	</a>
+	{% endfor %}
+</div>
+</div>
+					
 {% endblock %}
 
