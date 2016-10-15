@@ -23,7 +23,6 @@ body{
 #chatroom_list .one-chat{
 	border-bottom: 2px solid #DDD;
 	border-left: 10px solid transparent;
-	padding-left: 5px;
 }
 #chatroom_list .one-chat:hover{
 	border-left: 10px solid #ffeb32;
