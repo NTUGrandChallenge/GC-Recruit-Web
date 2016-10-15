@@ -11,3 +11,7 @@ function logout(){
 			swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
 	});
 }
+
+function noteam(){
+	swal("尚未加入團隊，趕快找一個吧！")
+}

@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %} Student Profile {% endblock %}
-{% block h2 %} 台大創創挑戰賽 {% endblock %}
+{% block title %}聊天列表{% endblock %}
 
 {% block content %}
-	<p>
-					{% for i in chatrooms %}
-					<h2>我的聊天列表</h2>
+<div class="container">
+{% for i in chatrooms %}
 						<table class="table">
 							<tr>
 								<td> {{i.student1.realname}} </td>
@@ -15,10 +13,8 @@
  --> 								<td> <a href="/chatroom/{{ me.id }}/{{ i.student1.id }}/">聊天</a> </td>
 							</tr>
 						</table>
-				</p>
 					{% endfor %}
-{% endblock %}
-{% block img %}
-	
+</div>
+					
 {% endblock %}
 
