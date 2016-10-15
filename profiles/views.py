@@ -232,7 +232,7 @@ def check(y,m,d):
 		if m == 2:
 			if d > 28:
 				return False
-		elif m  in [4,6,9,11]:
+		elif m in [4,6,9,11]:
 			if d ==31:
 				return False
 	return True
