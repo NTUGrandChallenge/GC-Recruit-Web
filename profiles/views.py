@@ -225,14 +225,14 @@ def check(y,m,d):
 		if m == 2:
 			if d > 29:
 				return False
-		if m == 4 or 6 or 9 or 11:
+		elif m in [4,6,9,11]:
 			if d ==31:
 				return False
 	else:
 		if m == 2:
 			if d > 28:
 				return False
-		if m == 4 or 6 or 9 or 11:
+		elif m == in [4,6,9,11]:
 			if d ==31:
 				return False
 	return True
