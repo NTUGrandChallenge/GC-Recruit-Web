@@ -282,21 +282,25 @@ def chatroom(request, idfrom, idto):
 	me = Student.objects.get(name=request.user)
 	s1=Student.objects.get(id=idfrom)
 	s2=Student.objects.get(id=idto)
-	chatroom1 = Chatroom.objects.filter(student1=s1, student2=s2)
-	chatroom2 = Chatroom.objects.filter(student1=s2, student2=s1)
-	chatroom = (chatroom1 | chatroom2).order_by('date_time')
-	if request.POST:
-		content = request.POST['content']
-		date_time = timezone.localtime(timezone.now())
-		# #如果session沒有被設置，才將資料加入資料庫
-		# if 'ok' not in request.session:
-		# 	request.session['ok'] = 'ok'
-		Chatroom.objects.create(
-				student1=Student.objects.get(id=idfrom),
-				student2=Student.objects.get(id=idto),
-				content=content,
-				date_time=date_time
-			)
+	if me in [s1, s2]:
+		chatroom1 = Chatroom.objects.filter(student1=s1, student2=s2)
+		chatroom2 = Chatroom.objects.filter(student1=s2, student2=s1)
+		chatroom = (chatroom1 | chatroom2).order_by('date_time')
+		if request.POST:
+			content = request.POST['content']
+			date_time = timezone.localtime(timezone.now())
+			# #如果session沒有被設置，才將資料加入資料庫
+			# if 'ok' not in request.session:
+			# 	request.session['ok'] = 'ok'
+			Chatroom.objects.create(
+					student1=Student.objects.get(id=idfrom),
+					student2=Student.objects.get(id=idto),
+					content=content,
+					date_time=date_time
+				)
+		return render_to_response('chatroom.html', RequestContext(request, locals()))
+	else:
+		return render_to_response('permission_error.html', RequestContext(request, locals()))
 	return render_to_response('chatroom.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
