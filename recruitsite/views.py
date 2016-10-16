@@ -31,7 +31,7 @@ def login(request):
 		auth.login(request, user)
 		return HttpResponseRedirect('/index/')
 	else:
-		return render_to_response('login.html', RequestContext(request, locals()))
+		return render_to_response('registration/login.html', RequestContext(request, locals()))
 
 def index(request):
 	all_number = len(User.objects.all())
