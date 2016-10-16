@@ -125,19 +125,25 @@
                     {%endfor%} -->
                     {% for student in student_list %}
                     <div class="col-md-4">
-                    <div class="one-student">
+                    <a href="/other_profile/?id={{ student.id }}">
+                    <div class="one-student text-center">
                         <div class="name">
                             <h4>{{student.realname}}</h4>
                         </div>
-                        <div class="info">
-
-                        </div>
                         <!-- {{student.motto}} -->
-                        <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large" class="square-img">
-                        <p>{{student.department}}</p>
-                        <p>{{student.interest}}</p>
-                        <a href="/other_profile/?id={{ student.id }}">檢視</a> 
+                        <div class="info">
+                            {% if student.name.socialaccount_set.first.uid %}
+                                <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large" style="width: 100%;">
+                            {% else %}
+                                <img src="/static/img/profile_image.png" style="width: 100%;">
+                            {% endif %}
+                            <div style="height: 60px;">
+                                <p>{{student.department}}</p>
+                            </div>
+                            <p>{{student.interest}}</p>
+                        </div>
                     </div>
+                    </a>
                     </div>
                     {% endfor %}
                 {% endif %}
@@ -168,7 +174,7 @@
                         <!-- {{student.motto}} -->
                         <div class="info">
                             {% if student.name.socialaccount_set.first.uid %}
-                                <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large" style="width: 100%;">
+                                <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=square&width=300" class="square-img">
                             {% else %}
                                 <img src="/static/img/profile_image.png" style="width: 100%;">
                             {% endif %}
@@ -193,9 +199,9 @@
                     <!-- {{student.motto}} -->
                     <div class="info">
                         {% if student.name.socialaccount_set.first.uid %}
-                            <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large" style="width: 100%;">
+                            <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=square&width=300" class="square-img">
                         {% else %}
-                            <img src="/static/img/profile_image.png" style="width: 100%;">
+                            <img src="/static/img/profile_image.png" class="square-img">
                         {% endif %}
                         <div style="height: 60px;">
                             <p>{{student.department}}</p>

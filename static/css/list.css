@@ -114,6 +114,15 @@ body{
 	background-color: #B77729;
 }
 #list .one-team .info{
+	position: relative;
 	flex: 4;
 	padding-left: 10px;
+	height: 100px;
+}
+#list .one-team .info .count{
+	display: inline-block;
+	position: absolute;
+	right: 5px;
+	bottom: 0;
+	color: #666;
 }

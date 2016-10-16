@@ -66,10 +66,12 @@ body > .container-fluid{
 	-webkit-clip-path: circle(50% at center);
 }
 .square-img{
-    object-fit: none;
-    object-position: center;
-    height: 150px;
-    width: 150px;
+    width: 100%;
+}
+.square-img:after{
+    content: "";
+    display: block;
+    padding-bottom: 100%;
 }
 
 /*navbar*/
