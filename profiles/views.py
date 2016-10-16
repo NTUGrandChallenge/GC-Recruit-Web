@@ -422,12 +422,36 @@ def follow_complete(request):
 	return render_to_response('follow_complete.html', locals())
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
-def list_team(request):
+def team_list(request):
 	students = Student.objects.all()
 	teams = Team.objects.all()
 	news = Team.objects.filter(captain_name='postgres')
 	teams = list(set(teams).difference(set(news)))
-	return render_to_response('team_list.html', locals())
+
+	word = False
+	search = False
+	if 'word' in request.GET:
+		word = True
+		keyword = request.GET['word']
+		if not keyword:
+			return HttpResponseRedirect('/team_list/')
+		else:
+			teams = Team.objects.filter(name__icontains = keyword)
+
+			slen = len(teams)
+			return render_to_response('team_list.html', RequestContext(request, locals()))
+	if 'search' in request.GET:
+		search = True
+		interests = request.GET.getlist("interest[]")
+		teams = []
+		for interest in interests:
+			interest_list = Team.objects.filter(interest_id=interest)
+			for each in interest_list:
+				teams.append(each)
+				
+		slen = len(teams)
+		return render_to_response('team_list.html', RequestContext(request, locals()))
+	return render_to_response('team_list.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_create_team_profile', login_url='/permission_error/')
 def create_team(request):
