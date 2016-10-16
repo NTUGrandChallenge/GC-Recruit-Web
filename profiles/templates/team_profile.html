@@ -79,7 +79,7 @@
                 {%endif%}
                 <div class="col-xs-3">
                     {% if student.name.socialaccount_set.first.uid %}
-                        <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large' class="square-img">
+                        <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?height=300&width=300' class="square-img">
                     {% else %}
                         <img src="/static/img/profile_image.png" class="square-img">
                     {% endif %}
