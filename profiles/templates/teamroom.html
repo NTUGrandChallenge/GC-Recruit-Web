@@ -18,7 +18,11 @@
 					{% if c.speaker != me %}
 						<div class="row one-message">
 							<div class="col-xs-2">
-								<img src='https://graph.facebook.com/{{c.speaker.name.socialaccount_set.first.uid}}/picture?type=small' class="profile-photo">
+								{% if c.student1.name.socialaccount_set.first.uid %}
+									<img src='https://graph.facebook.com/{{c.speaker.name.socialaccount_set.first.uid}}/picture?type=square' class="profile-photo">
+								{% else %}
+									<img src='/static/img/profile_image.png' class="profile-photo">
+								{% endif %}
 							</div>
 							<div class="col-xs-10">
 								<p>{{c.content}}</p>
@@ -30,7 +34,11 @@
 								<p class="text-right">{{c.content}}</p>
 							</div>
 							<div class="col-xs-2">
-								<img src='https://graph.facebook.com/{{c.speaker.name.socialaccount_set.first.uid}}/picture?type=small' class="profile-photo">
+								{% if c.student1.name.socialaccount_set.first.uid %}
+									<img src='https://graph.facebook.com/{{c.speaker.name.socialaccount_set.first.uid}}/picture?type=square' class="profile-photo">
+								{% else %}
+									<img src='/static/img/profile_image.png' class="profile-photo">
+								{% endif %}
 							</div>
 						</div>
 					{% endif %}

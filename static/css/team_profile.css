@@ -33,31 +33,33 @@ body{
     width: 150px;
     height: 150px;
     background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
     border-radius: 50%;
 }
 #team_profile .interest.field-1{
     background-image: url("/static/img/five-field/no_color.png");
-    background-size: cover;
+    background-size: 90%;
 }
 #team_profile .interest.field-2{
     background-image: url("/static/img/five-field/smart_color.png");
-    background-size: cover;
+    background-size: 90%;
 }
 #team_profile .interest.field-3{
     background-image: url("/static/img/five-field/health_color.png");
-    background-size: cover;
+    background-size: 90%;
 }
 #team_profile .interest.field-4{
     background-image: url("/static/img/five-field/environment_color.png");
-    background-size: cover;
+    background-size: 90%;
 }
 #team_profile .interest.field-5{
     background-image: url("/static/img/five-field/society_color.png");
-    background-size: cover;
+    background-size: 90%;
 }
 #team_profile .interest.field-6{
     background-image: url("/static/img/five-field/agriculture_color.png");
-    background-size: cover;
+    background-size: 90%;
 }
 #team_profile .team-name{
     -webkit-transform: skew(-10deg);
