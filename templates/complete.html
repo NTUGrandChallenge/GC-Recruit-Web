@@ -3,17 +3,19 @@
 {% block title %} 填寫完成 {% endblock %}
 
 {% block content %}
-<div style="height: 100vh;">
+<div class="container">
 
 </div>
-{{team_id}}
+
+{% if team_id %}
 <script type="text/javascript">
 	swal({
 		title: "創建成功！",
 		type: "success"
 	},function(){
-		window.location.href = "/index"
+		window.location.href = "/team_profile/{{team_id}}"
 	})
 </script>
+{% endif %}
 {% endblock %}
 
