@@ -111,18 +111,6 @@
                     <h2 class="post-title">沒有人符合你的要求...</h2>
                 {% else %}
                     <h2 class="post-title">有 {{slen}} 人符合你的要求</h2>
-                    <!-- {%for interest in interests%}
-                        <p>"{{interest}}"</p>
-                    {%endfor%}
-                    {%for role in roles%}
-                        <p>"{{role}}"</p>
-                    {%endfor%}
-                    {%for category in categorys%}
-                        <p>"{{category}}"</p>
-                    {%endfor%}
-                    {%for group in groups%}
-                        <p>"{{group}}"</p>
-                    {%endfor%} -->
                     {% for student in student_list %}
                     <div class="col-md-4">
                     <a href="/other_profile/?id={{ student.id }}">
@@ -152,18 +140,6 @@
                     <h2 class="post-title">沒有人符合你的要求...</h2>
                 {% else %}
                     <h2 class="post-title">有 {{slen}} 人符合你的要求</h2>
-                    {%for interest in interests%}
-                        <p>{{interest}}</p>
-                    {%endfor%}
-                    {%for role in roles%}
-                        <p>{{role}}</p>
-                    {%endfor%}
-                    {%for category in categorys%}
-                        <p>{{category}}</p>
-                    {%endfor%}
-                    {%for group in groups%}
-                        <p>{{group}}</p>
-                    {%endfor%}
                     {% for student in student_list %}
                     <div class="col-md-4">
                     <a href="/other_profile/?id={{ student.id }}">
