@@ -13,8 +13,15 @@
 	</div>
 </div>
 <div class="row">
-	<h1 class="text-center">操作錯誤</h1>
-	<h4>{{ error_msg }}</h4>
+	{% if error_msg == 'NO_ACCESS' %}
+		<h1 class="text-center">權限不足</h1>
+	{% elif error_msg == 'MORE_THAN_ONE_MEMBER' %}
+		<h1 class="text-center">將所有隊員踢出後才能解散團隊哦！</h1>
+	{% elif error_msg == 'UPLOAD_FAILED' %}
+		<h1 class="text-center">上傳失敗</h1>
+	{% else %}
+		<h1 class="text-center">操作錯誤</h1>
+	{% endif %}
 </div>
 </div>
 {% endblock %}
