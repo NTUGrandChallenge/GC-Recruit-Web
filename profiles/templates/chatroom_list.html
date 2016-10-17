@@ -10,8 +10,8 @@
 <div class="container" id="chatroom_list">
 <div class="content-wrapper">
 	{% for i in chatroom_all %}
-	<a href="/chatroom/{{ i.student1.id }}/{{ i.student2.id }}/">
 	{% if i.student1 != me %}
+	<a href="/chatroom/{{ i.student2.id }}/{{ i.student1.id }}/">
 	<div class="row one-chat">
 		<div class="col-xs-2" style="padding-top: 5px; padding-bottom: 5px;">
 			{% if i.student1.name.socialaccount_set.first.uid %}
@@ -28,6 +28,7 @@
 		{% endif %}
 	</div>
 	{%else%}
+	<a href="/chatroom/{{ i.student1.id }}/{{ i.student2.id }}/">
 	<div class="row one-chat">
 		<div class="col-xs-2" style="padding-top: 5px; padding-bottom: 5px;">
 			{% if i.student2.name.socialaccount_set.first.uid %}
