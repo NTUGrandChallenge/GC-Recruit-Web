@@ -291,7 +291,7 @@ def chatroom(request, idfrom, idto):
 		# 	each.content = each.content.replace("/n","<br>")
 		if request.POST:
 			content = request.POST['content']
-			content =content.replace("/n","<br>")
+			content =content.replace("\n","<br>")
 			date_time = timezone.localtime(timezone.now())
 			# #如果session沒有被設置，才將資料加入資料庫
 			# if 'ok' not in request.session:
@@ -397,11 +397,11 @@ def get_file (request):
 		data=f.read()   #開始讀寫檔案至data變數裡面
 		f.close()
 		# content_type有很多種，有強制下載轉乘PDF的、有ZIP的，我就用force-download
-		response = HttpResponse(data , content_type='application/zip')
+		response = HttpResponse(data , content_type='application/pdf')
 		#要import urllib
 		#檔案原本名稱.encode("utf-8") 記得要換回檔案原本的名稱，轉成utf-8格式以免亂碼
 		#不是存在service端的檔案名稱唷！
-		response['Content-Disposition'] = 'attachment; filename=1.zip'# % urllib.quote( '1'.encode("utf-8") )
+		response['Content-Disposition'] = 'attachment; filename=1.pdf'# % urllib.quote( '1'.encode("utf-8") )
 		return response
 	except:
 		return HttpResponse('error to download file')
@@ -415,11 +415,11 @@ def get_file2 (request):
 		data=f.read()   #開始讀寫檔案至data變數裡面
 		f.close()
 		# content_type有很多種，有強制下載轉乘PDF的、有ZIP的，我就用force-download
-		response = HttpResponse(data , content_type='application/zip')
+		response = HttpResponse(data , content_type='application/pdf')
 		#要import urllib
 		#檔案原本名稱.encode("utf-8") 記得要換回檔案原本的名稱，轉成utf-8格式以免亂碼
 		#不是存在service端的檔案名稱唷！
-		response['Content-Disposition'] = 'attachment; filename=2.zip'# % urllib.quote( '1'.encode("utf-8") )
+		response['Content-Disposition'] = 'attachment; filename=2.pdf'# % urllib.quote( '1'.encode("utf-8") )
 		return response
 	except:
 		return HttpResponse('error to download file')
