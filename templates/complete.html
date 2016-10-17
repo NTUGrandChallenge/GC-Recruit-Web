@@ -7,7 +7,13 @@
 
 </div>
 <script type="text/javascript">
-	swal("創建成功！", "開始找你的團隊夥伴吧", "success")
+	swal({
+		title: "創建成功！",
+		text: "開始找你的團隊夥伴吧",
+		type: "success",
+	}, function() {
+		window.location = '{{ to }}'
+	});
 </script>
 {% endblock %}
 

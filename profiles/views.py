@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render_to_response
 from profiles.models import Student, Interest, Chatroom, Team, Badge, up_file, file_info, Teamroom, Role, Insurance, Domain, Talent, Grade, Category, Group
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
@@ -274,6 +274,7 @@ def insurance_create(request):
 			)
 			perm = Permission.objects.get(codename='wait')
 			request.user.user_permissions.add(perm)
+			to = '/'
 			return render_to_response('complete.html', RequestContext(request, locals()))
 	return render_to_response('insurance.html', RequestContext(request, locals()))
 
@@ -300,7 +301,9 @@ def chatroom(request, idfrom, idto):
 				)
 		return render_to_response('chatroom.html', RequestContext(request, locals()))
 	else:
+		error_msg = 'NO_ACCESS'
 		return render_to_response('permission_error.html', RequestContext(request, locals()))
+
 	return render_to_response('chatroom.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
@@ -379,6 +382,7 @@ def upload(request):
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 @permission_required('profiles.can_upload', login_url='/agree2/')
 def upload2(request):
+	error_msg = 'UPLOAD_FAILED'
 	return render_to_response('permission_error.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
@@ -443,15 +447,16 @@ def create_team(request):
 			errors.append('* 有空白欄位！請不要留空！')
 		if not errors:
 			t = Team.objects.create(
-					name=teamname,
-					captain_name=captain_name,
-					interest = Interest.objects.get(name=team_interest),
-					content = content
-				)
+				name=teamname,
+				captain_name=captain_name,
+				interest = Interest.objects.get(name=team_interest),
+				content = content
+			)
 			student.team = t
 			perm = Permission.objects.get(codename='can_create_team_profile')
 			request.user.user_permissions.remove(perm)
 			student.save()
+			to = '/team_list/'
 		return render_to_response('complete.html', RequestContext(request, locals()))
 	else:
 		return render_to_response('create_team.html', RequestContext(request, locals()))
@@ -492,7 +497,8 @@ def team_profile(request, teamid):
 			me.save()
 			return render_to_response('team_profile.html', RequestContext(request, locals()))
 		else:
-			return HttpResponseRedirect("/permission_error/")
+			error_msg = 'NO_ACCESS'
+			return render_to_response('permission_error.html', RequestContext(request, locals()))
 
 	if request.POST.get('quit'):
 		if me.team == team:
@@ -511,7 +517,8 @@ def team_profile(request, teamid):
 				request.user.user_permissions.add(perm)
 				return HttpResponseRedirect('/team_list/')
 			else:
-				return HttpResponseRedirect('/permission_error/')
+				error_msg = 'MORE_THAN_ONE_MEMBER'
+				return render_to_response('permission_error.html', RequestContext(request, locals()))
 
 	if request.POST.get('cancel'):
 		if me.team != team:
@@ -549,7 +556,8 @@ def applied_list(request, teamid):
 			
 		return render_to_response('applied_list.html', RequestContext(request, locals()))
 	else:
-		return HttpResponseRedirect("/permission_error/")
+		error_msg = 'NO_ACCESS'
+		return render_to_response('permission_error.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def chatroom_list(request):

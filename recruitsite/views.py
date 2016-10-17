@@ -58,7 +58,10 @@ def register(request):
 	return render_to_response('register.html', RequestContext(request, locals()))
 
 def perror(request):
-	return render_to_response('permission_error.html', RequestContext(request, locals()))
+	error_msg = 'NO_ACCESS'
+	return render(request, 'permission_error.html', {
+		'message': error_msg
+	})
 
 @permission_required('profiles.wait', login_url='/agree/')
 def wait(request):
@@ -72,5 +75,6 @@ def use_session(request):
         return HttpResponse('Set name as Jacky')
 
 def complete(request):
+	to = '/'
 	return render_to_response('complete.html', RequestContext(request, locals()))
 
