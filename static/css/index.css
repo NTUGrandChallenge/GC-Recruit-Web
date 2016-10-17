@@ -1,3 +1,14 @@
 body{
 	background-color: #b2b2b2;
 }
+
+#index .news-wrapper{
+	border: 2px solid #333;
+	background-color: #fff;
+}
+
+#index .news-title{
+	font-size: 24px;
+	padding: 5px 10px;
+	border-bottom: 2px solid #DDD;
+}

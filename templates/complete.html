@@ -7,16 +7,14 @@
 
 </div>
 
-{% if team_id %}
 <script type="text/javascript">
 	swal({
 		title: "創建成功！",
 		text: "開始找你的團隊夥伴吧",
-		type: "success",
+	type: "success"
 	}, function() {
 		window.location = '{{ to }}'
 	});
 </script>
-{% endif %}
 {% endblock %}
 
