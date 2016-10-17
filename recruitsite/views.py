@@ -59,9 +59,11 @@ def register(request):
 
 def perror(request):
 	error_msg = 'NO_ACCESS'
-	return render(request, 'permission_error.html', {
-		'message': error_msg
-	})
+	# return render(request, 'permission_error.html', {
+	# 	'message': error_msg
+	# })
+	return render_to_response('permission_error.html', RequestContext(request, locals()))
+
 
 @permission_required('profiles.wait', login_url='/agree/')
 def wait(request):
