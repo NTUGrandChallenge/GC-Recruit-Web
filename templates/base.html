@@ -3,6 +3,8 @@
 <head>
 	<title>{% block title %} {% endblock %}</title>
 	<meta charset='utf-8'>
+
+    <link rel="shortcut icon" href="/static/img/logo.ico">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="/static/plugins/bootstrap-social-gh-pages/bootstrap-social.css">
@@ -72,32 +74,37 @@
 	<footer>
 		<div class="triangle"></div>
 		<div class="container">
-		    <!-- <div class="row">
+		    <div class="row">
 		        <div class="col-md-3">
-		            <a href="/news/index.html"><h4 class="footer-title">活動消息</h4></a>
-		            <a href="javascript: void(0)" onclick="comingSoon()"><h4 class="footer-title">Challengers<span style="font-family: 'Noto Sans TC'">'</span> Club</h4></a>
+		            <!-- <a href="/news/index.html"><h4 class="footer-title">活動消息</h4></a> -->
+		            <a href="https://ntuchallenge.com"><h4 class="footer-title">官方網站</h4></a>
 		        </div>
 		        
-		        <div class="col-md-3">
-		            <h4 class="hidden-xs footer-title">挑戰賽介紹</h4>
-		            <a href="#introductionCollapse" data-toggle="collapse" class="visible-xs toggle-collapse">
-		                <h4 class="footer-title">挑戰賽介紹</h4>
+				<div class="col-md-3">
+		            <h4 class="hidden-xs footer-title">參賽夥伴</h4>
+		            <a href="#partnerCollapse" data-toggle="collapse" class="visible-xs toggle-collapse">
+		                <h4 class="footer-title">參賽夥伴</h4>
 		            </a>
-		            <ul id="introductionCollapse" class="footer-menu collapse in">
-		                <li><a href="/timeline.html">賽程總覽</a></li>
-		                <li><a href="/five.html">五大領域</a></li>
-		                <li><a href="javascript: void(0)" onclick="comingSoon()">評審及導師</a></li>
-		                <li><a href="/faq.html">常見問題</a></li>
+		            <ul id="partnerCollapse" class="footer-menu collapse in">
+		                <li><a href="/search/">挑戰者列表</a></li>
+			            <li><a href="/team_list/">團隊列表</a></li>
 		            </ul>
 		        </div>
-		        
+
 		        <div class="col-md-3">
-		            <h4 class="hidden-xs footer-title">關於我們</h4>
-		            <a href="#aboutCollapse" data-toggle="collapse" class="visible-xs toggle-collapse">
-		                <h4 class="footer-title">關於我們</h4>
+		            <h4 class="hidden-xs footer-title">帳號相關</h4>
+		            <a href="#accountCollapse" data-toggle="collapse" class="visible-xs toggle-collapse">
+		                <h4 class="footer-title">帳號相關</h4>
 		            </a>
-		            <ul id="aboutCollapse" class="footer-menu collapse in">
-		                <li><a href="/related.html">相關單位</a></li>
+		            <ul id="accountCollapse" class="footer-menu collapse in">
+		                <li><a href="/my_profile/">個人資料</a></li>
+			            {% if request.user.student_set.first.team.id %}
+							<li><a href="/team_profile/{{request.user.student_set.first.team.id}}/">我的團隊</a></li>
+						{% else %}
+							<li><a href="javascript: void(0)" onclick="noteam()">我的團隊</a></li>
+						{% endif %}
+			            <li><a href="/edit_profile/">修改個人資料</a></li>
+			            <li><a href="/chatroom_list/">聊天列表</a></li>
 		            </ul>
 		        </div>
 		        
@@ -112,7 +119,7 @@
 		                <li>(02)3366-1573</li>
 		            </ul>
 		        </div>
-		    </div> -->
+		    </div>
 		</div>
 	</footer>
 					
