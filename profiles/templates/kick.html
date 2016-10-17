@@ -1,21 +1,20 @@
 {% extends 'base.html' %}
 
-{% block title %} 填寫資料 {% endblock %}
-{% block h2 %} 填寫您的資料 {% endblock %}
+{% block title %} 通知 {% endblock %}
 
 {% block content %}
-                {% for e in errors %}
-
-                    <p style="color:red;">{{ e }}</p>
-                {% endfor %}
-				<h3>你被踢出團隊了</h3>
-                <form action="" method="post" class="form-horizontal" role="form" style="width:33%; margin:auto; text-align:left">{% csrf_token %}
-                    <input name="agree" type="submit" value="我同意" class="btn btn-default" />
-               </form>
-               
-               
+<div class="container">
+	<div class="row">
+        <form action="" method="post" class="form-horizontal" role="form" style="display: none;">{% csrf_token %}
+            <input name="agree" type="submit" value="確認" class="btn btn-default" />
+        </form>
+	</div>
+</div>
+<script>
+	swal({
+		title: "你已被踢出團隊"
+	},function(){
+		$('input[type=submit]').trigger('click');
+	})
+</script>
 {% endblock %}
-{% block img %}
-    
-{% endblock %}
-
