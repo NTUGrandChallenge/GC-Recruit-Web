@@ -26,13 +26,13 @@
 							{% endif %}
 						</div>
 						<div class="col-xs-10">
-							<p>{{c.content}}</p>
+							<p>{{c.content|safe}}</p>
 						</div>
 					</div>
 				{% else %}
 					<div class="row one-message">
 						<div class="col-xs-10">
-							<p class="text-right">{{c.content}}</p>
+							<p class="text-right">{{c.content|safe}}</p>
 						</div>
 						<div class="col-xs-2">
 							{% if c.student1.name.socialaccount_set.first.uid %}

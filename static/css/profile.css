@@ -70,7 +70,6 @@ body{
 #profile .exp .title{
 	flex: 1;
 	background-color: #ffeb32;
-	writing-mode: vertical-lr;
 }
 #profile .exp .content{
 	flex: 12;

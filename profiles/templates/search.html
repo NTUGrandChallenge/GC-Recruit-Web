@@ -133,9 +133,9 @@
                         <!-- {{student.motto}} -->
                         <div class="info">
                             {% if student.name.socialaccount_set.first.uid %}
-                                <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large" style="width: 100%;">
+                                <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?height=300&width=300" class="square-img">
                             {% else %}
-                                <img src="/static/img/profile_image.png" style="width: 100%;">
+                                <img src="/static/img/profile_image.png" class="square-img">
                             {% endif %}
                             <div style="height: 60px;">
                                 <p>{{student.department}}</p>
@@ -174,7 +174,7 @@
                         <!-- {{student.motto}} -->
                         <div class="info">
                             {% if student.name.socialaccount_set.first.uid %}
-                                <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=square&width=300" class="square-img">
+                                <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?height=300&width=300" class="square-img">
                             {% else %}
                                 <img src="/static/img/profile_image.png" style="width: 100%;">
                             {% endif %}
@@ -199,7 +199,7 @@
                     <!-- {{student.motto}} -->
                     <div class="info">
                         {% if student.name.socialaccount_set.first.uid %}
-                            <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=square&width=300" class="square-img">
+                            <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?height=300&width=300" class="square-img">
                         {% else %}
                             <img src="/static/img/profile_image.png" class="square-img">
                         {% endif %}

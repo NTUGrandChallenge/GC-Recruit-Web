@@ -3,9 +3,11 @@
 {% block title %} 填寫完成 {% endblock %}
 
 {% block content %}
-<div style="height: 100vh;">
+<div class="container">
 
 </div>
+
+{% if team_id %}
 <script type="text/javascript">
 	swal({
 		title: "創建成功！",
@@ -15,5 +17,6 @@
 		window.location = '{{ to }}'
 	});
 </script>
+{% endif %}
 {% endblock %}
 

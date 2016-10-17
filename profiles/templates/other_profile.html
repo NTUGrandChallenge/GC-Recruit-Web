@@ -35,7 +35,7 @@
 				<div class="col-md-3">
 					<div class="profile-image">
 						{% if facebook_id %}
-							<img src="http://graph.facebook.com/{{facebook_id}}/picture?type=square&width=300">
+							<img src="http://graph.facebook.com/{{facebook_id}}/picture?height=300&width=300">
 						{% else %}
 							<img src="/static/img/profile_image.png" />
 						{% endif %}
@@ -52,12 +52,12 @@
 						<p>Email</p>
 					</div>
 					<div class="content">
-						<p>{{student.realname}}</p>
-						<p>{{student.nickname}}</p>
-						<p>{{student.school}}</p>
-						<p>{{student.department}}</p>
-						<p>{{student.grade}}</p>
-						<p>{{student.email}}</p>
+						<p>{{student.realname}}　</p>
+						<p>{{student.nickname}}　</p>
+						<p>{{student.school}}　</p>
+						<p>{{student.department}}　</p>
+						<p>{{student.grade}}　</p>
+						<p>{{student.email}}　</p>
 					</div>
 				</div>
 				</div>
@@ -65,7 +65,7 @@
 			<p class="text-center" style="font-size: 24px;">{{student.motto}}</p>
 			<div class="row">
 			<div class="col-xs-12 exp">
-				<div class="title full-height">
+				<div class="title full-height flexbox-center">
 					<h4 class="text-center">經歷</h4>
 				</div>
 				<div class="content full-height">

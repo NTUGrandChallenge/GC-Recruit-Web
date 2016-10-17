@@ -26,11 +26,11 @@
                         <input type="hidden"  name="applied" value="{{team.id}}">
                         <input type="submit" class="btn btn-success" value="申請加入團隊">
                     {%else%}
-                        <p>您已加入其他團隊無法申請加入此團隊</p>                        
+                        <p>已加入其他團隊就無法申請加入囉</p>                        
                     {%endif%}
                 {%elif team.captain_name == me.name.username %}
                     {%if team.student_set.all|length > 1 %}
-                        <p>團隊人數超過一人將無法解散團隊</p>
+                        <p>團隊人數超過一人將無法解散團隊喔</p>
                     {%else%}
                         <input type="hidden"  name="dismiss" value="{{team.id}}">
                         <input type="submit" class="btn btn-danger" value="解散團隊">
@@ -79,7 +79,7 @@
                 {%endif%}
                 <div class="col-xs-3">
                     {% if student.name.socialaccount_set.first.uid %}
-                        <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?type=large' class="square-img">
+                        <img src='http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?height=300&width=300' class="square-img">
                     {% else %}
                         <img src="/static/img/profile_image.png" class="square-img">
                     {% endif %}
@@ -92,7 +92,7 @@
                             {% if student != me %}
                             <form action="" method="post">{% csrf_token %}
                                 <input type="hidden"  name="kick" value="{{student.id}}">
-                                <input type="submit" class="btn btn-success" value="踢出">
+                                <input type="submit" class="btn btn-danger" value="踢出">
                             </form>
                             {%endif%}
                         {%endif%}
