@@ -286,8 +286,11 @@ def chatroom(request, idfrom, idto):
 		chatroom1 = Chatroom.objects.filter(student1=s1, student2=s2)
 		chatroom2 = Chatroom.objects.filter(student1=s2, student2=s1)
 		chatroom = (chatroom1 | chatroom2).order_by('date_time')
+		# for each in chatroom:
+		# 	each.content = each.content.replace("/n","<br>")
 		if request.POST:
 			content = request.POST['content']
+			content =content.replace("/n","<br>")
 			date_time = timezone.localtime(timezone.now())
 			# #如果session沒有被設置，才將資料加入資料庫
 			# if 'ok' not in request.session:
@@ -334,7 +337,7 @@ def upload(request):
 		files = request.FILES.getlist('file') #抓取檔案(可能多個檔案)
 		if len(files) > 0:
 			try:
-				file_dir = os.path.join('/Users/handsome/Desktop/upload' , str(form.student.name))
+				file_dir = os.path.join('/home/ubuntu/upload' , str(form.student.name))
 				file_dir2 = file_dir
                 #如果路徑中的檔案夾不存在就建立一個新的
 				if not os.path.exists(file_dir):
@@ -384,7 +387,7 @@ def upload2(request):
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def get_file (request):
 	try:
-		file_dir = os.path.join('/Users/handsome/Desktop/upload' , str(request.user)) 	
+		file_dir = os.path.join('/home/ubuntu/upload' , str(request.user)) 	
 		file_path = os.path.join( file_dir , '1')
 		f=open(file_path,'rb')
 		data=f.read()   #開始讀寫檔案至data變數裡面
@@ -402,7 +405,7 @@ def get_file (request):
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def get_file2 (request):
 	try:
-		file_dir = os.path.join('/Users/handsome/Desktop/upload' , str(request.user)) 	
+		file_dir = os.path.join('/home/ubuntu/upload' , str(request.user)) 	
 		file_path = os.path.join( file_dir , '2')
 		f=open(file_path,'rb')
 		data=f.read()   #開始讀寫檔案至data變數裡面
@@ -579,7 +582,10 @@ def applied_list(request, teamid):
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def chatroom_list(request):
 	me = Student.objects.get(name=request.user)
-	chatrooms = Chatroom.objects.filter(student2=me).order_by('-date_time')
+	chatroom1 = Chatroom.objects.filter(student1=me)
+	chatrooms = Chatroom.objects.filter(student2=me)
+	chatroom_all = (chatroom1 | chatrooms).order_by('-date_time')
+	
 	s_list = []
 	c_list = []
 	for chatroom in chatrooms:
@@ -587,6 +593,19 @@ def chatroom_list(request):
 			c_list.append(chatroom)
 			s_list.append(chatroom.student1)
 	chatrooms = c_list
+
+	s_list2 = [me,]
+	c_list2 = []
+	for chatroom in chatroom_all:
+		if chatroom not in c_list2 and chatroom.student1 not in s_list2:
+			c_list2.append(chatroom)
+			s_list2.append(chatroom.student1)
+	for chatroom in chatroom_all:
+		if chatroom not in c_list2 and chatroom.student2 not in s_list2:
+			c_list2.append(chatroom)
+			s_list2.append(chatroom.student2)
+	chatroom_all = c_list2
+
 
 	return render_to_response('chatroom_list.html', locals())
 
