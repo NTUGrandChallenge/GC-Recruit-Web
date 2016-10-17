@@ -44,7 +44,7 @@
 						<a href="#" id="navbar-myself" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">{{ request.user }}<span class="caret"></span></a>
 		                <ul id="dropdown-myself" class="dropdown-menu" role="menu" aria-labelledby="navbar-myself">
 				            <li><a href="/my_profile/">個人資料</a></li>
-				            {% if request.user.student.team.name != 'none' %}
+				            {% if request.user.student_set.first.team.id %}
 								<li><a href="/team_profile/{{request.user.student_set.first.team.id}}/">我的團隊</a></li>
 							{% else %}
 								<li><a href="javascript: void(0)" onclick="noteam()">我的團隊</a></li>

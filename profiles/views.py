@@ -483,7 +483,7 @@ def create_team(request):
 			perm = Permission.objects.get(codename='can_create_team_profile')
 			request.user.user_permissions.remove(perm)
 			student.save()
-			to = '/team_list/'
+			to = '/team_profile/' + str(t.id)
 		return render_to_response('complete.html', RequestContext(request, locals()))
 	else:
 		return render_to_response('create_team.html', RequestContext(request, locals()))
