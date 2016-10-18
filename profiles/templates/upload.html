@@ -1,25 +1,22 @@
 {% extends 'base.html' %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/css/form.css">
+{% endblock %}
+
 {% block title %} Upload {% endblock %}
 
 {% block content %}
 <div class="container">
-	<div class="row">
-		
-	</div>
+<div class="content-wrapper">
+		<p>每次上傳後均會蓋掉之前所有檔案</p>
+		<p>更新文件時請記得一次選取所有所需文件</p>
+		<form action="" method="post"  enctype="multipart/form-data">{%csrf_token%}
+			<label for="file">上傳提案簡報及提案書：</label><input type="file" name="file" id="file" multiple="">
+			<p style="font-size: 14px;">最新版本上傳日期：{% now "Y-m-d" %}</p>
+			<button type="submit" class="btn btn-default">送出</button>  
+		</form>
 </div>
-
-	請注意每次上傳後均會蓋掉之前所有檔案，
-	因此每次更新文件時請記得一次選取多個文件
-	<form action="" method="post"  enctype="multipart/form-data">{%csrf_token%}
-						<table>
-  							<tr> <td name="date1">上傳日期：</td> <td>{% now "Y-m-d" %}</td> </tr>
-							<tr> <td>上傳提案簡報及提案書：</td> <td><input type="file" name="file" multiple=""></td> </tr>
-<!-- 							<tr> <td>上傳檔案：</td> <td><input type="file" name="file"></td> </tr>
- -->						</table>
-						<input type="submit" value="送出" /> 
-					</form>
-	
-{{counter}}
+</div>
 {% endblock %}
 
