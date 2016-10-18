@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/css/create_student.css">
+<link rel="stylesheet" href="/static/css/form.css">
 {% endblock %}
 
 {% block title %} 編輯團隊資料 {% endblock %}
@@ -12,24 +12,16 @@
      {% for e in errors %}
           <p style="color:red;">{{ e }}</p>
      {% endfor %}
-     <form action="" method="post" class="form-inline" role="form">{% csrf_token %}
-     <div class="row introduce">
-     <fieldset>
-          <legend>團隊介紹</legend>
-          <div class="col-xs-12">
+     <form action="" method="post" class="form-horizontal" role="form">{% csrf_token %}
+     <div>
           <div class="form-group">
-               <label for="content">介紹內容：</label>
-               <textarea id="content" rows="5" name="content" class="form-control" >{{team.content}}</textarea>
+               <label for="content">隊伍描述 (100字以內)</label>
+               <textarea id="content" rows="3" name="content" class="form-control" maxlength="100" required>{{team.content}}</textarea>
           </div>
-          </div>
-     </fieldset>
+          <button type="submit" class="btn btn-primary">更改</button>
      </div>
-     <button type="submit" class="btn btn-primary">更改</button>
      </form>
 </div>
 </div>
-{% endblock %}
-{% block img %}
-    
 {% endblock %}
 

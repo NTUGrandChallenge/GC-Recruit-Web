@@ -17,6 +17,10 @@
             </div>
             <div class="functions full-width">
             	<form action="" method="post">{% csrf_token %}
+                
+                {% if team.captain_name == me.name.username %}
+                <div><a href="/edit_team/"><button class="btn btn-default">修改團隊簡介</button></a></div>
+                {% endif %}
                 {%if team.id != me.team.id%}
                     {%if team in me.applied.all%}
                         <p>申請已經發送</p>
@@ -45,12 +49,12 @@
                 <div><a href="/applied_list/{{ team.id }}/"><button class="btn btn-default">待審核成員</button></a></div>
                 {% endif %}
                 {% if team.captain_name == me.name.username %}
+
                 <div><button class="btn btn-default"><a href="/upload/">挑戰提案繳交</a></button></div>
                 {% endif %}
                 {%if team.id == me.team.id%}
                 <div><a href="/get_file/"><button class="btn btn-default">下載挑戰提案簡報</button></a></div>
                 <div><a href="/get_file2/"><button class="btn btn-default">下載挑戰提案書</button></a></div>
-                <div><a href="/edit_team/"><button class="btn btn-default">修改團隊簡介</button></a></div>
                 {% endif %}
             </div>
         </div>

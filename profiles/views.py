@@ -679,7 +679,7 @@ def edit_team(request):
 		content = request.POST['content']
 		team.content = content
 		team.save()
-		return HttpResponseRedirect('/team_list/')
+		return HttpResponseRedirect('/team_profile/' + str(team.id))
 	else:
 		return render_to_response('edit_team.html', RequestContext(request, locals()))
 
