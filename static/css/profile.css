@@ -15,6 +15,19 @@ body{
 #profile #sidebar a:hover{
 	color: #50cfc7;
 }
+#profile #sidebar button.follow-btn{
+	background: transparent;
+	border: none;
+	display: inline-block;
+}
+#profile #sidebar button.follow-btn:hover{
+	color: #e50045;
+}
+#profile #sidebar button.follow-btn:active,
+#profile #sidebar button.follow-btn:focus,
+#profile #sidebar button.follow-btn:target{
+	outline: none;
+}
 
 #profile .top{
 	padding-bottom: 20px;

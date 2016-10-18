@@ -14,14 +14,14 @@
                 <img src="/static/img/student_profile_header.png" class="full-width" />
             </div>
             <div class="text-center">
-                <form action="" method="GET">
+                <form action="" method="GET" style="display: inline-block;">
 					{%if student.id != myid%}
 						{%if student in me.follow.all %}
 							<input type="hidden"  name="cancel" value="{{student.id}}">
-							<input type="submit" value="取消追蹤">
+							<button type="submit" class="follow-btn"><i class="fa fa-heart fa-4x" aria-hidden="true"></i></button>
 						{%else%}
 							<input type="hidden"  name="follow" value="{{student.id}}">
-							<input type="submit" value="追蹤">
+							<button type="submit" class="follow-btn" style="color: #e50045;"><i class="fa fa-heart fa-4x" aria-hidden="true"></i></button>
 						{%endif%}
 					{%endif%}
 				</form>

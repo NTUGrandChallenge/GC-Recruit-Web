@@ -324,7 +324,7 @@ def other_profile(request):
 		student = Student.objects.get(id=request.GET['follow'])
 		me.follow.add(student)	
 		me.save()
-		return render_to_response('follow_complete.html', locals())
+		return render_to_response('other_profile.html', RequestContext(request, locals()))
 	if request.GET.get('cancel'):
 		me = Student.objects.get(name=request.user)
 		student = Student.objects.get(id=request.GET['cancel'])
