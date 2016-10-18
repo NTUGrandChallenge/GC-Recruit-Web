@@ -320,13 +320,19 @@ def other_profile(request):
 			facebook_id = user.socialaccount_set.first().uid
 		return render_to_response('other_profile.html', RequestContext(request, locals()))
 	if request.GET.get('follow'):
- 		me = Student.objects.get(name=request.user)
- 		student = Student.objects.get(id=request.GET['follow'])
- 		me.follow.add(student)	
- 		me.save()
- 		return render_to_response('follow_complete.html', locals())
+		me = Student.objects.get(name=request.user)
+		student = Student.objects.get(id=request.GET['follow'])
+		me.follow.add(student)	
+		me.save()
+		return render_to_response('follow_complete.html', locals())
+	if request.GET.get('cancel'):
+		me = Student.objects.get(name=request.user)
+		student = Student.objects.get(id=request.GET['cancel'])
+		me.follow.remove(student)	
+		me.save()
+		return render_to_response('other_profile.html', RequestContext(request, locals()))
 	else:
-		return HttpResponseRedirect("/student_list/")
+		return HttpResponseRedirect("/search/")
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 @permission_required('profiles.can_upload', login_url='/agree2/')
