@@ -124,6 +124,7 @@ def edit(request):
 	if request.POST:
 		motto = request.POST['motto']
 		experience = request.POST['experience']
+		experience =experience.replace("\n","<br>")
 		myinterest = request.POST['interest']
 		myrole = request.POST['role']
 
@@ -474,6 +475,7 @@ def create_team(request):
 		student = request.user.student_set.first()
 		teamname = request.POST['teamname']
 		content = request.POST['content']
+		content =content.replace("\n","<br>")
 		team_interest = request.POST['interest']
 		captain_name = student.name
 		if any(not request.POST[k] for k in request.POST):
@@ -508,6 +510,7 @@ def teamroom(request,teamid):
 		member = False
 	if request.POST:
 		content = request.POST['content']
+		content =content.replace("\n","<br>")
 		date_time = timezone.localtime(timezone.now())
 		Teamroom.objects.create(
 			team=team,
