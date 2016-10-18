@@ -689,6 +689,12 @@ def edit_team(request):
 	else:
 		return render_to_response('edit_team.html', RequestContext(request, locals()))
 
+@permission_required('profiles.can_view_base_profile', login_url='/wait/')
+def follow_list(request):
+	me = request.user.student_set.first()
+	follow_list = me.follow.all()
+	return render_to_response('follow_list.html', RequestContext(request, locals()))
+
 
 
 
