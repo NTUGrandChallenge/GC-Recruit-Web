@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/list.css">
+{% endblock %}
+{% block title %}挑戰者列表{% endblock %}
+  
+{% block content %}
+<div class="container-fluid" id="list">
+    <div class="row">
+        <div class="col-md-3 full-height" id="sidebar">
+            <div style="margin-bottom: 20px;">
+                <a href="/search/">
+                    <img src="/static/img/student_list_header.png" class="full-width" />
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9" id="challenger_list">
+            <div class="list_top">
+                <img src="/static/img/triangle.png" class="left" />
+                <img src="/static/img/list_top.png" class="right" />
+            </div>
+            <div class="row" style="margin: 50px;">
+                {% for student in follow_list %}
+                <div class="col-md-4">
+                <a href="/other_profile/?id={{ student.id }}">
+                <div class="one-student text-center">
+                    <div class="name">
+                        <h4>{{student.realname}}</h4>
+                    </div>
+                    <!-- {{student.motto}} -->
+                    <div class="info">
+                        {% if student.name.socialaccount_set.first.uid %}
+                            <img src="http://graph.facebook.com/{{student.name.socialaccount_set.first.uid}}/picture?height=300&width=300" class="square-img">
+                        {% else %}
+                            <img src="/static/img/profile_image.png" class="square-img">
+                        {% endif %}
+                        <div style="height: 60px;">
+                            <p>{{student.department}}</p>
+                        </div>
+                        <p>{{student.interest}}</p>
+                    </div>
+                </div>
+                </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/list.js"></script>
+{% endblock %}
