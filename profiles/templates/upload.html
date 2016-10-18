@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %} Upload {% endblock %}
-{% block h2 %} {{ s1.nickname }}的上傳空間 {% endblock %}
 
 {% block content %}
+<div class="container">
+	<div class="row">
+		
+	</div>
+</div>
+
 	請注意每次上傳後均會蓋掉之前所有檔案，
 	因此每次更新文件時請記得一次選取多個文件
 	<form action="" method="post"  enctype="multipart/form-data">{%csrf_token%}
@@ -16,8 +21,5 @@
 					</form>
 	
 {{counter}}
-{% endblock %}
-{% block img %}
-	
 {% endblock %}
 

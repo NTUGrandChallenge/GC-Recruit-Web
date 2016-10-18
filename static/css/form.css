@@ -2,7 +2,7 @@ body{
 	background-color: #b2b2b2;
 }
 @media screen and (min-width: 768px){
-	#create_team .content-wrapper{
+	.content-wrapper{
 		width: 60vw;
 		padding: 100px 10vw;
 		margin: 50px auto;
@@ -10,13 +10,13 @@ body{
 	}
 }
 @media screen and (max-width: 768px){
-	#create_team .content-wrapper{
+	.content-wrapper{
 		background-color: #fff;
 		width: 100%;
 		padding: 50px;
 	}
 }
-#create_team button[type="submit"]{
+button[type="submit"]{
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
