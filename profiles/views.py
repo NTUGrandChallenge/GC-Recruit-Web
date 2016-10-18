@@ -379,7 +379,7 @@ def upload(request):
 			except:
 					pass
 			# 		shutil.rmtree(file_dir, True)   #發生例外，就刪除路徑檔案
-		return HttpResponseRedirect('/index/')
+		return HttpResponseRedirect('/team_list/')
 	return render_to_response('upload.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
@@ -670,4 +670,21 @@ def activity(request, badgeid):
 		me.save()
 		return render_to_response('activity.html', RequestContext(request, locals()))	
 	return render_to_response('activity.html', RequestContext(request, locals()))
+
+@permission_required('profiles.can_view_base_profile', login_url='/permission_error/')
+def edit_team(request):
+	student = Student.objects.get(name=request.user)
+	team = student.team
+	if request.POST:
+		content = request.POST['content']
+		team.content = content
+		team.save()
+		return HttpResponseRedirect('/team_list/')
+	else:
+		return render_to_response('edit_team.html', RequestContext(request, locals()))
+
+
+
+
+
 

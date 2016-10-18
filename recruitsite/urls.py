@@ -5,7 +5,7 @@ from django.contrib import admin
 from recruitsite.views import welcome, index, register, logout, perror, use_session, complete, wait#, login#, logout
 from django.contrib.auth.views import login#, logout
 from django.contrib.auth.decorators import login_required
-from profiles.views import list_student, profile, edit, student_create, other_profile, chatroom, upload, upload2, follow_complete, team_list, create_team, teamroom, team_profile, applied_list, search, chatroom_list, insurance_create, agree, get_file, get_file2, kick, agree2, board, activity
+from profiles.views import list_student, profile, edit, student_create, other_profile, chatroom, upload, upload2, follow_complete, team_list, create_team, teamroom, team_profile, applied_list, search, chatroom_list, insurance_create, agree, get_file, get_file2, kick, agree2, board, activity, edit_team
 from django.views.static import serve
 import allauth
 
@@ -51,6 +51,7 @@ urlpatterns = [
     url(r'^kick/$', login_required(kick)),
     url(r'^board/(\d{1,5})/$', login_required(board)),
     url(r'^activity/(\d{1,5})/$', login_required(activity)),
+    url(r'^edit_team/$', login_required(edit_team)),
     
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'next_page': '/accounts/login'}),
 
