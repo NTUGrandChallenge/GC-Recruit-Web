@@ -47,16 +47,22 @@ body{
 }
 
 #profile .basic{
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	position: relative;
 }
 #profile .basic .title{
-	flex: 1;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
 	text-align: center;
 	background-color: #ffeb32;
 }
 #profile .basic .content{
-	flex: 4;
+	-webkit-box-flex: 4;
+	    -ms-flex: 4;
+	        flex: 4;
 	background-color: #fff;
 }
 #profile .basic p{
@@ -73,6 +79,8 @@ body{
 }
 
 #profile .exp{
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	height: 120px;
 	min-height: 100px;
@@ -81,11 +89,15 @@ body{
 	border-bottom: #ffeb32 3px solid;
 }
 #profile .exp .title{
-	flex: 1;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
 	background-color: #ffeb32;
 }
 #profile .exp .content{
-	flex: 12;
+	-webkit-box-flex: 12;
+	    -ms-flex: 12;
+	        flex: 12;
 	padding: 10px;
 	background-color: #fff;
 }

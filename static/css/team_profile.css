@@ -18,8 +18,8 @@ body{
 }
 #team_profile .functions input,
 #team_profile .functions button{
-	width: 80%;
-	margin-bottom: 5px;
+    width: 80%;
+    margin-bottom: 5px;
 }
 
 @media screen and (min-width: 768px){
@@ -80,13 +80,13 @@ body{
 }
 
 #team_profile .one-teammate{
-	background-color: #FFF;
-	position: relative;
-	padding: 10px;
+    background-color: #FFF;
+    position: relative;
+    padding: 10px;
     margin-bottom: 20px;
 }
 #team_profile .one-teammate:hover{
-	background-color: #ffeb32;
+    background-color: #ffeb32;
 }
 #team_profile .one-teammate .ribbon-wrapper{
     width: 120px;
@@ -109,7 +109,7 @@ body{
     color: #fff;
 }
 #team_profile .one-teammate img{
-	margin: 10px;
+    margin: 10px;
 }
 #team_profile .one-teammate .circle{
     width: 100px;

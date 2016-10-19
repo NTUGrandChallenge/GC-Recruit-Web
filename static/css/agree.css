@@ -11,9 +11,13 @@ body{
 	text-align: justify;
 }
 #agree .action{
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 }
 #agree .action form{
-	flex: 1;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
 	text-align: center;
-}
+}s

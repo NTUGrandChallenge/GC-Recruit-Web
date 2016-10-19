@@ -8,6 +8,10 @@
     src: url('/static/font/Coves Bold.otf');
 }
 
+::-moz-selection {
+  background: #ffeb32; /* WebKit/Blink Browsers */
+}
+
 ::selection {
   background: #ffeb32; /* WebKit/Blink Browsers */
 }
@@ -62,8 +66,8 @@ body > .container-fluid{
 }
 
 .circular-img{
-	width: 100%;
-	-webkit-clip-path: circle(50% at center);
+    width: 100%;
+    -webkit-clip-path: circle(50% at center);
 }
 .square-img{
     width: 100%;
