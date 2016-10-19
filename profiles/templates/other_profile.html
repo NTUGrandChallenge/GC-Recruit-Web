@@ -18,10 +18,10 @@
 					{%if student.id != myid%}
 						{%if student in me.follow.all %}
 							<input type="hidden"  name="cancel" value="{{student.id}}">
-							<button type="submit" class="follow-btn"><i class="fa fa-heart fa-4x" aria-hidden="true"></i></button>
+							<button type="submit" class="follow-btn" style="color: #e50045;"><i class="fa fa-heart fa-4x" aria-hidden="true"></i></button>
 						{%else%}
 							<input type="hidden"  name="follow" value="{{student.id}}">
-							<button type="submit" class="follow-btn" style="color: #e50045;"><i class="fa fa-heart fa-4x" aria-hidden="true"></i></button>
+							<button type="submit" class="follow-btn"><i class="fa fa-heart fa-4x" aria-hidden="true"></i></button>
 						{%endif%}
 					{%endif%}
 				</form>
