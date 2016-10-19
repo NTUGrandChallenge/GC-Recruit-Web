@@ -63,18 +63,20 @@ body{
 	background-color: #ffeb32;
 }
 #list .one-student .name{
-	-webkit-box-flex: 1;
-	    -ms-flex: 1;
-	        flex: 1;
+    -webkit-box-flex: 1;
+    width: 20%;
+        -ms-flex: 1;
+            flex: 1;
 	background-color: #ffeb32;
 	-webkit-writing-mode: vertical-lr;
 	    -ms-writing-mode: tb-lr;
 	        writing-mode: vertical-lr;
 }
 #list .one-student .info{
-	-webkit-box-flex: 3;
-	    -ms-flex: 3;
-	        flex: 3;
+    -webkit-box-flex: 3;
+    width: 80%;
+        -ms-flex: 3;
+            flex: 3;
 }
 
 
