@@ -321,12 +321,16 @@ def other_profile(request):
 			facebook_id = user.socialaccount_set.first().uid
 		return render_to_response('other_profile.html', RequestContext(request, locals()))
 	if request.GET.get('follow'):
+		myid = request.user.student_set.first().id
+		user = User.objects.get(student=student)
 		me = Student.objects.get(name=request.user)
 		student = Student.objects.get(id=request.GET['follow'])
 		me.follow.add(student)	
 		me.save()
 		return render_to_response('other_profile.html', RequestContext(request, locals()))
 	if request.GET.get('cancel'):
+		myid = request.user.student_set.first().id
+		user = User.objects.get(student=student)
 		me = Student.objects.get(name=request.user)
 		student = Student.objects.get(id=request.GET['cancel'])
 		me.follow.remove(student)	
