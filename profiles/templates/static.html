@@ -12,20 +12,27 @@
      {% for student in students %}
           <div>
 <!--                {{student.name}}
- -->               {{student.realname}}
+ -->               
 <!--                {{student.nickname}}
- -->               {{student.school}}
-               {{student.department}}
+ -->              <!--  {{student.school}}
+               {{student.department}} -->
 <!--                {{student.domain}}
- -->               {{student.grade}}
+ -->              <!--  {{student.grade}} -->
                <!-- {{student.motto}}
                {{student.experience}} -->
-               {{student.email}}
-               {{student.interest}}
+               <!-- {{student.email}}
+               {{student.interest}} -->
 <!--                {{student.talent}}
- -->               {{student.role}}
+ -->              <!--  {{student.role}} -->
 <!--                {{student.team}}
  -->          </div>
+          <table>
+               <tr>
+               <td>{{student.realname}}</td>
+               <td>{{student.school}}</td>
+               <td>{{student.email}}</td>
+               </tr>
+          </table>
      {% endfor %}
      
      
