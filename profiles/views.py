@@ -321,14 +321,18 @@ def other_profile(request):
 			facebook_id = user.socialaccount_set.first().uid
 		return render_to_response('other_profile.html', RequestContext(request, locals()))
 	if request.GET.get('follow'):
+		myid = request.user.student_set.first().id
 		me = Student.objects.get(name=request.user)
 		student = Student.objects.get(id=request.GET['follow'])
+		user = User.objects.get(student=student)
 		me.follow.add(student)	
 		me.save()
 		return render_to_response('other_profile.html', RequestContext(request, locals()))
 	if request.GET.get('cancel'):
+		myid = request.user.student_set.first().id
 		me = Student.objects.get(name=request.user)
 		student = Student.objects.get(id=request.GET['cancel'])
+		user = User.objects.get(student=student)
 		me.follow.remove(student)	
 		me.save()
 		return render_to_response('other_profile.html', RequestContext(request, locals()))
@@ -698,8 +702,10 @@ def follow_list(request):
 	follow_list = me.follow.all()
 	return render_to_response('follow_list.html', RequestContext(request, locals()))
 
-
-
+@permission_required('profiles.can_edit_team_profile', login_url='/wait/')
+def statical(request):
+	students = Student.objects.all()
+	return render_to_response('static.html', RequestContext(request, locals()))
 
 
 
