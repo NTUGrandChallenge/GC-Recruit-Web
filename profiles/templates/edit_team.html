@@ -15,8 +15,8 @@
      <form action="" method="post" class="form-horizontal" role="form">{% csrf_token %}
      <div>
           <div class="form-group">
-               <label for="content">隊伍描述 (100字以內)</label>
-               <textarea id="content" rows="3" name="content" class="form-control" maxlength="100" required>{{team.content}}</textarea>
+               <label for="content">隊伍描述 (300字以內)</label>
+               <textarea id="content" rows="3" name="content" class="form-control" maxlength="300" required>{{team.content}}</textarea>
           </div>
           <button type="submit" class="btn btn-primary">更改</button>
      </div>
