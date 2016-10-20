@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/create_student.css">
+{% endblock %}
+
+{% block title %} 編輯個人資料 {% endblock %}
+
+{% block content %}
+<div class="container" id="create_student">
+<div class="content-wrapper">
+     {% for student in students %}
+          <div>
+<!--                {{student.name}}
+ -->               {{student.realname}}
+<!--                {{student.nickname}}
+ -->               {{student.school}}
+               {{student.department}}
+<!--                {{student.domain}}
+ -->               {{student.grade}}
+               <!-- {{student.motto}}
+               {{student.experience}} -->
+               {{student.email}}
+               {{student.interest}}
+<!--                {{student.talent}}
+ -->               {{student.role}}
+<!--                {{student.team}}
+ -->          </div>
+     {% endfor %}
+     
+     
+</div>
+</div>
+{% endblock %}
+{% block img %}
+    
+{% endblock %}
+

@@ -698,8 +698,10 @@ def follow_list(request):
 	follow_list = me.follow.all()
 	return render_to_response('follow_list.html', RequestContext(request, locals()))
 
-
-
+@permission_required('profiles.can_edit_team_profile', login_url='/wait/')
+def statical(request):
+	students = Student.objects.all()
+	return render_to_response('static.html', RequestContext(request, locals()))
 
 
 
