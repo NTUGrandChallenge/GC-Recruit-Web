@@ -34,6 +34,26 @@ body{
 	padding: 10px;
 	width: 80%;
 }
+#list #sidebar #interest_2 + label::before{
+	background-color: #FFA3B5;
+	border: #FFA3B5;
+}
+#list #sidebar #interest_3 + label::before{
+	background-color: #EE2737;
+	border: #EE2737;
+}
+#list #sidebar #interest_4 + label::before{
+	background-color: #00B140;
+	border: #00B140;
+}
+#list #sidebar #interest_5 + label::before{
+	background-color: #005EB8;
+	border: #005EB8;
+}
+#list #sidebar #interest_6 + label::before{
+	background-color: #B77729;
+	border: #B77729;
+}
 
 #list #challenger_list{
 	padding-top: 30px;
