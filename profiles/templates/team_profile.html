@@ -44,13 +44,13 @@
                 {% if team.captain_name == me.name.username %}
                 <div><a href="/edit_team/"><button class="btn btn-default">修改團隊簡介</button></a></div>
                 {% endif %}
-                {%if team.id == me.team.id%}
                 <div><a href="/teamroom/{{ team.id }}/"><button class="btn btn-default">團隊聊天室</button></a></div>
+                {%if team.id == me.team.id%}
                 <div><a href="/applied_list/{{ team.id }}/"><button class="btn btn-default">待審核成員</button></a></div>
                 {% endif %}
                 {% if team.captain_name == me.name.username %}
 
-                <div><button class="btn btn-default"><a href="/upload/">挑戰提案繳交</a></button></div>
+                <div><a href="/upload/"><button class="btn btn-default">挑戰提案繳交</button></a></div>
                 {% endif %}
                 {%if team.id == me.team.id%}
                 <div><a href="/get_file/"><button class="btn btn-default">下載挑戰提案簡報</button></a></div>
