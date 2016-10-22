@@ -351,7 +351,7 @@ def upload(request):
 		files = request.FILES.getlist('file') #抓取檔案(可能多個檔案)
 		if len(files) > 0:
 			try:
-				fname = str(form.student.team.interest) + "_" + str(form.student.team.id) + "_" + str(form.student.team.name)
+				fname = str(form.student.team.interest) + "_" + str(form.student.team.id)
 				file_dir = os.path.join('/home/ubuntu/upload' , fname)
 				file_dir2 = file_dir
                 #如果路徑中的檔案夾不存在就建立一個新的
@@ -403,7 +403,8 @@ def upload2(request):
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def get_file (request):
 	try:
-		file_dir = os.path.join('/home/ubuntu/upload' , str(request.user)) 	
+		fname = str(request.user.student_set.first().team.interest) + "_" + str(request.user.student_set.first().team.id)
+		file_dir = os.path.join('/home/ubuntu/upload' , fname)
 		file_path = os.path.join( file_dir , 'brief')
 		f=open(file_path,'rb')
 		data=f.read()   #開始讀寫檔案至data變數裡面
@@ -413,7 +414,7 @@ def get_file (request):
 		#要import urllib
 		#檔案原本名稱.encode("utf-8") 記得要換回檔案原本的名稱，轉成utf-8格式以免亂碼
 		#不是存在service端的檔案名稱唷！
-		response['Content-Disposition'] = 'attachment; filename=1.pdf'# % urllib.quote( '1'.encode("utf-8") )
+		response['Content-Disposition'] = 'attachment; filename=brief.pdf'# % urllib.quote( '1'.encode("utf-8") )
 		return response
 	except:
 		return HttpResponse('error to download file')
@@ -421,7 +422,8 @@ def get_file (request):
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def get_file2 (request):
 	try:
-		file_dir = os.path.join('/home/ubuntu/upload' , str(request.user)) 	
+		fname = str(request.user.student_set.first().team.interest) + "_" + str(request.user.student_set.first().team.id)
+		file_dir = os.path.join('/home/ubuntu/upload' , fname)
 		file_path = os.path.join( file_dir , 'proposal')
 		f=open(file_path,'rb')
 		data=f.read()   #開始讀寫檔案至data變數裡面
@@ -431,7 +433,7 @@ def get_file2 (request):
 		#要import urllib
 		#檔案原本名稱.encode("utf-8") 記得要換回檔案原本的名稱，轉成utf-8格式以免亂碼
 		#不是存在service端的檔案名稱唷！
-		response['Content-Disposition'] = 'attachment; filename=2.pdf'# % urllib.quote( '1'.encode("utf-8") )
+		response['Content-Disposition'] = 'attachment; filename=proposal.pdf'# % urllib.quote( '1'.encode("utf-8") )
 		return response
 	except:
 		return HttpResponse('error to download file')
