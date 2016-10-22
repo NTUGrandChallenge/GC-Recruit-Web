@@ -11,7 +11,7 @@ import urllib
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def search(request):
-	first_user_list = Student.objects.all()
+	first_user_list = Student.objects.all().reverse()
 	category_all = Category.objects.all()
 	group_all = Group.objects.all()
 	word = False
@@ -351,7 +351,8 @@ def upload(request):
 		files = request.FILES.getlist('file') #抓取檔案(可能多個檔案)
 		if len(files) > 0:
 			try:
-				file_dir = os.path.join('/home/ubuntu/upload' , str(form.student.name))
+				fname = str(form.student.team.interest) + "_" + str(form.student.team.id)
+				file_dir = os.path.join('/home/ubuntu/upload' , fname)
 				file_dir2 = file_dir
                 #如果路徑中的檔案夾不存在就建立一個新的
 				if not os.path.exists(file_dir):
@@ -360,7 +361,7 @@ def upload(request):
 				for file in files:
 					if counter == 0:
 	               	    #為了避免檔案名稱重複，因此存在server端時，把修改檔案名稱
-						local_name = '1'#timezone.now().strftime('%Y%m%d%H%M%S')
+						local_name = 'brief'#timezone.now().strftime('%Y%m%d%H%M%S')
 						file_path = os.path.join(file_dir, local_name)
 	               		    #存入資料庫
 						file_info.objects.create(
@@ -375,7 +376,7 @@ def upload(request):
 							destination.write(chunk)
 							destination.close()
 					if counter == 1:
-						local_name = '2'
+						local_name = 'proposal'
 						file_path2 = os.path.join(file_dir2, local_name)
 						file_info.objects.create(
 								File = up_file.objects.get(id=form.pk),
@@ -402,8 +403,9 @@ def upload2(request):
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def get_file (request):
 	try:
-		file_dir = os.path.join('/home/ubuntu/upload' , str(request.user)) 	
-		file_path = os.path.join( file_dir , '1')
+		fname = str(request.user.student_set.first().team.interest) + "_" + str(request.user.student_set.first().team.id)
+		file_dir = os.path.join('/home/ubuntu/upload' , fname)
+		file_path = os.path.join( file_dir , 'brief')
 		f=open(file_path,'rb')
 		data=f.read()   #開始讀寫檔案至data變數裡面
 		f.close()
@@ -412,7 +414,7 @@ def get_file (request):
 		#要import urllib
 		#檔案原本名稱.encode("utf-8") 記得要換回檔案原本的名稱，轉成utf-8格式以免亂碼
 		#不是存在service端的檔案名稱唷！
-		response['Content-Disposition'] = 'attachment; filename=1.pdf'# % urllib.quote( '1'.encode("utf-8") )
+		response['Content-Disposition'] = 'attachment; filename=brief.pdf'# % urllib.quote( '1'.encode("utf-8") )
 		return response
 	except:
 		return HttpResponse('error to download file')
@@ -420,8 +422,9 @@ def get_file (request):
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def get_file2 (request):
 	try:
-		file_dir = os.path.join('/home/ubuntu/upload' , str(request.user)) 	
-		file_path = os.path.join( file_dir , '2')
+		fname = str(request.user.student_set.first().team.interest) + "_" + str(request.user.student_set.first().team.id)
+		file_dir = os.path.join('/home/ubuntu/upload' , fname)
+		file_path = os.path.join( file_dir , 'proposal')
 		f=open(file_path,'rb')
 		data=f.read()   #開始讀寫檔案至data變數裡面
 		f.close()
@@ -430,7 +433,7 @@ def get_file2 (request):
 		#要import urllib
 		#檔案原本名稱.encode("utf-8") 記得要換回檔案原本的名稱，轉成utf-8格式以免亂碼
 		#不是存在service端的檔案名稱唷！
-		response['Content-Disposition'] = 'attachment; filename=2.pdf'# % urllib.quote( '1'.encode("utf-8") )
+		response['Content-Disposition'] = 'attachment; filename=proposal.pdf'# % urllib.quote( '1'.encode("utf-8") )
 		return response
 	except:
 		return HttpResponse('error to download file')
