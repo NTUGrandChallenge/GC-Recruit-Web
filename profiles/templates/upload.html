@@ -12,11 +12,11 @@
 	<p>每次上傳後均會蓋掉之前所有檔案，更新文件時請記得一次選取所有所需文件</p>
 	<p>上傳截止時間：11 / 6 23:59 </p>
 	<br />
-	<p><strong>檔名格式：[領域代號][團隊編號]_[檔案類型]</strong></p>
-	<p style="font-size: 16px;"><strong>領域代號：</strong>SL(智慧生活)、H(健康醫療)、E(永續環境)、SY(社會文化)、F(食品與農業)</p>
-	<p style="font-size: 16px;"><strong>您的隊伍編號：</strong>{{s1.team.id}}</p>
-	<p style="font-size: 16px;"><strong>檔案類型：</strong>brief(提案簡報)、proposal(提案書)</p>
-	<p style="font-size: 16px;">範例：F3_brief</p>
+	<p><strong>檔名格式：[領域代號][團隊編號]_[檔案類型].pdf</strong></p>
+	<p style="font-size: 16px;"><strong>領域代號：</strong>SL（智慧生活）、H（健康醫療）、E（永續環境）、SY（社會文化）、F（食品與農業）</p>
+	<p style="font-size: 16px;"><strong>您的團隊編號：</strong>{{s1.team.id}}</p>
+	<p style="font-size: 16px;"><strong>檔案類型：</strong>brief（提案簡報）、proposal（提案書）</p>
+	<p style="font-size: 16px;">範例：F3_brief.pdf、SY15_proposal.pdf</p>
 	<br/>
 	<form action="" method="post"  enctype="multipart/form-data">{%csrf_token%}
 		<label for="file">上傳提案簡報及提案書：</label><input type="file" name="file" id="file" multiple="">
