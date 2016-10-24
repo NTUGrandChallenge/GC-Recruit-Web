@@ -391,7 +391,7 @@ def upload(request):
 			except:
 					pass
 			# 		shutil.rmtree(file_dir, True)   #發生例外，就刪除路徑檔案
-		return HttpResponseRedirect('/team_list/')
+		return HttpResponseRedirect('/team_profile/' + str(s1.team.id))
 	return render_to_response('upload.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
