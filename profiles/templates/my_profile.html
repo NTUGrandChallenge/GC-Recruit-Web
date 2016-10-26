@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="/static/css/profile.css">
 {% endblock %}
 
+{% load account socialaccount %}
+
 {% block title %} {{student.realname}} {% endblock %}
 
 {% block content %}
@@ -112,6 +114,7 @@
 					</div>
 				{% endfor %}
 			</div>
+          	<a href="{% provider_login_url "facebook" %}">hahahahahaha</a>
 		</div>
 	</div>
 	</div>
