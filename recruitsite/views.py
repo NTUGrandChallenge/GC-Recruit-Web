@@ -34,9 +34,9 @@ def login(request):
 		return render_to_response('registration/login.html', RequestContext(request, locals()))
 
 def index(request):
-	all_number = len(User.objects.all())
-	students = Student.objects.all()
-	wait_number = len(students)
+	pwait = Permission.objects.get(codename='wait')
+	u1 = User.objects.filter(user_permissions=pwait)
+	wait_number = len(u1)
 	teams = Team.objects.filter(captain_name='postgres')
 	badges = Badge.objects.all()
 	return render_to_response('index.html', RequestContext(request, locals()))
