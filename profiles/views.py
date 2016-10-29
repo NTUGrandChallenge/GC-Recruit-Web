@@ -353,41 +353,25 @@ def upload(request):
 			try:
 				fname = str(form.student.team.interest) + "_" + str(form.student.team.id)
 				file_dir = os.path.join('/home/ubuntu/upload' , fname)
-				file_dir2 = file_dir
                 #如果路徑中的檔案夾不存在就建立一個新的
 				if not os.path.exists(file_dir):
 					os.makedirs(file_dir) 
-				counter = 0
 				for file in files:
-					if counter == 0:
 	               	    #為了避免檔案名稱重複，因此存在server端時，把修改檔案名稱
-						local_name = 'brief'#timezone.now().strftime('%Y%m%d%H%M%S')
-						file_path = os.path.join(file_dir, local_name)
-	               		    #存入資料庫
-						file_info.objects.create(
-								File = up_file.objects.get(id=form.pk),
-								local_name = local_name, #存在server檔名
-								upload_name = file.name #原本檔名
-								)
-					# 開始讀寫檔案至server
-	    #              'b' 如果檔案存在就會被覆蓋
-						destination =open(file_path,'wb+')
-						for chunk in file.chunks():
-							destination.write(chunk)
-							destination.close()
-					if counter == 1:
-						local_name = 'proposal'
-						file_path2 = os.path.join(file_dir2, local_name)
-						file_info.objects.create(
-								File = up_file.objects.get(id=form.pk),
-								local_name = local_name, #存在server檔名
-								upload_name = file.name #原本檔名
-								)
-						destination =open(file_path2,'wb+')
-						for chunk in file.chunks():
-							destination.write(chunk)
-							destination.close()
-					counter = counter + 1
+					local_name = 'brief'#timezone.now().strftime('%Y%m%d%H%M%S')
+					file_path = os.path.join(file_dir, local_name)
+	              		    #存入資料庫
+					file_info.objects.create(
+							File = up_file.objects.get(id=form.pk),
+							local_name = local_name, #存在server檔名
+							upload_name = file.name #原本檔名
+							)
+				# 開始讀寫檔案至server
+	    #             'b' 如果檔案存在就會被覆蓋
+					destination =open(file_path,'wb+')
+					for chunk in file.chunks():
+						destination.write(chunk)
+						destination.close()
 			except:
 					pass
 			# 		shutil.rmtree(file_dir, True)   #發生例外，就刪除路徑檔案
@@ -397,8 +381,37 @@ def upload(request):
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 @permission_required('profiles.can_upload', login_url='/agree2/')
 def upload2(request):
-	error_msg = 'UPLOAD_FAILED'
-	return render_to_response('permission_error.html', RequestContext(request, locals()))
+	s1=Student.objects.get(id=request.user.student_set.first().id)
+	if request.method == 'POST':# request.POST.get 如果沒有request到資料時會丟回None
+		date = timezone.localtime(timezone.now())
+        # 存入資料庫
+		form = up_file(upload_datetime = date, student = s1) 
+		form.save()
+		files = request.FILES.getlist('file') #抓取檔案(可能多個檔案)
+		if len(files) > 0:
+			try:
+				fname = str(form.student.team.interest) + "_" + str(form.student.team.id)
+				file_dir = os.path.join('/home/ubuntu/upload' , fname)
+                #如果路徑中的檔案夾不存在就建立一個新的
+				if not os.path.exists(file_dir):
+					os.makedirs(file_dir) 
+				for file in files:
+					local_name = 'proposal'
+					file_path = os.path.join(file_dir, local_name)
+					file_info.objects.create(
+							File = up_file.objects.get(id=form.pk),
+							local_name = local_name, #存在server檔名
+							upload_name = file.name #原本檔名
+							)
+					destination =open(file_path,'wb+')
+					for chunk in file.chunks():
+						destination.write(chunk)
+						destination.close()
+			except:
+					pass
+			# 		shutil.rmtree(file_dir, True)   #發生例外，就刪除路徑檔案
+		return HttpResponseRedirect('/team_profile/' + str(s1.team.id))
+	return render_to_response('upload2.html', RequestContext(request, locals()))
 
 @permission_required('profiles.can_view_base_profile', login_url='/wait/')
 def get_file (request):
