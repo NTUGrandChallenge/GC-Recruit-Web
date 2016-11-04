@@ -358,7 +358,7 @@ def upload(request):
 					os.makedirs(file_dir) 
 				for file in files:
 	               	    #為了避免檔案名稱重複，因此存在server端時，把修改檔案名稱
-					local_name = 'brief'#timezone.now().strftime('%Y%m%d%H%M%S')
+					local_name = 'brief.pdf'#timezone.now().strftime('%Y%m%d%H%M%S')
 					file_path = os.path.join(file_dir, local_name)
 	              		    #存入資料庫
 					file_info.objects.create(
@@ -396,7 +396,7 @@ def upload2(request):
 				if not os.path.exists(file_dir):
 					os.makedirs(file_dir) 
 				for file in files:
-					local_name = 'proposal'
+					local_name = 'proposal.pdf'
 					file_path = os.path.join(file_dir, local_name)
 					file_info.objects.create(
 							File = up_file.objects.get(id=form.pk),
@@ -418,7 +418,7 @@ def get_file (request):
 	try:
 		fname = str(request.user.student_set.first().team.interest) + "_" + str(request.user.student_set.first().team.id)
 		file_dir = os.path.join('/home/ubuntu/upload' , fname)
-		file_path = os.path.join( file_dir , 'brief')
+		file_path = os.path.join( file_dir , 'brief.pdf')
 		f=open(file_path,'rb')
 		data=f.read()   #開始讀寫檔案至data變數裡面
 		f.close()
@@ -441,7 +441,7 @@ def get_file2 (request):
 	try:
 		fname = str(request.user.student_set.first().team.interest) + "_" + str(request.user.student_set.first().team.id)
 		file_dir = os.path.join('/home/ubuntu/upload' , fname)
-		file_path = os.path.join( file_dir , 'proposal')
+		file_path = os.path.join( file_dir , 'proposal.pdf')
 		f=open(file_path,'rb')
 		data=f.read()   #開始讀寫檔案至data變數裡面
 		f.close()
