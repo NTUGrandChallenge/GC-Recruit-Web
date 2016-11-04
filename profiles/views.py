@@ -419,9 +419,13 @@ def get_file (request):
 		fname = str(request.user.student_set.first().team.interest) + "_" + str(request.user.student_set.first().team.id)
 		file_dir = os.path.join('/home/ubuntu/upload' , fname)
 		file_path = os.path.join( file_dir , 'brief')
-		f=open(file_path,'rb')
-		data=f.read()   #開始讀寫檔案至data變數裡面
-		f.close()
+		# f=open(file_path,'rb')
+		# data=f.read()   #開始讀寫檔案至data變數裡面
+		# f.close()
+		destination =open(file_path,'rb')
+		for chunk in file.chunks():
+			data = data + destination.read(chunk)
+		destination.close()
 		# content_type有很多種，有強制下載轉乘PDF的、有ZIP的，我就用force-download
 		response = HttpResponse(data , content_type='application/pdf')
 		#要import urllib
