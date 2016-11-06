@@ -727,5 +727,11 @@ def statical(request):
 	students = Student.objects.all()
 	return render_to_response('static.html', RequestContext(request, locals()))
 
+@permission_required('profiles.can_edit_team_profile', login_url='/wait/')
+def team_statical(request):
+	teams = Team.objects.all()
+	students = Student.objects.all()
+	return render_to_response('team_static.html', RequestContext(request, locals()))
+
 
 
