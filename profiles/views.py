@@ -731,7 +731,7 @@ def statical(request):
 def team_statical(request):
 	teams = Team.objects.all()
 	news = Team.objects.filter(captain_name='postgres')
-	none = Team.objects.get(name="none")
+	none = Team.objects.filter(name="none")
 	teams = list(set(teams).difference(set(news)))
 	teams = list(set(teams).difference(set(none)))
 	return render_to_response('team_static.html', RequestContext(request, locals()))
