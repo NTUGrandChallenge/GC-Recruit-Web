@@ -352,7 +352,7 @@ def upload(request):
 		if len(files) > 0:
 			try:
 				fname = str(form.student.team.interest) + "_" + str(form.student.team.id)
-				file_dir = os.path.join('/home/ubuntu/upload' , fname)
+				file_dir = os.path.join('/home/ubuntu/upload2' , fname)
                 #如果路徑中的檔案夾不存在就建立一個新的
 				if not os.path.exists(file_dir):
 					os.makedirs(file_dir) 
@@ -391,7 +391,7 @@ def upload2(request):
 		if len(files) > 0:
 			try:
 				fname = str(form.student.team.interest) + "_" + str(form.student.team.id)
-				file_dir = os.path.join('/home/ubuntu/upload' , fname)
+				file_dir = os.path.join('/home/ubuntu/upload2' , fname)
                 #如果路徑中的檔案夾不存在就建立一個新的
 				if not os.path.exists(file_dir):
 					os.makedirs(file_dir) 
