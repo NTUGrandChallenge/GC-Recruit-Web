@@ -730,7 +730,10 @@ def statical(request):
 @permission_required('profiles.can_edit_team_profile', login_url='/wait/')
 def team_statical(request):
 	teams = Team.objects.all()
-	students = Student.objects.all()
+	news = Team.objects.filter(captain_name='postgres')
+	none = Team.objects.get(name="none")
+	teams = list(set(teams).difference(set(news)))
+	teams = list(set(teams).difference(set(none)))
 	return render_to_response('team_static.html', RequestContext(request, locals()))
 
 
