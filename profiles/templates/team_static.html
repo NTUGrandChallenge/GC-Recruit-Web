@@ -34,7 +34,9 @@
           </table>
           {% for student in team.student_set.all %}
           <table class="table">
-               <tr>
+               <tr>               
+               <td>{{team.interest}}</td>
+               <td>{{team.name}}</td>               
                {% if student.name.username == team.captain_name %}
                <td> 隊長 </td>
                {% else %}
