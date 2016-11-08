@@ -47,6 +47,17 @@
                <td>{{student.school}}</td>
                <td>{{student.department}}</td>
                <td>{{student.grade}}</td>
+               <td>{{student.email}}</td>
+               {% for insurance in student.insurance_set.all %}
+               <td>{{insurnce.phone}}</td>
+               <td>{{insurnce.birthday_y}}</td>
+               <td>{{insurnce.birthday_m}}</td>
+               <td>{{insurnce.birthday_d}}</td>
+               <td>{{insurnce.security_id}}</td>
+               <td>{{insurnce.emergency}}</td>
+               <td>{{insurnce.emergency_relationship}}</td>
+               <td>{{insurnce.emergency_phone}}</td>
+               {%endfor%}
                </tr>
           </table>
           {% endfor %}
