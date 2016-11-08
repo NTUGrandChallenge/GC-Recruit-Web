@@ -36,7 +36,9 @@
           <table class="table">
                <tr>
                {% if student.name.username == team.captain_name %}
-               <td> 隊長 </td>                    
+               <td> 隊長 </td>
+               {% else %}
+               <td></td>                    
                {% endif %}
 
                <td>{{student.realname}}</td>
