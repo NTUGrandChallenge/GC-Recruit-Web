@@ -152,7 +152,7 @@ def agree(request):
 		return HttpResponseRedirect('/create_student/')
 	if 'no' in request.POST:
 		return HttpResponseRedirect('/index/')
-	return render_to_response('over.html', RequestContext(request, locals()))
+	return render_to_response('agree.html', RequestContext(request, locals()))
 
 
 def student_create(request):
